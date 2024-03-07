@@ -4,41 +4,55 @@
     box-sizing: border-box;
 }
 
+:root {
+    --blue: rgb(0, 123, 255);
+    --dark-gray: #333;
+    --light-gray: rgba(182, 182, 182, 0.304);
+    --gray: #535353;
+    --super-light-gray: rgba(214, 214, 214, 0.448);
+    --shadow: rgba(0, 0, 0, 0.05);
+    --red: rgba(255, 19, 19, 0.898);
+    --orange: rgba(255, 136, 1, 0.953);
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: var(--dark-gray);
     display: grid;
     grid-template-columns: 0.6fr 2fr;
 }
 
 h1 {
     font-family: 'Rubik Doodle Shadow';
-    color: rgb(0, 166, 255);
+    color: var(--blue);
 }
 
 #sidebar {
-    background-color: rgba(214, 214, 214, 0.448);
+    background-color: var(--super-light-gray);
     height: 100vh;
     padding: 24px;
 }
 
-.titles {
+.tiles {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
 }
 
-.title {
-    background-color: rgba(128, 128, 128, 0.304);
+.tile {
+    background-color: var(--light-gray);
     border-radius: 16px;
-    box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.1);
-    padding: 8px 8px 4px 8px;
+    box-shadow: inset 2px 2px 2px var(--shadow);
+    padding: 8px 10px 8px 8px;
     display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 8px;
 }
 
 #main-content {
     height: 100vh;
     border: 1px solid rgb(214, 214, 214);
-    box-shadow: -10px 0 20px rgba(0, 0, 0, 0.042);
+    box-shadow: -10px 0 20px var(--shadow);
 }
 
 .logo {
@@ -51,4 +65,49 @@ h1 {
 .logo-image {
     width: 64px;
     height: auto;
+}
+
+.new-list {
+    position: fixed;
+    left: 18px;
+    bottom: 18px;
+    color: var(--gray);
+    cursor: pointer;
+}
+
+span.material-symbols-outlined {
+    position: relative;
+    top: 3px;
+    font-size: 1rem;
+    margin-right: 8px;
+}
+
+div.material-symbols-outlined {
+    border-radius: 50%;
+    padding: 0.2rem;
+    color: white;
+    font-size: 1rem;
+}
+
+.today .material-symbols-outlined {
+    background-color: var(--blue);
+}
+
+.all .material-symbols-outlined {
+    background-color: var(--dark-gray);
+}
+
+.week .material-symbols-outlined {
+    background-color: var(--red);
+}
+
+.important .material-symbols-outlined {
+    background-color: var(--orange);
+}
+
+.digit {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--gray);
+    text-align: end;
 }
