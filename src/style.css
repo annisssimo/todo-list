@@ -6,15 +6,32 @@
 
 body {
     font-family: fantasy;
+    display: grid;
+    grid-template-columns: 0.6fr 2fr;
 }
 
-header {
-    padding: 20px;
+h1 {
+    color: rgb(0, 166, 255);
+    position: relative;
+    top: 5px;
+}
+
+#sidebar {
+    background-color: rgba(214, 214, 214, 0.448);
+    height: 100vh;
+    padding: 24px;
+}
+
+#main-content {
+    height: 100vh;
+    border: 1px solid rgb(214, 214, 214);
+    box-shadow: -10px 0 20px rgba(0, 0, 0, 0.042);
 }
 
 .logo {
     display: flex;
     align-items: center;
+    gap: 20px;
 }
 
 .logo-image {
