@@ -5,12 +5,13 @@
 }
 
 body {
-    font-family: fantasy;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
     display: grid;
     grid-template-columns: 0.6fr 2fr;
 }
 
 h1 {
+    font-family: fantasy;
     color: rgb(0, 166, 255);
     position: relative;
     top: 5px;
@@ -20,6 +21,20 @@ h1 {
     background-color: rgba(214, 214, 214, 0.448);
     height: 100vh;
     padding: 24px;
+}
+
+.titles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.title {
+    background-color: rgba(128, 128, 128, 0.304);
+    border-radius: 16px;
+    box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.1);
+    padding: 8px 8px 0px 8px;
+    display: grid;
 }
 
 #main-content {
