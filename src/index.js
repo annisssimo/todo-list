@@ -1,6 +1,6 @@
 import './style.css';
 import WebFont from 'webfontloader';
-import Task from './task.js';
+import task1 from './task';
 
 WebFont.load({
   google: {
@@ -8,3 +8,4 @@ WebFont.load({
   },
 });
 
+console.log(task1);

@@ -1,4 +1,4 @@
-export class Task {
+class Task {
     constructor(title, description, dueDate, priority) {
       this.title = title;
       this.description = description;
@@ -7,3 +7,6 @@ export class Task {
     }
 }
 
+const task1 = new Task('clean the home', 'with Yarik', '09.03.2024', 'low');
+
+export default task1;
