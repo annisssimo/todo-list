@@ -147,3 +147,17 @@ div.plus {
     background-color: var(--orange);
     color: white;
 }
+
+dialog {
+    position: fixed;
+    top: 44%;
+    left: 38%;
+    width: 350px;
+    border: none;
+    border-radius: 8px;
+    padding: 24px;
+}
+
+form h3 {
+    text-align: center;
+}

@@ -42,9 +42,7 @@ export class UI {
             case 'important':
                 tileIcon.style.color = 'var(--orange)';
                 break;
-            // Add more cases if needed
             default:
-                // Handle the default case, if any
                 break;
         }
     }
