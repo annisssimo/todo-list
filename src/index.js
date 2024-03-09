@@ -1,7 +1,7 @@
 import './style.css';
 import WebFont from 'webfontloader';
 import task1 from './task';
-import {UI} from './ui.js';
+import {Tile} from './tile.js';
 
 WebFont.load({
   google: {
@@ -11,9 +11,10 @@ WebFont.load({
 
 document.addEventListener('DOMContentLoaded', () => {
   const tiles = document.querySelectorAll('.tile');
-  tiles.forEach(tile => {
-      tile.addEventListener('click', (event) => UI.updateHeading(event));
-  });
+  tiles.forEach(tileElement => {
+    let tile = new Tile();
+    tileElement.addEventListener('click', (event) => tile.chooseTile(event));  
+});
 });
 
 

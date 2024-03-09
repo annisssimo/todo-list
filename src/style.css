@@ -127,3 +127,23 @@ div.plus {
     color: var(--gray);
     font-size: 24px;
 }
+
+.today-tile-clicked {
+    background-color: var(--blue);
+    color: white;
+}
+
+.week-tile-clicked {
+    background-color: var(--red);
+    color: white;
+}
+
+.all-tile-clicked {
+    background-color: var(--dark-gray);
+    color: white;
+}
+
+.important-tile-clicked {
+    background-color: var(--orange);
+    color: white;
+}
