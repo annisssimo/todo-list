@@ -6,13 +6,14 @@
 
 :root {
     --blue: rgb(0, 123, 255);
-    --dark-gray: #333;
+    --dark-gray: rgb(51, 51, 51);
     --light-gray: rgba(182, 182, 182, 0.304);
-    --gray: #535353;
+    --gray: rgb(116, 116, 116);
     --super-light-gray: rgba(214, 214, 214, 0.448);
     --shadow: rgba(0, 0, 0, 0.05);
     --red: rgba(255, 19, 19, 0.898);
     --orange: rgba(255, 136, 1, 0.953);
+    --header: rgb(244, 244, 244);
 }
 
 body {
@@ -108,6 +109,19 @@ div.material-symbols-outlined {
 .digit {
     font-size: 1.4rem;
     font-weight: 700;
-    color: var(--gray);
+    color: var(--dark-gray);
     text-align: end;
+}
+
+header {
+    height: 60px;
+    background-color: var(--header);
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+div.plus {
+    color: var(--gray);
+    font-size: 24px;
 }
