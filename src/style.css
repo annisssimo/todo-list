@@ -185,3 +185,9 @@ button {
     flex-direction: row-reverse;
     gap: 8px;
 }
+
+.my-lists-heading {
+    margin-top: 48px;
+    font-family: 'Rubik Doodle Shadow';
+    font-size: 24px;
+}

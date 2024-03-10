@@ -1,4 +1,5 @@
 import {List} from './list';
+import {UI} from './ui';
 import todo from './todo';
 
 export class Modal {
@@ -94,6 +95,7 @@ export class Modal {
             event.preventDefault();
             let newList = new List(nameInput.value, colorInput.value);
             todo.addList(newList);
+            UI.displayMyLists(todo.lists);
             console.log(todo);
             dialogElement.close();
             console.log(newList);

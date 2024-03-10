@@ -46,4 +46,35 @@ export class UI {
                 break;
         }
     }
+
+    static resetMyLists(listContainer) {
+        listContainer.innerHTML = '';
+    }
+
+    static displayMyLists(lists) {
+        const sidebar = document.querySelector('#sidebar');
+        let listContainer = document.querySelector('#listContainer');
+
+        if (!listContainer) {
+            listContainer = document.createElement('div');
+            listContainer.id = 'listContainer';
+            sidebar.appendChild(listContainer);
+        } else {
+            // If it exists, reset its content
+            UI.resetMyLists(listContainer);
+        }
+        
+        const listsHeading = document.createElement('p');
+        listsHeading.textContent = 'My lists';
+        listsHeading.classList.add('my-lists-heading');
+        
+        sidebar.appendChild(listContainer);
+        listContainer.appendChild(listsHeading);
+
+        lists.forEach(list => {
+            const listItem = document.createElement('div');
+            listContainer.appendChild(listItem);
+            listItem.textContent = list.name;
+        });
+    }
 }
