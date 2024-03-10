@@ -78,10 +78,11 @@ export class UI {
 
             const listColor = document.createElement('div');
             const listName = document.createElement('p');
-            listColor.className = 'list-color';
+            listColor.classList.add('list-color');
+            listName.classList.add('tile-text');
 
             listColor.style.backgroundColor = list.color;
-            listName.textContent = list.name;
+            listName.textContent = list.heading;
             
             listItem.appendChild(listColor);
             listItem.appendChild(listName);

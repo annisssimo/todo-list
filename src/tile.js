@@ -1,9 +1,10 @@
 import {UI} from './ui.js';
 
 export class Tile {
-    constructor(heading, numberOfTasks) {
+    constructor(heading, color) {
         this.heading = heading;
-        this.numberOfTasks = numberOfTasks;
+        this.color = color;
+        this.tasks = [];
     }
 
     chooseTile(event) {

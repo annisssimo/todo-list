@@ -1,6 +1,5 @@
 import './style.css';
 import WebFont from 'webfontloader';
-import task1 from './task';
 import {Tile} from './tile.js';
 import {Modal} from './modal.js';
 
@@ -20,6 +19,3 @@ document.addEventListener('DOMContentLoaded', () => {
   const newListBtn = document.querySelector('.new-list');
   newListBtn.addEventListener('click', () => Modal.createModal());
 });
-
-
-// console.log(task1);

@@ -1,10 +1,10 @@
 class ToDo {
     constructor () {
-        this.lists = [];
+        this.tiles = [];
     }
 
-    addList(newList) {
-        return this.lists.push(newList);
+    addTile(newTile) {
+        return this.tiles.push(newTile);
     }
 }
 

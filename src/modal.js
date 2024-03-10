@@ -1,4 +1,4 @@
-import {List} from './list';
+import {Tile} from './tile';
 import {UI} from './ui';
 import todo from './todo';
 
@@ -93,12 +93,12 @@ export class Modal {
 
         confirmButton.addEventListener('click', (event) => {
             event.preventDefault();
-            let newList = new List(nameInput.value, colorInput.value);
-            todo.addList(newList);
-            UI.displayMyLists(todo.lists);
+            let newTile = new Tile(nameInput.value, colorInput.value);
+            todo.addTile(newTile);
+            UI.displayMyLists(todo.tiles);
             console.log(todo);
             dialogElement.close();
-            console.log(newList);
+            console.log(newTile);
         });
     }
 
