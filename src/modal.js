@@ -23,6 +23,7 @@ export class Modal {
         nameInputElement.type = 'text';
         nameInputElement.maxLength = '60';
         nameInputElement.required = true;
+        nameInputElement.focused = true;
 
         // Creating input for color
         const colorLabelElement = document.createElement('label');
@@ -44,7 +45,7 @@ export class Modal {
         confirmButtonElement.type = 'submit';
         confirmButtonElement.id = 'confirm-btn';
         confirmButtonElement.disabled = true;
-        confirmButtonElement.textContent = 'Ok';
+        confirmButtonElement.textContent = 'OK';
 
         // Appending elements to form
         formElement.append(
@@ -61,9 +62,13 @@ export class Modal {
         document.body.appendChild(dialogElement);
 
         dialogElement.showModal();
+
+        Modal.handleModalButtons(cancelButtonElement, confirmButtonElement, dialogElement);
+
+        Modal.checkNameInput(nameInputElement, confirmButtonElement);
     }
 
-    // Helper function to create input div
+    //  function to create input div
     static createInputDiv(label, input) {
         const divElement = document.createElement('div');
         divElement.className = 'input';
@@ -71,11 +76,29 @@ export class Modal {
         return divElement;
     }
 
-    // Helper function to create modal buttons div
+    //  function to create modal buttons div
     static createModalButtonsDiv(cancelButton, confirmButton) {
         const divElement = document.createElement('div');
         divElement.className = 'modal-buttons';
         divElement.append(cancelButton, confirmButton);
         return divElement;
+    }
+
+    static handleModalButtons(cancelButton, confirmButton, dialogElement) {
+
+        confirmButton.addEventListener('click', () => {
+            // createNewList(newlist);
+            dialogElement.close();
+        });
+
+        cancelButton.addEventListener('click', () => {
+            dialogElement.close();
+        });
+    }
+
+    static checkNameInput(nameInput, confirmButton) {
+        nameInput.addEventListener('input', () => {
+            confirmButton.disabled = !nameInput.value.trim();
+        });
     }
 }

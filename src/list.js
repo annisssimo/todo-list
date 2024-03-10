@@ -5,6 +5,6 @@ class List {
     }
 
     createNewList(newlist) {
-
+        console.log('yay');
     }
 }
