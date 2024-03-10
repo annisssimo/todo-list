@@ -22,4 +22,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-console.log(task1);
+// console.log(task1);

@@ -1,4 +1,5 @@
 import {List} from './list';
+import todo from './todo';
 
 export class Modal {
     static createModal() {
@@ -92,6 +93,8 @@ export class Modal {
         confirmButton.addEventListener('click', (event) => {
             event.preventDefault();
             let newList = new List(nameInput.value, colorInput.value);
+            todo.addList(newList);
+            console.log(todo);
             dialogElement.close();
             console.log(newList);
         });
