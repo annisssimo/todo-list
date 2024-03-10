@@ -73,8 +73,18 @@ export class UI {
 
         lists.forEach(list => {
             const listItem = document.createElement('div');
+            listItem.className = 'list-item';
             listContainer.appendChild(listItem);
-            listItem.textContent = list.name;
+
+            const listColor = document.createElement('div');
+            const listName = document.createElement('p');
+            listColor.className = 'list-color';
+
+            listColor.style.backgroundColor = list.color;
+            listName.textContent = list.name;
+            
+            listItem.appendChild(listColor);
+            listItem.appendChild(listName);
         });
     }
 }
