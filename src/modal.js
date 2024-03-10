@@ -1,3 +1,5 @@
+import {List} from './list';
+
 export class Modal {
     static createModal() {
         // Creating dialog element
@@ -63,7 +65,8 @@ export class Modal {
 
         dialogElement.showModal();
 
-        Modal.handleModalButtons(cancelButtonElement, confirmButtonElement, dialogElement);
+        Modal.handleConfirmBtn(confirmButtonElement, dialogElement, nameInputElement, colorInputElement);
+        Modal.handleCancelBtn (cancelButtonElement, dialogElement);
 
         Modal.checkNameInput(nameInputElement, confirmButtonElement);
     }
@@ -84,13 +87,17 @@ export class Modal {
         return divElement;
     }
 
-    static handleModalButtons(cancelButton, confirmButton, dialogElement) {
+    static handleConfirmBtn(confirmButton, dialogElement, nameInput, colorInput) {
 
-        confirmButton.addEventListener('click', () => {
-            // createNewList(newlist);
+        confirmButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            let newList = new List(nameInput.value, colorInput.value);
             dialogElement.close();
+            console.log(newList);
         });
+    }
 
+    static handleCancelBtn (cancelButton, dialogElement) {
         cancelButton.addEventListener('click', () => {
             dialogElement.close();
         });

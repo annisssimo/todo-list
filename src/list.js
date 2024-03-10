@@ -1,10 +1,8 @@
-class List {
-    constructor(listName) {
-        this.listName = listName;
+export class List {
+    constructor(name, color) {
+        this.name = name;
+        this.color = color;
         this.tasks = [];
     }
 
-    createNewList(newlist) {
-        console.log('yay');
-    }
 }
