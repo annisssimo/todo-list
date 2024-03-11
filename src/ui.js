@@ -5,9 +5,9 @@ export class UI {
     }
 
     static resetTilesColors() {
-        const allTiles = document.querySelectorAll('.tile');
+        const allTiles = document.querySelectorAll('.tab');
         allTiles.forEach(tile => {
-            tile.classList.remove('today-tile-clicked', 'week-tile-clicked', 'all-tile-clicked', 'important-tile-clicked');
+            tile.classList.remove('today-tile-clicked', 'week-tile-clicked', 'all-tile-clicked', 'important-tile-clicked', 'list-clicked');
 
             const tileIcon = tile.querySelector('.material-symbols-outlined');
             const tileDigit = tile.querySelector('.digit');
@@ -20,32 +20,49 @@ export class UI {
 
     static changeTileColor(clickedTile) {
         UI.resetTilesColors();
-
-        clickedTile.classList.add(`${clickedTile.id}-tile-clicked`);
-
-        const tileIcon = clickedTile.querySelector('.material-symbols-outlined');
-        const tileDigit = clickedTile.querySelector('.digit');
-
-        tileIcon.style.background = 'white';
-        tileDigit.style.color = 'white';
-
-        switch (clickedTile.id) {
-            case 'today':
-                tileIcon.style.color = 'var(--blue)';
-                break;
-            case 'week':
-                tileIcon.style.color = 'var(--red)';
-                break;
-            case 'all':
-                tileIcon.style.color = 'var(--dark-gray)';
-                break;
-            case 'important':
-                tileIcon.style.color = 'var(--orange)';
-                break;
-            default:
-                break;
+    
+        if (clickedTile.classList.contains('tile')) {
+            clickedTile.classList.add(`${clickedTile.id}-tile-clicked`);
+    
+            const tileIcon = clickedTile.querySelector('.material-symbols-outlined');
+            const tileDigit = clickedTile.querySelector('.digit');
+    
+            if (tileIcon) {
+                tileIcon.style.background = 'white';
+                tileIcon.style.color = 'white';
+    
+                switch (clickedTile.id) {
+                    case 'today':
+                        tileIcon.style.color = 'var(--blue)';
+                        break;
+                    case 'week':
+                        tileIcon.style.color = 'var(--red)';
+                        break;
+                    case 'all':
+                        tileIcon.style.color = 'var(--dark-gray)';
+                        break;
+                    case 'important':
+                        tileIcon.style.color = 'var(--orange)';
+                        break;
+                    default:
+                        break;
+                }
+            }
+    
+            if (tileDigit) {
+                tileDigit.style.color = 'white';
+            }
+        } else if (clickedTile.classList.contains('list-item')) {
+            clickedTile.classList.add('list-clicked');
+    
+            const tileIcon = clickedTile.querySelector('.material-symbols-outlined');
+            if (tileIcon) {
+                tileIcon.style.background = 'white';
+                tileIcon.style.color = 'white';
+            }
         }
-    }
+    }    
+    
 
     static resetMyLists(listContainer) {
         listContainer.innerHTML = '';
@@ -53,14 +70,13 @@ export class UI {
 
     static displayMyLists(lists) {
         const sidebar = document.querySelector('#sidebar');
-        let listContainer = document.querySelector('#listContainer');
-
+        let listContainer = document.querySelector('#list-container');
+        
         if (!listContainer) {
             listContainer = document.createElement('div');
-            listContainer.id = 'listContainer';
+            listContainer.id = 'list-container';
             sidebar.appendChild(listContainer);
         } else {
-            // If it exists, reset its content
             UI.resetMyLists(listContainer);
         }
         
@@ -73,13 +89,13 @@ export class UI {
 
         lists.forEach(list => {
             const listItem = document.createElement('div');
-            listItem.className = 'list-item';
+            listItem.classList.add('list-item');
             listContainer.appendChild(listItem);
 
             const listColor = document.createElement('div');
             const listName = document.createElement('p');
             listColor.classList.add('list-color');
-            listName.classList.add('tile-text');
+            listName.classList.add('text');
 
             listColor.style.backgroundColor = list.color;
             listName.textContent = list.heading;

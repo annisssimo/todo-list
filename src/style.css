@@ -204,3 +204,7 @@ button {
     width: 1rem;
     border-radius: 50%;
 }
+
+.list-clicked {
+    background-color: var(--orange);
+}

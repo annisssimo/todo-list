@@ -1,57 +1,38 @@
-import {Tile} from './tile';
-import {UI} from './ui';
+import { List } from './list';
+import { UI } from './ui';
 import todo from './todo';
 
 export class Modal {
+
+    static checkIfModalExists() {
+        let dialog = document.querySelector('#add-new-list-dialog');
+
+        if (dialog) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     static createModal() {
-        // Creating dialog element
         const dialogElement = document.createElement('dialog');
         dialogElement.id = 'add-new-list-dialog';
 
-        // Creating form element
         const formElement = document.createElement('form');
         formElement.id = 'add-new-list-form';
 
-        // Creating heading element
-        const headingElement = document.createElement('h3');
-        headingElement.textContent = 'New list';
+        const headingElement = Modal.createElement('h3', 'New list');
 
-        // Creating input for name
-        const nameLabelElement = document.createElement('label');
-        nameLabelElement.htmlFor = 'name';
-        nameLabelElement.textContent = 'Name:';
+        const nameLabelElement = Modal.createInputLabel('name', 'Name:');
+        const nameInputElement = Modal.createInput('text', 'name', 'name', 60, true, true);
 
-        const nameInputElement = document.createElement('input');
-        nameInputElement.name = 'name';
-        nameInputElement.id = 'name';
-        nameInputElement.type = 'text';
-        nameInputElement.maxLength = '60';
-        nameInputElement.required = true;
-        nameInputElement.focused = true;
+        const colorLabelElement = Modal.createInputLabel('color', 'Color:');
+        const colorInputElement = Modal.createInput('color', 'color', 'color');
 
-        // Creating input for color
-        const colorLabelElement = document.createElement('label');
-        colorLabelElement.htmlFor = 'color';
-        colorLabelElement.textContent = 'Color:';
+        const cancelButtonElement = Modal.createButton('button', 'cancel-btn', 'Cancel');
+        const confirmButtonElement = Modal.createButton('submit', 'confirm-btn', 'OK', true);
 
-        const colorInputElement = document.createElement('input');
-        colorInputElement.name = 'color';
-        colorInputElement.id = 'color';
-        colorInputElement.type = 'color';
-
-        // Creating modal buttons
-        const cancelButtonElement = document.createElement('button');
-        cancelButtonElement.type = 'button';
-        cancelButtonElement.id = 'cancel-btn';
-        cancelButtonElement.textContent = 'Cancel';
-
-        const confirmButtonElement = document.createElement('button');
-        confirmButtonElement.type = 'submit';
-        confirmButtonElement.id = 'confirm-btn';
-        confirmButtonElement.disabled = true;
-        confirmButtonElement.textContent = 'OK';
-
-        // Appending elements to form
         formElement.append(
             headingElement,
             Modal.createInputDiv(nameLabelElement, nameInputElement),
@@ -59,21 +40,38 @@ export class Modal {
             Modal.createModalButtonsDiv(cancelButtonElement, confirmButtonElement)
         );
 
-        // Appending form to dialog
         dialogElement.appendChild(formElement);
-
-        // Appending dialog to body
         document.body.appendChild(dialogElement);
 
-        dialogElement.showModal();
-
         Modal.handleConfirmBtn(confirmButtonElement, dialogElement, nameInputElement, colorInputElement);
-        Modal.handleCancelBtn (cancelButtonElement, dialogElement);
-
+        Modal.handleCancelBtn(cancelButtonElement, dialogElement);
         Modal.checkNameInput(nameInputElement, confirmButtonElement);
     }
 
-    //  function to create input div
+    static createElement(tagName, textContent) {
+        const element = document.createElement(tagName);
+        element.textContent = textContent;
+        return element;
+    }
+
+    static createInputLabel(id, textContent) {
+        const labelElement = Modal.createElement('label', textContent);
+        labelElement.htmlFor = id;
+        return labelElement;
+    }
+
+    static createInput(type, name, id, maxLength, required, focused) {
+        const inputElement = document.createElement('input');
+        Object.assign(inputElement, { type, name, id, maxLength, required, focused });
+        return inputElement;
+    }
+
+    static createButton(type, id, textContent, disabled) {
+        const buttonElement = document.createElement('button');
+        Object.assign(buttonElement, { type, id, textContent, disabled });
+        return buttonElement;
+    }
+
     static createInputDiv(label, input) {
         const divElement = document.createElement('div');
         divElement.className = 'input';
@@ -81,7 +79,6 @@ export class Modal {
         return divElement;
     }
 
-    //  function to create modal buttons div
     static createModalButtonsDiv(cancelButton, confirmButton) {
         const divElement = document.createElement('div');
         divElement.className = 'modal-buttons';
@@ -90,19 +87,17 @@ export class Modal {
     }
 
     static handleConfirmBtn(confirmButton, dialogElement, nameInput, colorInput) {
-
         confirmButton.addEventListener('click', (event) => {
             event.preventDefault();
-            let newTile = new Tile(nameInput.value, colorInput.value);
-            todo.addTile(newTile);
-            UI.displayMyLists(todo.tiles);
+            const newList = new List(nameInput.value, colorInput.value);
+            todo.addList(newList);
+            UI.displayMyLists(todo.lists);
             console.log(todo);
             dialogElement.close();
-            console.log(newTile);
         });
     }
 
-    static handleCancelBtn (cancelButton, dialogElement) {
+    static handleCancelBtn(cancelButton, dialogElement) {
         cancelButton.addEventListener('click', () => {
             dialogElement.close();
         });
@@ -112,5 +107,24 @@ export class Modal {
         nameInput.addEventListener('input', () => {
             confirmButton.disabled = !nameInput.value.trim();
         });
+    }
+
+    static showNewListModal() {
+        const dialogElement = document.querySelector('#add-new-list-dialog');
+        Modal.resetDialog();
+        dialogElement.showModal();
+    }
+
+    static resetDialog() {
+        const nameInput = document.getElementById('name');
+        const colorInput = document.getElementById('color');
+        const confirmButton = document.getElementById('confirm-btn');
+
+        // Clear input fields
+        nameInput.value = '';
+        colorInput.value = '';
+
+        // Reset confirm button state
+        confirmButton.disabled = true;
     }
 }

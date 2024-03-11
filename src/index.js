@@ -1,6 +1,5 @@
 import './style.css';
 import WebFont from 'webfontloader';
-import {Tile} from './tile.js';
 import {Modal} from './modal.js';
 
 WebFont.load({
@@ -10,12 +9,15 @@ WebFont.load({
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  const tiles = document.querySelectorAll('.tile');
-  tiles.forEach(tileElement => {
-    let tile = new Tile();
-    tileElement.addEventListener('click', (event) => tile.chooseTile(event));  
+  const newListBtn = document.querySelector('.new-list');
+  newListBtn.addEventListener('click', () => {
+    if(!Modal.checkIfModalExists()) {   
+      Modal.createModal();
+      Modal.showNewListModal();
+    } else {
+      Modal.showNewListModal();
+    }
   });
 
-  const newListBtn = document.querySelector('.new-list');
-  newListBtn.addEventListener('click', () => Modal.createModal());
+  //todo: handle plus btn
 });
