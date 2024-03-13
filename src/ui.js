@@ -2,12 +2,14 @@
 // import { weekList } from './weekList.js';
 // import { allList } from './allList.js';
 // import { importantList } from './importantList.js';
-import { List } from './list.js';
+// import { List } from './list.js';
 
 export class UI {
 
-    static updateHeading(heading, tileText) {
-        heading.textContent = tileText.textContent;
+    static updateHeading(clickedList) {
+        const text = clickedList.querySelector('.text');
+        const heading = document.querySelector('h2');
+        heading.textContent = text.textContent;
     }
 
     static resetTilesColors() {

@@ -9,11 +9,9 @@ export class List {
 
     chooseList(event) {
         const clickedList = event.currentTarget;
-        const text = clickedList.querySelector('.text');
-        const heading = document.querySelector('h2');
     
-
-        UI.updateHeading(heading, text);
+        UI.resetTilesColors();
+        UI.updateHeading(clickedList);
         UI.changeListColor(clickedList);
-    }    
+    }
 }
