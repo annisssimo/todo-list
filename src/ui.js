@@ -1,3 +1,9 @@
+// import { todayList } from './todayList.js';
+// import { weekList } from './weekList.js';
+// import { allList } from './allList.js';
+// import { importantList } from './importantList.js';
+import { List } from './list.js';
+
 export class UI {
 
     static updateHeading(heading, tileText) {
@@ -5,7 +11,7 @@ export class UI {
     }
 
     static resetTilesColors() {
-        const allTiles = document.querySelectorAll('.tab');
+        const allTiles = document.querySelectorAll('.tile');
         allTiles.forEach(tile => {
             tile.classList.remove('today-tile-clicked', 'week-tile-clicked', 'all-tile-clicked', 'important-tile-clicked', 'list-clicked');
 
@@ -102,6 +108,18 @@ export class UI {
             
             listItem.appendChild(listColor);
             listItem.appendChild(listName);
+
+            listItem.addEventListener('click', list.chooseList);
         });
+    }
+
+    static resetListsColors() {
+        let lists = document.querySelectorAll('.list-item');
+        lists.forEach(list => list.classList.remove('list-clicked'));
+    }
+
+    static changeListColor(clickedList) {
+        UI.resetListsColors();
+        clickedList.classList.add('list-clicked');
     }
 }
