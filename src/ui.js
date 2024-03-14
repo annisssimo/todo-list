@@ -3,6 +3,7 @@
 // import { allList } from './allList.js';
 // import { importantList } from './importantList.js';
 // import { List } from './list.js';
+import { Task } from './task.js';
 import { ElementsCreator } from './elementsCreator';
 
 
@@ -135,17 +136,32 @@ export class UI {
 
         const radioBtn = ElementsCreator.createInput('radio', 'done-btn', 'done-btn');
 
-
         const divContainer = document.createElement('div');
 
         const taskNameInputElement = ElementsCreator.createInput('text', 'taskName', 'taskName', 60, true, true, '', true);
         const taskNotesInputElement = ElementsCreator.createInput('text', 'taskNotes', 'taskNotes', 60, false, false, 'Notes');
         const datePicker = ElementsCreator.createInput('date', 'task-date-picker', 'task-date-picker');
 
-        formElement.append(radioBtn, divContainer);
+        const importantBtn = ElementsCreator.createButton('button', 'important-btn', 'label_important', false);
+        importantBtn.classList.add('material-symbols-outlined', 'important-btn-disabled');
+
+        formElement.append(radioBtn, divContainer, importantBtn);
         divContainer.append(taskNameInputElement, taskNotesInputElement, datePicker);
         mainContent.append(formElement);
 
+        importantBtn.addEventListener('click', () => {
+            importantBtn.classList.add('important-btn-clicked');
+        });
 
+        // taskNameInputElement.addEventListener('blur', () => {
+        //     const newTask = new Task(radioBtn.value);
+        //     console.log('newTask');
+        // });
+
+        // formElement.addEventListener('blur', () => {
+        //     console.log('FOOOO');
+        //     const newTask = new Task(radioBtn.value, taskNameInputElement.value, taskNotesInputElement.value, datePicker.value);
+        //     console.log(newTask);
+        // });
     }
 }

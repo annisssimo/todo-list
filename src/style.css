@@ -234,15 +234,28 @@ button {
 }
 
 #add-new-task-form {
-    padding: 10px;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 1fr 40fr 1fr;
     border-bottom: 1px solid var(--light-gray);
 }
 
 #done-btn {
-    margin-top: 6px;
+    margin-top: 5px;
     width: 16px;
     height: 16px;
+}
+
+#important-btn {
+    font-size: 18px;
+    padding: 2px 5px;
+    align-self: center;
+}
+
+.important-btn-disabled {
+    color: rgba(128, 128, 128, 0.761);
+}
+
+.important-btn-clicked {
+    color: orange;
 }

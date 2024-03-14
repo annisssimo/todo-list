@@ -1,7 +1,8 @@
 import './style.css';
 import WebFont from 'webfontloader';
-import {Modal} from './modal.js';
-import {UI} from './ui.js';
+import { Modal } from './modal.js';
+import { UI } from './ui.js';
+import { Task } from './task.js';
 
 WebFont.load({
   google: {
@@ -33,5 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const newTaskBtn = document.querySelector('.plus');
-  newTaskBtn.addEventListener('click', UI.createNewTaskForm)
+  newTaskBtn.addEventListener('click', () => {
+    UI.createNewTaskForm();
+  });
 });
