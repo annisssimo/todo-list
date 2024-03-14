@@ -28,6 +28,10 @@ h1 {
     color: var(--blue);
 }
 
+h2 {
+    font-family: 'Rubik Doodle Shadow';
+}
+
 #sidebar {
     background-color: var(--super-light-gray);
     height: 100vh;
@@ -54,8 +58,8 @@ h1 {
 }
 
 #main-content {
-    height: 100vh;
     box-shadow: -10px 0 20px var(--shadow);
+    background-color: white;
 }
 
 .logo {
@@ -126,6 +130,7 @@ header {
 div.plus {
     color: var(--gray);
     font-size: 24px;
+    cursor: pointer;
 }
 
 .today-tile-clicked {
@@ -168,9 +173,25 @@ div.input {
     margin-bottom: 12px;
 }
 
-input {
+#name, #color {
     margin-left: 10px;
     width: 80%;
+}
+
+#taskName, #taskNotes, #task-date-picker {
+    margin-top: 4px;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+#taskName, #taskNotes {
+    width: 98%;
+}
+
+#taskNotes, #task-date-picker {
+    color: var(--gray);
 }
 
 button {
@@ -210,4 +231,8 @@ button {
 .list-clicked {
     background-color: var(--light-gray);
     border-radius: 10px;
+}
+
+#add-new-task-form {
+    padding: 10px;
 }

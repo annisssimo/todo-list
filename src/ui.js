@@ -3,6 +3,8 @@
 // import { allList } from './allList.js';
 // import { importantList } from './importantList.js';
 // import { List } from './list.js';
+import { ElementsCreator } from './elementsCreator';
+
 
 export class UI {
 
@@ -123,5 +125,21 @@ export class UI {
     static changeListColor(clickedList) {
         UI.resetListsColors();
         clickedList.classList.add('list-clicked');
+    }
+
+    static createNewTaskForm() {
+        const mainContent = document.querySelector('#main-content');
+
+        const formElement = document.createElement('form');
+        formElement.id = 'add-new-task-form';
+
+        const taskNameInputElement = ElementsCreator.createInput('text', 'taskName', 'taskName', 60, true, true, '', true);
+        const taskNotesInputElement = ElementsCreator.createInput('text', 'taskNotes', 'taskNotes', 60, false, false, 'Notes');
+        const datePicker = ElementsCreator.createDatePicker('date', 'task-date-picker');
+
+        formElement.append(taskNameInputElement, taskNotesInputElement, datePicker);
+
+        mainContent.appendChild(formElement);
+
     }
 }

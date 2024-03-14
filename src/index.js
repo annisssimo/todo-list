@@ -13,13 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const tilesDiv = document.querySelector('.tiles');
   
-    tilesDiv.addEventListener('click', (event) => {
-      let clickedTile = event.target.closest('.tile');
-      UI.resetListsColors();
-      UI.updateHeading(clickedTile);
-      UI.changeTileColor(clickedTile)
+  tilesDiv.addEventListener('click', (event) => {
+    let clickedTile = event.target.closest('.tile');
+    if (clickedTile) {
+        UI.resetListsColors();
+        UI.updateHeading(clickedTile);
+        UI.changeTileColor(clickedTile);
     }
-  );
+  });
 
   const newListBtn = document.querySelector('.new-list');
   newListBtn.addEventListener('click', () => {
@@ -31,5 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  //todo: handle plus btn
+  const newTaskBtn = document.querySelector('.plus');
+  newTaskBtn.addEventListener('click', UI.createNewTaskForm)
 });

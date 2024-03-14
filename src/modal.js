@@ -1,6 +1,7 @@
 import { List } from './list';
 import { UI } from './ui';
 import todo from './todo';
+import { ElementsCreator } from './elementsCreator';
 
 export class Modal {
 
@@ -22,22 +23,22 @@ export class Modal {
         const formElement = document.createElement('form');
         formElement.id = 'add-new-list-form';
 
-        const headingElement = Modal.createElement('h3', 'New list');
+        const headingElement = ElementsCreator.createElement('h3', 'New list');
 
-        const nameLabelElement = Modal.createInputLabel('name', 'Name:');
-        const nameInputElement = Modal.createInput('text', 'name', 'name', 60, true, true);
+        const nameLabelElement = ElementsCreator.createInputLabel('name', 'Name:');
+        const nameInputElement = ElementsCreator.createInput('text', 'name', 'name', 60, true, true, '');
 
-        const colorLabelElement = Modal.createInputLabel('color', 'Color:');
-        const colorInputElement = Modal.createInput('color', 'color', 'color');
+        const colorLabelElement = ElementsCreator.createInputLabel('color', 'Color:');
+        const colorInputElement = ElementsCreator.createInput('color', 'color', 'color');
 
-        const cancelButtonElement = Modal.createButton('button', 'cancel-btn', 'Cancel');
-        const confirmButtonElement = Modal.createButton('submit', 'confirm-btn', 'OK', true);
+        const cancelButtonElement = ElementsCreator.createButton('button', 'cancel-btn', 'Cancel');
+        const confirmButtonElement = ElementsCreator.createButton('submit', 'confirm-btn', 'OK', true);
 
         formElement.append(
             headingElement,
-            Modal.createInputDiv(nameLabelElement, nameInputElement),
-            Modal.createInputDiv(colorLabelElement, colorInputElement),
-            Modal.createModalButtonsDiv(cancelButtonElement, confirmButtonElement)
+            ElementsCreator.createInputDiv(nameLabelElement, nameInputElement),
+            ElementsCreator.createInputDiv(colorLabelElement, colorInputElement),
+            ElementsCreator.createModalButtonsDiv(cancelButtonElement, confirmButtonElement)
         );
 
         dialogElement.appendChild(formElement);
@@ -46,44 +47,6 @@ export class Modal {
         Modal.handleConfirmBtn(confirmButtonElement, dialogElement, nameInputElement, colorInputElement);
         Modal.handleCancelBtn(cancelButtonElement, dialogElement);
         Modal.checkNameInput(nameInputElement, confirmButtonElement);
-    }
-
-    static createElement(tagName, textContent) {
-        const element = document.createElement(tagName);
-        element.textContent = textContent;
-        return element;
-    }
-
-    static createInputLabel(id, textContent) {
-        const labelElement = Modal.createElement('label', textContent);
-        labelElement.htmlFor = id;
-        return labelElement;
-    }
-
-    static createInput(type, name, id, maxLength, required, focused) {
-        const inputElement = document.createElement('input');
-        Object.assign(inputElement, { type, name, id, maxLength, required, focused });
-        return inputElement;
-    }
-
-    static createButton(type, id, textContent, disabled) {
-        const buttonElement = document.createElement('button');
-        Object.assign(buttonElement, { type, id, textContent, disabled });
-        return buttonElement;
-    }
-
-    static createInputDiv(label, input) {
-        const divElement = document.createElement('div');
-        divElement.className = 'input';
-        divElement.append(label, input);
-        return divElement;
-    }
-
-    static createModalButtonsDiv(cancelButton, confirmButton) {
-        const divElement = document.createElement('div');
-        divElement.className = 'modal-buttons';
-        divElement.append(cancelButton, confirmButton);
-        return divElement;
     }
 
     static handleConfirmBtn(confirmButton, dialogElement, nameInput, colorInput) {
