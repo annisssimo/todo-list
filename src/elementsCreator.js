@@ -36,10 +36,4 @@ export class ElementsCreator {
         divElement.append(cancelButton, confirmButton);
         return divElement;
     }
-
-    static createDatePicker (type, id) {
-        const datePicker = document.createElement('input');
-        Object.assign(datePicker, { type, id });
-        return datePicker;
-    }
 }

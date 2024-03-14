@@ -133,13 +133,19 @@ export class UI {
         const formElement = document.createElement('form');
         formElement.id = 'add-new-task-form';
 
+        const radioBtn = ElementsCreator.createInput('radio', 'done-btn', 'done-btn');
+
+
+        const divContainer = document.createElement('div');
+
         const taskNameInputElement = ElementsCreator.createInput('text', 'taskName', 'taskName', 60, true, true, '', true);
         const taskNotesInputElement = ElementsCreator.createInput('text', 'taskNotes', 'taskNotes', 60, false, false, 'Notes');
-        const datePicker = ElementsCreator.createDatePicker('date', 'task-date-picker');
+        const datePicker = ElementsCreator.createInput('date', 'task-date-picker', 'task-date-picker');
 
-        formElement.append(taskNameInputElement, taskNotesInputElement, datePicker);
+        formElement.append(radioBtn, divContainer);
+        divContainer.append(taskNameInputElement, taskNotesInputElement, datePicker);
+        mainContent.append(formElement);
 
-        mainContent.appendChild(formElement);
 
     }
 }

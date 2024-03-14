@@ -235,4 +235,14 @@ button {
 
 #add-new-task-form {
     padding: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+#done-btn {
+    margin-top: 6px;
+    width: 16px;
+    height: 16px;
 }
