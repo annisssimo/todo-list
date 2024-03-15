@@ -14,4 +14,8 @@ export class List {
         UI.updateHeading(clickedList);
         UI.changeListColor(clickedList);
     }
+
+    addTask(task) {
+        this.tasks.push(task);
+    }
 }

@@ -3,6 +3,7 @@
 // import { allList } from './allList.js';
 // import { importantList } from './importantList.js';
 // import { List } from './list.js';
+import todo from './todo.js';
 import { Task } from './task.js';
 import { ElementsCreator } from './elementsCreator';
 
@@ -150,9 +151,13 @@ export class UI {
                 if (!taskNameInput.value.trim()) {
                     return; // Если поле задачи не задано, прерываем выполнение
                 }
+
+                const listName = document.querySelector('h2').textContent;
+                const list = todo.lists.find(obj => obj.heading === listName);
       
                 // Создаем объект Task с данными из полей формы
                 const task = Task.createTaskFromForm();
+                list.addTask(task);
                 
                 // Удаляем окно редактора формы
                 UI.removeTaskForm();
@@ -162,6 +167,9 @@ export class UI {
 
                 //Создаем новую пустую форму таски
                 ElementsCreator.createNewTaskForm('id', 'add-new-task-form');
+
+                //Вешаем на новую форму слушатель Enter
+                UI.handleEnterKeyOnForm();
             }
         });
     }
