@@ -128,40 +128,41 @@ export class UI {
         clickedList.classList.add('list-clicked');
     }
 
-    static createNewTaskForm() {
-        const mainContent = document.querySelector('#main-content');
+    static displayTaskInMainContent(task) {
+        ElementsCreator.createNewTaskWithData(task);
+    }
 
-        const formElement = document.createElement('form');
-        formElement.id = 'add-new-task-form';
+    static removeTaskForm() {
+        const formElement = document.querySelector('#add-new-task-form');
+        formElement.remove();
+    }
 
-        const radioBtn = ElementsCreator.createInput('radio', 'done-btn', 'done-btn');
+    static handleEnterKeyOnForm() {
+        const formElement = document.getElementById('add-new-task-form');
 
-        const divContainer = document.createElement('div');
+        formElement.addEventListener('keypress', function(event) {
+            // Проверяем, была ли нажата клавиша Enter
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Предотвращаем стандартное действие формы
+                
+                // Создаем объект Task только если поле задачи задано
+                const taskNameInput = document.getElementById('taskName');
+                if (!taskNameInput.value.trim()) {
+                    return; // Если поле задачи не задано, прерываем выполнение
+                }
+      
+                // Создаем объект Task с данными из полей формы
+                const task = Task.createTaskFromForm();
+                
+                // Удаляем окно редактора формы
+                UI.removeTaskForm();
 
-        const taskNameInputElement = ElementsCreator.createInput('text', 'taskName', 'taskName', 60, true, true, '', true);
-        const taskNotesInputElement = ElementsCreator.createInput('text', 'taskNotes', 'taskNotes', 60, false, false, 'Notes');
-        const datePicker = ElementsCreator.createInput('date', 'task-date-picker', 'task-date-picker');
+                // Выводим задачу в main-content
+                UI.displayTaskInMainContent(task);
 
-        const importantBtn = ElementsCreator.createButton('button', 'important-btn', 'label_important', false);
-        importantBtn.classList.add('material-symbols-outlined', 'important-btn-disabled');
-
-        formElement.append(radioBtn, divContainer, importantBtn);
-        divContainer.append(taskNameInputElement, taskNotesInputElement, datePicker);
-        mainContent.append(formElement);
-
-        importantBtn.addEventListener('click', () => {
-            importantBtn.classList.add('important-btn-clicked');
+                //Создаем новую пустую форму таски
+                ElementsCreator.createNewTaskForm('id', 'add-new-task-form');
+            }
         });
-
-        // taskNameInputElement.addEventListener('blur', () => {
-        //     const newTask = new Task(radioBtn.value);
-        //     console.log('newTask');
-        // });
-
-        // formElement.addEventListener('blur', () => {
-        //     console.log('FOOOO');
-        //     const newTask = new Task(radioBtn.value, taskNameInputElement.value, taskNotesInputElement.value, datePicker.value);
-        //     console.log(newTask);
-        // });
     }
 }

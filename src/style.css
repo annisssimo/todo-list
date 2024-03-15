@@ -237,6 +237,15 @@ button {
     padding: 16px;
     display: grid;
     grid-template-columns: 1fr 40fr 1fr;
+    gap: 10px;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.task {
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 1fr 40fr 1fr;
+    gap: 10px;
     border-bottom: 1px solid var(--light-gray);
 }
 

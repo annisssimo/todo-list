@@ -3,6 +3,7 @@ import WebFont from 'webfontloader';
 import { Modal } from './modal.js';
 import { UI } from './ui.js';
 import { Task } from './task.js';
+import { ElementsCreator } from './elementsCreator.js';
 
 WebFont.load({
   google: {
@@ -35,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const newTaskBtn = document.querySelector('.plus');
   newTaskBtn.addEventListener('click', () => {
-    UI.createNewTaskForm();
+    ElementsCreator.createNewTaskForm('id', 'add-new-task-form');
+    UI.handleEnterKeyOnForm();
+
   });
 });
