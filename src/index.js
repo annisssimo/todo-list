@@ -1,9 +1,8 @@
 import './style.css';
 import WebFont from 'webfontloader';
-import { Modal } from './modal.js';
-import { UI } from './ui.js';
-import { Task } from './task.js';
-import { ElementsCreator } from './elementsCreator.js';
+import { Modal } from './modal';
+import { UI } from './ui';
+import { ElementsCreator } from './elementsCreator';
 
 WebFont.load({
   google: {

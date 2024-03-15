@@ -1,4 +1,4 @@
-import {UI} from './ui.js';
+import {UI} from './ui';
 
 export class List {
     constructor(heading, color) {

@@ -1,10 +1,5 @@
-// import { todayList } from './todayList.js';
-// import { weekList } from './weekList.js';
-// import { allList } from './allList.js';
-// import { importantList } from './importantList.js';
-// import { List } from './list.js';
-import todo from './todo.js';
-import { Task } from './task.js';
+import todo from './todo';
+import { Task } from './task';
 import { ElementsCreator } from './elementsCreator';
 
 
