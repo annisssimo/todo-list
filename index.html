@@ -1,1 +1,74 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/><title>Todo List</title><link rel="icon" href="reminder-app-icon.png"><script defer="defer" src="bundle.js"></script></head><body><div id="sidebar"><div class="logo"><img class="logo-image" src="./reminder-app-icon.png" alt="logo"><h1>ToDo List</h1></div><div class="tiles"><div class="tile today-tile-clicked" id="today"><div class="icon today"><div class="material-symbols-outlined" style="color: var(--blue); background: white;">event</div></div><div class="digit" style="color: white;">3</div><div class="text">Today</div></div><div class="tile" id="week"><div class="icon week"><div class="material-symbols-outlined">date_range</div></div><div class="digit">8</div><div class="text">Weekly</div></div><div class="tile" id="all"><div class="icon all"><div class="material-symbols-outlined">inbox</div></div><div class="digit">3</div><div class="text">All</div></div><div class="tile" id="important"><div class="icon important"><div class="material-symbols-outlined">label_important</div></div><div class="digit">1</div><div class="text">Important</div></div></div><div class="my-lists"></div><div class="new-list"><span class="material-symbols-outlined">add_circle </span><span>New list</span></div></div><div class="container"><header><h2>Today</h2><div class="material-symbols-outlined plus">add</div></header><div id="main-content"></div></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Todo List</title>
+<link rel="icon" href="reminder-app-icon.png"><script defer src="bundle.js"></script></head>
+<body>
+
+    <div id="sidebar">
+        <div class="logo">
+            <img class="logo-image" src="./reminder-app-icon.png" alt="logo">
+            <h1>ToDo List</h1>
+        </div>
+        <div class="tiles">
+            <div class="tile today-tile-clicked" id="today">
+                <div class="icon today">
+                    <div class="material-symbols-outlined" style="color: var(--blue); background: white;">
+                        event
+                    </div>
+                </div>
+                <div class="digit" style="color: white;">3</div>
+                <div class="text">Today</div>
+            </div>
+            <div class="tile" id="week">
+                <div class="icon week">
+                    <div class="material-symbols-outlined">
+                        date_range
+                    </div>
+                </div>
+                <div class="digit">8</div>
+                <div class="text">Weekly</div> 
+            </div>
+            <div class="tile" id="all">
+                <div class="icon all">
+                    <div class="material-symbols-outlined">
+                        inbox
+                    </div>
+                </div>
+                <div class="digit">3</div>
+                <div class="text">All</div>    
+            </div>
+            <div class="tile" id="important">
+                <div class="icon important">
+                    <div class="material-symbols-outlined">
+                        label_important
+                    </div>
+                </div>
+                <div class="digit">1</div>
+                <div class="text">Important</div> 
+            </div>
+        </div>
+        <div class="new-list">
+            <span class="material-symbols-outlined">
+                add_circle
+            </span>
+            <span>New list</span>
+        </div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h2>Today</h2>
+            <div class="material-symbols-outlined plus">
+                add
+            </div>
+        </header>
+        <div id="main-content"></div>
+    </div>
+
+</body>
+</html>
