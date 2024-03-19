@@ -124,17 +124,30 @@ export class UI {
         clickedList.classList.add('list-clicked');
     }
 
-    static displayTaskInMainContent(task) {
-        ElementsCreator.createNewTaskWithData(task);
+    static updateTaskListInMainContent(list) {
+        const mainContent = document.querySelector('#main-content');
+        mainContent.innerHTML = '';
+
+        list.tasks.forEach(task => UI.createTaskDiv(task));
+        console.log(todo.lists);
     }
 
-    static removeTaskForm() {
-        const formElement = document.querySelector('#add-new-task-form');
-        formElement.remove();
+    static createTaskDiv(task) {
+        const mainContent = document.querySelector('#main-content');
+        const taskDiv = document.createElement('div');
+
+        taskDiv.innerHTML = `${task.isDone}, ${task.title}, ${task.description}, ${task.dueDate}, ${task.isImportant}`;
+        mainContent.appendChild(taskDiv);
     }
+
+    // static removeTaskForm() {
+    //     const formElement = document.querySelector('#add-new-task-form');
+    //     console.log(formElement);
+    //     formElement.remove();
+    // }
 
     static handleEnterKeyOnForm() {
-        const formElement = document.getElementById('add-new-task-form');
+        const formElement = document.querySelector('#add-new-task-form');
 
         formElement.addEventListener('keypress', function(event) {
             // Проверяем, была ли нажата клавиша Enter
@@ -155,15 +168,15 @@ export class UI {
                 list.addTask(task);
                 
                 // Удаляем окно редактора формы
-                UI.removeTaskForm();
+                // UI.removeTaskForm();
 
                 // Выводим задачу в main-content
-                UI.displayTaskInMainContent(task);
+                UI.updateTaskListInMainContent(list);
 
-                //Создаем новую пустую форму таски
-                ElementsCreator.createNewTaskForm('id', 'add-new-task-form');
+                // Создаем новую пустую форму таски
+                ElementsCreator.createNewTaskForm();
 
-                //Вешаем на новую форму слушатель Enter
+                // Вешаем на новую форму слушатель Enter
                 UI.handleEnterKeyOnForm();
             }
         });

@@ -35,8 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const newTaskBtn = document.querySelector('.plus');
   newTaskBtn.addEventListener('click', () => {
-    ElementsCreator.createNewTaskForm('id', 'add-new-task-form');
+    ElementsCreator.createNewTaskForm();
     UI.handleEnterKeyOnForm();
-
   });
 });

@@ -55,7 +55,6 @@ export class Modal {
             const newList = new List(nameInput.value, colorInput.value);
             todo.addList(newList);
             UI.displayMyLists(todo.lists);
-            console.log(todo);
             dialogElement.close();
         });
     }

@@ -1,4 +1,5 @@
 import {format} from 'date-fns';
+import { UI } from './ui';
 
 export class ElementsCreator {
     static createElement(tagName, textContent) {
@@ -39,13 +40,15 @@ export class ElementsCreator {
         return divElement;
     }
 
-    static createNewTaskForm(attribute, value) {
+    static createNewTaskForm() {
         const mainContent = document.querySelector('#main-content');
 
         const formElement = document.createElement('form');
-        formElement.setAttribute(attribute, value);
+        formElement.setAttribute('id', 'add-new-task-form');
 
-        const radioBtn = ElementsCreator.createInput('radio', 'done-btn', 'done-btn');
+        // const radioBtn = ElementsCreator.createInput('radio', 'done-btn', 'done-btn');
+        const radioBtn = ElementsCreator.createButton('button', 'done-btn', '', false);
+        radioBtn.classList.add('radio-btn-disabled');
 
         const divContainer = document.createElement('div');
 
@@ -61,19 +64,12 @@ export class ElementsCreator {
         mainContent.append(formElement);
 
         importantBtn.addEventListener('click', () => {
-            importantBtn.classList.add('important-btn-clicked');
+            importantBtn.classList.toggle('important-btn-clicked');
+        }); 
+        
+        radioBtn.addEventListener('click', () => {
+            radioBtn.classList.toggle('radio-btn-clicked');
         });
 
-        return {radioBtn, taskNameInputElement, taskNotesInputElement, datePicker, importantBtn};
-    }
-
-    static createNewTaskWithData(task) {
-        const {radioBtn, taskNameInputElement, taskNotesInputElement, datePicker, importantBtn} = ElementsCreator.createNewTaskForm('class', 'task');
-        radioBtn.value = task.isDone;
-        taskNameInputElement.value = task.title;
-        taskNotesInputElement.value = task.description;
-        // Преобразовываем объект Date в строку формата 'yyyy-MM-dd'
-        datePicker.value = format(task.dueDate, 'yyyy-MM-dd');
-        importantBtn.value = task.isImportant;
     }
 }
