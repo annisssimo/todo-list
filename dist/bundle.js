@@ -1862,6 +1862,77 @@ function constructFrom(date, value) {
 
 /***/ }),
 
+/***/ "./node_modules/date-fns/endOfWeek.mjs":
+/*!*********************************************!*\
+  !*** ./node_modules/date-fns/endOfWeek.mjs ***!
+  \*********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   endOfWeek: () => (/* binding */ endOfWeek)
+/* harmony export */ });
+/* harmony import */ var _toDate_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./toDate.mjs */ "./node_modules/date-fns/toDate.mjs");
+/* harmony import */ var _lib_defaultOptions_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./_lib/defaultOptions.mjs */ "./node_modules/date-fns/_lib/defaultOptions.mjs");
+
+
+
+/**
+ * The {@link endOfWeek} function options.
+ */
+
+/**
+ * @name endOfWeek
+ * @category Week Helpers
+ * @summary Return the end of a week for the given date.
+ *
+ * @description
+ * Return the end of a week for the given date.
+ * The result will be in the local timezone.
+ *
+ * @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+ *
+ * @param date - The original date
+ * @param options - An object with options
+ *
+ * @returns The end of a week
+ *
+ * @example
+ * // The end of a week for 2 September 2014 11:55:00:
+ * const result = endOfWeek(new Date(2014, 8, 2, 11, 55, 0))
+ * //=> Sat Sep 06 2014 23:59:59.999
+ *
+ * @example
+ * // If the week starts on Monday, the end of the week for 2 September 2014 11:55:00:
+ * const result = endOfWeek(new Date(2014, 8, 2, 11, 55, 0), { weekStartsOn: 1 })
+ * //=> Sun Sep 07 2014 23:59:59.999
+ */
+function endOfWeek(date, options) {
+  const defaultOptions = (0,_lib_defaultOptions_mjs__WEBPACK_IMPORTED_MODULE_0__.getDefaultOptions)();
+  const weekStartsOn =
+    options?.weekStartsOn ??
+    options?.locale?.options?.weekStartsOn ??
+    defaultOptions.weekStartsOn ??
+    defaultOptions.locale?.options?.weekStartsOn ??
+    0;
+
+  const _date = (0,_toDate_mjs__WEBPACK_IMPORTED_MODULE_1__.toDate)(date);
+  const day = _date.getDay();
+  const diff = (day < weekStartsOn ? -7 : 0) + 6 - (day - weekStartsOn);
+
+  _date.setDate(_date.getDate() + diff);
+  _date.setHours(23, 59, 59, 999);
+  return _date;
+}
+
+// Fallback for modularized imports:
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (endOfWeek);
+
+
+/***/ }),
+
 /***/ "./node_modules/date-fns/getDefaultOptions.mjs":
 /*!*****************************************************!*\
   !*** ./node_modules/date-fns/getDefaultOptions.mjs ***!
@@ -7164,6 +7235,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _elementsCreator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./elementsCreator */ "./src/elementsCreator.js");
 /* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./list */ "./src/list.js");
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/isToday.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/startOfWeek.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/endOfWeek.mjs");
 
 
 
@@ -7191,19 +7264,25 @@ document.addEventListener('DOMContentLoaded', () => {
       if (clickedTile.id === 'all') {
         _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.allList);
       } else if (clickedTile.id === 'today') {
-        console.log(_list__WEBPACK_IMPORTED_MODULE_5__.todayList);
+        _list__WEBPACK_IMPORTED_MODULE_5__.todayList.tasks = [];
         _list__WEBPACK_IMPORTED_MODULE_5__.allList.tasks.forEach(task => {
-          console.log(_list__WEBPACK_IMPORTED_MODULE_5__.todayList.tasks);
           if ((0,date_fns__WEBPACK_IMPORTED_MODULE_6__.isToday)(task.dueDate)) {
-            console.log((0,date_fns__WEBPACK_IMPORTED_MODULE_6__.isToday)(task.dueDate));
             _list__WEBPACK_IMPORTED_MODULE_5__.todayList.addTask(task);
           }
         });
-
         _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.todayList);
       } else if (clickedTile.id === 'week') {
+        _list__WEBPACK_IMPORTED_MODULE_5__.weekList.tasks = [];
+        const startDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_7__.startOfWeek)(new Date(), { weekStartsOn: 1 }); // Начало текущей недели (понедельник)
+        const endDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_8__.endOfWeek)(new Date(), { weekStartsOn: 1 }); // Конец текущей недели (воскресенье)
+        _list__WEBPACK_IMPORTED_MODULE_5__.allList.tasks.forEach(task => {
+          if (task.dueDate >= startDate && task.dueDate <= endDate) {
+            _list__WEBPACK_IMPORTED_MODULE_5__.weekList.addTask(task);
+          }
+        });
         _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.weekList);
       } else if (clickedTile.id === 'important') {
+        
         _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.importantList);
       }
     }

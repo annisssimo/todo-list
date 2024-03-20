@@ -4,7 +4,7 @@ import { Modal } from './modal';
 import { UI } from './ui';
 import { ElementsCreator } from './elementsCreator';
 import { todayList, weekList, allList, importantList } from './list';
-import {isToday} from 'date-fns';
+import { isToday, startOfWeek, endOfWeek } from 'date-fns';
 
 WebFont.load({
   google: {
@@ -25,19 +25,25 @@ document.addEventListener('DOMContentLoaded', () => {
       if (clickedTile.id === 'all') {
         UI.updateTaskListInMainContent(allList);
       } else if (clickedTile.id === 'today') {
-        console.log(todayList);
+        todayList.tasks = [];
         allList.tasks.forEach(task => {
-          console.log(todayList.tasks);
           if (isToday(task.dueDate)) {
-            console.log(isToday(task.dueDate));
             todayList.addTask(task);
           }
         });
-
         UI.updateTaskListInMainContent(todayList);
       } else if (clickedTile.id === 'week') {
+        weekList.tasks = [];
+        const startDate = startOfWeek(new Date(), { weekStartsOn: 1 }); // Начало текущей недели (понедельник)
+        const endDate = endOfWeek(new Date(), { weekStartsOn: 1 }); // Конец текущей недели (воскресенье)
+        allList.tasks.forEach(task => {
+          if (task.dueDate >= startDate && task.dueDate <= endDate) {
+            weekList.addTask(task);
+          }
+        });
         UI.updateTaskListInMainContent(weekList);
       } else if (clickedTile.id === 'important') {
+        
         UI.updateTaskListInMainContent(importantList);
       }
     }
