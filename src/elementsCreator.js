@@ -1,4 +1,4 @@
-import { UI } from './ui';
+import { format } from 'date-fns';
 
 export class ElementsCreator {
     static createElement(tagName, textContent) {
@@ -71,5 +71,62 @@ export class ElementsCreator {
             radioBtn.classList.toggle('radio-btn-clicked');
         });
 
+    }
+
+    static createTaskDiv(task) {
+        const formWrapper = document.createElement('div');
+        formWrapper.classList.add('task');
+    
+        const doneBtn = document.createElement('button');
+        doneBtn.type = 'button';
+        doneBtn.classList.add('done-btn');
+        doneBtn.classList.add(task.isDone ? 'radio-btn-clicked' : 'radio-btn-disabled');
+        formWrapper.appendChild(doneBtn);
+    
+        const inputWrapper = document.createElement('div');
+    
+        const taskNameInput = document.createElement('input');
+        taskNameInput.type = 'text';
+        taskNameInput.name = 'taskName';
+        taskNameInput.classList.add('taskName');
+        taskNameInput.maxLength = '60';
+        taskNameInput.value = task.title;
+        taskNameInput.autofocus = true;
+        inputWrapper.appendChild(taskNameInput);
+    
+        const taskNotesInput = document.createElement('input');
+        taskNotesInput.type = 'text';
+        taskNotesInput.name = 'taskNotes';
+        taskNotesInput.classList.add('taskNotes');
+        taskNotesInput.maxLength = '60';
+        taskNotesInput.placeholder = 'Notes';
+        taskNotesInput.value = task.description;
+        inputWrapper.appendChild(taskNotesInput);
+    
+        const taskDatePickerInput = document.createElement('input');
+        taskDatePickerInput.type = 'date';
+        taskDatePickerInput.name = 'task-date-picker';
+        taskDatePickerInput.classList.add('task-date-picker');
+        if (task.dueDate) {
+            taskDatePickerInput.value = task.dueDate ? format(task.dueDate, 'yyyy-MM-dd') : '';
+        }
+        inputWrapper.appendChild(taskDatePickerInput);
+    
+        formWrapper.appendChild(inputWrapper);
+    
+        const importantBtn = document.createElement('button');
+        importantBtn.type = 'button';
+        importantBtn.classList.add('important-btn', 'material-symbols-outlined');
+        if (task.isImportant) {
+            importantBtn.classList.add('important-btn-clicked');
+        } else {
+            importantBtn.classList.add('important-btn-disabled');
+        }
+        importantBtn.textContent = 'label_important';
+        formWrapper.appendChild(importantBtn);
+    
+        // Добавление формы в основной контент
+        const mainContent = document.querySelector('#main-content');
+        mainContent.appendChild(formWrapper);
     }
 }

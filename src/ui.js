@@ -128,17 +128,9 @@ export class UI {
         const mainContent = document.querySelector('#main-content');
         mainContent.innerHTML = '';
 
-        list.tasks.forEach(task => UI.createTaskDiv(task));
+        list.tasks.forEach(task => ElementsCreator.createTaskDiv(task));
     }
-
-    static createTaskDiv(task) {
-        const mainContent = document.querySelector('#main-content');
-        const taskDiv = document.createElement('div');
-
-        taskDiv.innerHTML = `${task.isDone}, ${task.title}, ${task.description}, ${task.dueDate}, ${task.isImportant}`;
-        mainContent.appendChild(taskDiv);
-    }
-
+    
     static handleEnterKeyOnForm() {
         const formElement = document.querySelector('#add-new-task-form');
 

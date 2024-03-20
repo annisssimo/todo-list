@@ -182,7 +182,7 @@ div.input {
     width: 80%;
 }
 
-#taskName, #taskNotes, #task-date-picker {
+#taskName, #taskNotes, #task-date-picker, .taskName, .taskNotes, .task-date-picker {
     margin-top: 4px;
     border: none;
     outline: none;
@@ -190,11 +190,11 @@ div.input {
     font-size: inherit;
 }
 
-#taskName, #taskNotes {
+#taskName, #taskNotes, .taskName, .taskNotes {
     width: 98%;
 }
 
-#taskNotes, #task-date-picker {
+#taskNotes, #task-date-picker, .task-date-picker, .taskNotes {
     color: var(--gray);
 }
 
@@ -237,7 +237,7 @@ button {
     border-radius: 10px;
 }
 
-#add-new-task-form {
+#add-new-task-form, .task {
     padding: 16px;
     display: grid;
     grid-template-columns: 1fr 40fr 1fr;
@@ -253,7 +253,7 @@ button {
     border-bottom: 1px solid var(--light-gray);
 }
 
-#done-btn {
+#done-btn, .done-btn {
     margin-top: 5px;
     width: 1rem;
     height: 1rem;
@@ -265,11 +265,11 @@ button {
     background-color: transparent; /* Прозрачный фон */
 }
 
-#done-btn.radio-btn-clicked {
+#done-btn.radio-btn-clicked, .done-btn.radio-btn-clicked {
     border-color: var(--orange); /* Оранжевая граница для нажатой кнопки */
 }
 
-#done-btn::before {
+#done-btn::before, .done-btn::before {
     content: ""; /* Пустой контент для псевдоэлемента */
     position: absolute; /* Позиционирование псевдоэлемента */
     top: 50%; /* Расположение кружка по вертикали */
@@ -282,16 +282,15 @@ button {
     opacity: 0; /* Начальное скрытие кружка */
 }
 
-#done-btn.radio-btn-clicked::before {
+#done-btn.radio-btn-clicked::before, .done-btn.radio-btn-clicked::before {
     opacity: 1; /* Показать кружок только когда кнопка нажата */
 }
 
-#done-btn:hover {
+#done-btn:hover, .done-btn:hover {
     cursor: pointer; /* Изменение курсора при наведении */
 }
 
-
-#important-btn {
+#important-btn, .important-btn {
     font-size: 18px;
     padding: 2px 5px;
     align-self: center;
