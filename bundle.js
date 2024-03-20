@@ -7282,7 +7282,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.weekList);
       } else if (clickedTile.id === 'important') {
-        
+        _list__WEBPACK_IMPORTED_MODULE_5__.importantList.tasks = [];
+        _list__WEBPACK_IMPORTED_MODULE_5__.allList.tasks.forEach(task => {
+          if (task.isImportant) {
+            _list__WEBPACK_IMPORTED_MODULE_5__.importantList.addTask(task);
+          }
+        });
         _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.importantList);
       }
     }
