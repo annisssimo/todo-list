@@ -129,7 +129,6 @@ export class UI {
         mainContent.innerHTML = '';
 
         list.tasks.forEach(task => UI.createTaskDiv(task));
-        console.log(todo.lists);
     }
 
     static createTaskDiv(task) {
@@ -139,12 +138,6 @@ export class UI {
         taskDiv.innerHTML = `${task.isDone}, ${task.title}, ${task.description}, ${task.dueDate}, ${task.isImportant}`;
         mainContent.appendChild(taskDiv);
     }
-
-    // static removeTaskForm() {
-    //     const formElement = document.querySelector('#add-new-task-form');
-    //     console.log(formElement);
-    //     formElement.remove();
-    // }
 
     static handleEnterKeyOnForm() {
         const formElement = document.querySelector('#add-new-task-form');
@@ -166,10 +159,8 @@ export class UI {
                 // Создаем объект Task с данными из полей формы
                 const task = Task.createTaskFromForm();
                 list.addTask(task);
+                task.addToAllTasksList();
                 
-                // Удаляем окно редактора формы
-                // UI.removeTaskForm();
-
                 // Выводим задачу в main-content
                 UI.updateTaskListInMainContent(list);
 

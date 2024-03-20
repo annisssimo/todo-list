@@ -820,7 +820,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
 
 
-
 class ElementsCreator {
     static createElement(tagName, textContent) {
         const element = document.createElement(tagName);
@@ -866,7 +865,6 @@ class ElementsCreator {
         const formElement = document.createElement('form');
         formElement.setAttribute('id', 'add-new-task-form');
 
-        // const radioBtn = ElementsCreator.createInput('radio', 'done-btn', 'done-btn');
         const radioBtn = ElementsCreator.createButton('button', 'done-btn', '', false);
         radioBtn.classList.add('radio-btn-disabled');
 
@@ -905,7 +903,11 @@ class ElementsCreator {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   List: () => (/* binding */ List)
+/* harmony export */   List: () => (/* binding */ List),
+/* harmony export */   allList: () => (/* binding */ allList),
+/* harmony export */   importantList: () => (/* binding */ importantList),
+/* harmony export */   todayList: () => (/* binding */ todayList),
+/* harmony export */   weekList: () => (/* binding */ weekList)
 /* harmony export */ });
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
 /* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
@@ -913,7 +915,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class List {
-    constructor(heading, color) {
+    constructor(type, heading, color) {
+        this.type = type;
         this.heading = heading;
         this.color = color;
         this.tasks = [];
@@ -934,6 +937,12 @@ class List {
         this.tasks.push(task);
     }
 }
+
+const todayList = new List('default', 'Today', 'var(--blue)');
+const weekList = new List('default', 'Weekly', 'var(--red)');
+const allList = new List('default', 'All', 'var(--dark-gray)');
+const importantList = new List('default', 'Important', 'var(--orange)');
+
 
 
 /***/ }),
@@ -1007,7 +1016,7 @@ class Modal {
     static handleConfirmBtn(confirmButton, dialogElement, nameInput, colorInput) {
         confirmButton.addEventListener('click', (event) => {
             event.preventDefault();
-            const newList = new _list__WEBPACK_IMPORTED_MODULE_0__.List(nameInput.value, colorInput.value);
+            const newList = new _list__WEBPACK_IMPORTED_MODULE_0__.List('custom', nameInput.value, colorInput.value);
             _todo__WEBPACK_IMPORTED_MODULE_2__["default"].addList(newList);
             _ui__WEBPACK_IMPORTED_MODULE_1__.UI.displayMyLists(_todo__WEBPACK_IMPORTED_MODULE_2__["default"].lists);
             dialogElement.close();
@@ -1059,7 +1068,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Task: () => (/* binding */ Task)
 /* harmony export */ });
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/parse.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/parse.mjs");
+/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./list */ "./src/list.js");
+
 
 
 class Task {
@@ -1067,8 +1078,12 @@ class Task {
     this.isDone = isDone;
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_0__.parse)(dueDate, 'yyyy-MM-dd', new Date()) : '';
+    this.dueDate = dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_1__.parse)(dueDate, 'yyyy-MM-dd', new Date()) : '';
     this.isImportant = isImportant;
+  }
+
+  addToAllTasksList() {
+    _list__WEBPACK_IMPORTED_MODULE_0__.allList.addTask(this);
   }
 
   // Функция для создания объекта Task из данных формы
@@ -1263,7 +1278,6 @@ class UI {
         mainContent.innerHTML = '';
 
         list.tasks.forEach(task => UI.createTaskDiv(task));
-        console.log(_todo__WEBPACK_IMPORTED_MODULE_0__["default"].lists);
     }
 
     static createTaskDiv(task) {
@@ -1273,12 +1287,6 @@ class UI {
         taskDiv.innerHTML = `${task.isDone}, ${task.title}, ${task.description}, ${task.dueDate}, ${task.isImportant}`;
         mainContent.appendChild(taskDiv);
     }
-
-    // static removeTaskForm() {
-    //     const formElement = document.querySelector('#add-new-task-form');
-    //     console.log(formElement);
-    //     formElement.remove();
-    // }
 
     static handleEnterKeyOnForm() {
         const formElement = document.querySelector('#add-new-task-form');
@@ -1300,10 +1308,8 @@ class UI {
                 // Создаем объект Task с данными из полей формы
                 const task = _task__WEBPACK_IMPORTED_MODULE_1__.Task.createTaskFromForm();
                 list.addTask(task);
+                task.addToAllTasksList();
                 
-                // Удаляем окно редактора формы
-                // UI.removeTaskForm();
-
                 // Выводим задачу в main-content
                 UI.updateTaskListInMainContent(list);
 
@@ -2259,6 +2265,109 @@ function getWeekYear(date, options) {
 
 // Fallback for modularized imports:
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getWeekYear);
+
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/isSameDay.mjs":
+/*!*********************************************!*\
+  !*** ./node_modules/date-fns/isSameDay.mjs ***!
+  \*********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   isSameDay: () => (/* binding */ isSameDay)
+/* harmony export */ });
+/* harmony import */ var _startOfDay_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./startOfDay.mjs */ "./node_modules/date-fns/startOfDay.mjs");
+
+
+/**
+ * @name isSameDay
+ * @category Day Helpers
+ * @summary Are the given dates in the same day (and year and month)?
+ *
+ * @description
+ * Are the given dates in the same day (and year and month)?
+ *
+ * @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+ *
+ * @param dateLeft - The first date to check
+ * @param dateRight - The second date to check
+
+ * @returns The dates are in the same day (and year and month)
+ *
+ * @example
+ * // Are 4 September 06:00:00 and 4 September 18:00:00 in the same day?
+ * const result = isSameDay(new Date(2014, 8, 4, 6, 0), new Date(2014, 8, 4, 18, 0))
+ * //=> true
+ *
+ * @example
+ * // Are 4 September and 4 October in the same day?
+ * const result = isSameDay(new Date(2014, 8, 4), new Date(2014, 9, 4))
+ * //=> false
+ *
+ * @example
+ * // Are 4 September, 2014 and 4 September, 2015 in the same day?
+ * const result = isSameDay(new Date(2014, 8, 4), new Date(2015, 8, 4))
+ * //=> false
+ */
+function isSameDay(dateLeft, dateRight) {
+  const dateLeftStartOfDay = (0,_startOfDay_mjs__WEBPACK_IMPORTED_MODULE_0__.startOfDay)(dateLeft);
+  const dateRightStartOfDay = (0,_startOfDay_mjs__WEBPACK_IMPORTED_MODULE_0__.startOfDay)(dateRight);
+
+  return +dateLeftStartOfDay === +dateRightStartOfDay;
+}
+
+// Fallback for modularized imports:
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (isSameDay);
+
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/isToday.mjs":
+/*!*******************************************!*\
+  !*** ./node_modules/date-fns/isToday.mjs ***!
+  \*******************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   isToday: () => (/* binding */ isToday)
+/* harmony export */ });
+/* harmony import */ var _isSameDay_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./isSameDay.mjs */ "./node_modules/date-fns/isSameDay.mjs");
+
+
+/**
+ * @name isToday
+ * @category Day Helpers
+ * @summary Is the given date today?
+ * @pure false
+ *
+ * @description
+ * Is the given date today?
+ *
+ * @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+ *
+ * @param date - The date to check
+ *
+ * @returns The date is today
+ *
+ * @example
+ * // If today is 6 October 2014, is 6 October 14:00:00 today?
+ * const result = isToday(new Date(2014, 9, 6, 14, 0))
+ * //=> true
+ */
+function isToday(date) {
+  return (0,_isSameDay_mjs__WEBPACK_IMPORTED_MODULE_0__.isSameDay)(date, Date.now());
+}
+
+// Fallback for modularized imports:
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (isToday);
 
 
 /***/ }),
@@ -6519,6 +6628,53 @@ function setWeek(date, week, options) {
 
 /***/ }),
 
+/***/ "./node_modules/date-fns/startOfDay.mjs":
+/*!**********************************************!*\
+  !*** ./node_modules/date-fns/startOfDay.mjs ***!
+  \**********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   startOfDay: () => (/* binding */ startOfDay)
+/* harmony export */ });
+/* harmony import */ var _toDate_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./toDate.mjs */ "./node_modules/date-fns/toDate.mjs");
+
+
+/**
+ * @name startOfDay
+ * @category Day Helpers
+ * @summary Return the start of a day for the given date.
+ *
+ * @description
+ * Return the start of a day for the given date.
+ * The result will be in the local timezone.
+ *
+ * @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+ *
+ * @param date - The original date
+ *
+ * @returns The start of a day
+ *
+ * @example
+ * // The start of a day for 2 September 2014 11:55:00:
+ * const result = startOfDay(new Date(2014, 8, 2, 11, 55, 0))
+ * //=> Tue Sep 02 2014 00:00:00
+ */
+function startOfDay(date) {
+  const _date = (0,_toDate_mjs__WEBPACK_IMPORTED_MODULE_0__.toDate)(date);
+  _date.setHours(0, 0, 0, 0);
+  return _date;
+}
+
+// Fallback for modularized imports:
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (startOfDay);
+
+
+/***/ }),
+
 /***/ "./node_modules/date-fns/startOfISOWeek.mjs":
 /*!**************************************************!*\
   !*** ./node_modules/date-fns/startOfISOWeek.mjs ***!
@@ -7006,6 +7162,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal */ "./src/modal.js");
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
 /* harmony import */ var _elementsCreator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./elementsCreator */ "./src/elementsCreator.js");
+/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./list */ "./src/list.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/isToday.mjs");
+
+
 
 
 
@@ -7025,9 +7185,27 @@ document.addEventListener('DOMContentLoaded', () => {
   tilesDiv.addEventListener('click', (event) => {
     let clickedTile = event.target.closest('.tile');
     if (clickedTile) {
-        _ui__WEBPACK_IMPORTED_MODULE_3__.UI.resetListsColors();
-        _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateHeading(clickedTile);
-        _ui__WEBPACK_IMPORTED_MODULE_3__.UI.changeTileColor(clickedTile);
+      _ui__WEBPACK_IMPORTED_MODULE_3__.UI.resetListsColors();
+      _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateHeading(clickedTile);
+      _ui__WEBPACK_IMPORTED_MODULE_3__.UI.changeTileColor(clickedTile);
+      if (clickedTile.id === 'all') {
+        _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.allList);
+      } else if (clickedTile.id === 'today') {
+        console.log(_list__WEBPACK_IMPORTED_MODULE_5__.todayList);
+        _list__WEBPACK_IMPORTED_MODULE_5__.allList.tasks.forEach(task => {
+          console.log(_list__WEBPACK_IMPORTED_MODULE_5__.todayList.tasks);
+          if ((0,date_fns__WEBPACK_IMPORTED_MODULE_6__.isToday)(task.dueDate)) {
+            console.log((0,date_fns__WEBPACK_IMPORTED_MODULE_6__.isToday)(task.dueDate));
+            _list__WEBPACK_IMPORTED_MODULE_5__.todayList.addTask(task);
+          }
+        });
+
+        _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.todayList);
+      } else if (clickedTile.id === 'week') {
+        _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.weekList);
+      } else if (clickedTile.id === 'important') {
+        _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.importantList);
+      }
     }
   });
 

@@ -3,6 +3,8 @@ import WebFont from 'webfontloader';
 import { Modal } from './modal';
 import { UI } from './ui';
 import { ElementsCreator } from './elementsCreator';
+import { todayList, weekList, allList, importantList } from './list';
+import {isToday} from 'date-fns';
 
 WebFont.load({
   google: {
@@ -17,9 +19,27 @@ document.addEventListener('DOMContentLoaded', () => {
   tilesDiv.addEventListener('click', (event) => {
     let clickedTile = event.target.closest('.tile');
     if (clickedTile) {
-        UI.resetListsColors();
-        UI.updateHeading(clickedTile);
-        UI.changeTileColor(clickedTile);
+      UI.resetListsColors();
+      UI.updateHeading(clickedTile);
+      UI.changeTileColor(clickedTile);
+      if (clickedTile.id === 'all') {
+        UI.updateTaskListInMainContent(allList);
+      } else if (clickedTile.id === 'today') {
+        console.log(todayList);
+        allList.tasks.forEach(task => {
+          console.log(todayList.tasks);
+          if (isToday(task.dueDate)) {
+            console.log(isToday(task.dueDate));
+            todayList.addTask(task);
+          }
+        });
+
+        UI.updateTaskListInMainContent(todayList);
+      } else if (clickedTile.id === 'week') {
+        UI.updateTaskListInMainContent(weekList);
+      } else if (clickedTile.id === 'important') {
+        UI.updateTaskListInMainContent(importantList);
+      }
     }
   });
 

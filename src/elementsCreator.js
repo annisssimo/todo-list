@@ -1,4 +1,3 @@
-import {format} from 'date-fns';
 import { UI } from './ui';
 
 export class ElementsCreator {
@@ -46,7 +45,6 @@ export class ElementsCreator {
         const formElement = document.createElement('form');
         formElement.setAttribute('id', 'add-new-task-form');
 
-        // const radioBtn = ElementsCreator.createInput('radio', 'done-btn', 'done-btn');
         const radioBtn = ElementsCreator.createButton('button', 'done-btn', '', false);
         radioBtn.classList.add('radio-btn-disabled');
 

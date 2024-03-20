@@ -1,4 +1,5 @@
-import {parse} from 'date-fns';
+import { parse } from 'date-fns';
+import { List, todayList, weekList, allList, importantList } from './list';
 
 export class Task {
   constructor(isDone, title, description, dueDate, isImportant) {
@@ -7,6 +8,10 @@ export class Task {
     this.description = description;
     this.dueDate = dueDate ? parse(dueDate, 'yyyy-MM-dd', new Date()) : '';
     this.isImportant = isImportant;
+  }
+
+  addToAllTasksList() {
+    allList.addTask(this);
   }
 
   // Функция для создания объекта Task из данных формы
