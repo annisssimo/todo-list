@@ -43,7 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         UI.updateTaskListInMainContent(weekList);
       } else if (clickedTile.id === 'important') {
-        
+        importantList.tasks = [];
+        allList.tasks.forEach(task => {
+          if (task.isImportant) {
+            importantList.addTask(task);
+          }
+        });
         UI.updateTaskListInMainContent(importantList);
       }
     }
