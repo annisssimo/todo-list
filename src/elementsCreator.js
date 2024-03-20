@@ -61,6 +61,8 @@ export class ElementsCreator {
         divContainer.append(taskNameInputElement, taskNotesInputElement, datePicker);
         mainContent.append(formElement);
 
+        taskNameInputElement.focus();
+
         importantBtn.addEventListener('click', () => {
             importantBtn.classList.toggle('important-btn-clicked');
         }); 

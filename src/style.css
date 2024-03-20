@@ -133,6 +133,10 @@ div.plus {
     cursor: pointer;
 }
 
+.hide {
+    display: none;
+}
+
 .today-tile-clicked {
     background-color: var(--blue);
     color: white;

@@ -13,6 +13,9 @@ class List {
         const clickedList = event.currentTarget;
         const listHeading = clickedList.querySelector('.text').textContent;
         const list = todo.lists.find(obj => obj.heading === listHeading);
+
+        const plusAddTaskElement = document.querySelector('.plus');
+        plusAddTaskElement.classList.remove('hide');
     
         UI.resetTilesColors();
         UI.updateHeading(clickedList);

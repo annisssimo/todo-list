@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
   tilesDiv.addEventListener('click', (event) => {
     let clickedTile = event.target.closest('.tile');
     if (clickedTile) {
+      const plusAddTaskElement = document.querySelector('.plus');
+      plusAddTaskElement.classList.add('hide');
+
       UI.resetListsColors();
       UI.updateHeading(clickedTile);
       UI.changeTileColor(clickedTile);
