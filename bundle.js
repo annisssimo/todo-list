@@ -205,7 +205,7 @@ div.input {
     width: 80%;
 }
 
-#taskName, #taskNotes, #task-date-picker, .taskName, .taskNotes, .task-date-picker {
+#task-name, #task-notes, #task-date-picker, .task-name, .task-notes, .task-date-picker {
     margin-top: 4px;
     border: none;
     outline: none;
@@ -213,11 +213,11 @@ div.input {
     font-size: inherit;
 }
 
-#taskName, #taskNotes, .taskName, .taskNotes {
+#task-name, #task-notes, .task-name, .task-notes {
     width: 98%;
 }
 
-#taskNotes, #task-date-picker, .task-date-picker, .taskNotes {
+#task-notes, #task-date-picker, .task-date-picker, .task-notes {
     color: var(--gray);
 }
 
@@ -292,6 +292,11 @@ button {
     border-color: var(--orange); /* Оранжевая граница для нажатой кнопки */
 }
 
+.gray-crossed {
+    color: var(--light-gray);
+    text-decoration: line-through;
+}
+
 #done-btn::before, .done-btn::before {
     content: ""; /* Пустой контент для псевдоэлемента */
     position: absolute; /* Позиционирование псевдоэлемента */
@@ -325,7 +330,7 @@ button {
 
 .important-btn-clicked {
     color: var(--orange);
-}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n:root {\n    --blue: rgb(0, 123, 255);\n    --dark-gray: rgb(51, 51, 51);\n    --light-gray: rgba(182, 182, 182, 0.304);\n    --gray: rgb(116, 116, 116);\n    --super-light-gray: rgba(214, 214, 214, 0.448);\n    --shadow: rgba(0, 0, 0, 0.05);\n    --red: rgba(255, 19, 19, 0.898);\n    --orange: rgba(261, 154, 15);\n    --header: rgb(244, 244, 244);\n}\n\nbody {\n    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n    color: var(--dark-gray);\n    display: grid;\n    grid-template-columns: 0.6fr 2fr;\n}\n\nh1 {\n    font-family: 'Rubik Doodle Shadow';\n    color: var(--blue);\n}\n\nh2 {\n    font-family: 'Rubik Doodle Shadow';\n}\n\n#sidebar {\n    background-color: var(--super-light-gray);\n    height: 100vh;\n    min-height: 384px;\n    padding: 24px;\n    border: 1px solid rgb(214, 214, 214);\n}\n\n.tiles {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 12px;\n}\n\n.tile {\n    background-color: var(--light-gray);\n    border-radius: 12px;\n    box-shadow: inset 2px 2px 2px var(--shadow);\n    padding: 8px 10px 8px 8px;\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    row-gap: 8px;\n    min-width: 128px;\n}\n\n#main-content {\n    box-shadow: -10px 0 20px var(--shadow);\n    background-color: white;\n}\n\n.logo {\n    display: flex;\n    align-items: center;\n    gap: 20px;\n    margin-bottom: 24px;\n}\n\n.logo-image {\n    width: 64px;\n    height: auto;\n}\n\n.new-list {\n    position: fixed;\n    left: 18px;\n    bottom: 18px;\n    color: var(--gray);\n    cursor: pointer;\n}\n\nspan.material-symbols-outlined {\n    position: relative;\n    top: 3px;\n    font-size: 1rem;\n    margin-right: 8px;\n}\n\ndiv.material-symbols-outlined {\n    border-radius: 50%;\n    padding: 0.2rem;\n    color: white;\n    font-size: 1rem;\n}\n\n.today .material-symbols-outlined {\n    background-color: var(--blue);\n}\n\n.all .material-symbols-outlined {\n    background-color: var(--dark-gray);\n}\n\n.week .material-symbols-outlined {\n    background-color: var(--red);\n}\n\n.important .material-symbols-outlined {\n    background-color: var(--orange);\n}\n\n.digit {\n    font-size: 1.4rem;\n    font-weight: 700;\n    color: var(--dark-gray);\n    text-align: end;\n}\n\nheader {\n    height: 60px;\n    background-color: var(--header);\n    display: flex;\n    justify-content: space-between;\n    padding: 16px;\n}\n\ndiv.plus {\n    color: var(--gray);\n    font-size: 24px;\n    cursor: pointer;\n}\n\n.hide {\n    display: none;\n}\n\n.today-tile-clicked {\n    background-color: var(--blue);\n    color: white;\n}\n\n.week-tile-clicked {\n    background-color: var(--red);\n    color: white;\n}\n\n.all-tile-clicked {\n    background-color: var(--dark-gray);\n    color: white;\n}\n\n.important-tile-clicked {\n    background-color: var(--orange);\n    color: white;\n}\n\ndialog {\n    position: fixed;\n    top: 32%;\n    left: 38%;\n    width: 350px;\n    border: none;\n    border-radius: 8px;\n    padding: 24px;\n}\n\nform h3 {\n    text-align: center;\n    margin-bottom: 20px;\n    font-family: 'Rubik Doodle Shadow';\n}\n\ndiv.input {\n    margin-bottom: 12px;\n}\n\n#name, #color {\n    margin-left: 10px;\n    width: 80%;\n}\n\n#taskName, #taskNotes, #task-date-picker, .taskName, .taskNotes, .task-date-picker {\n    margin-top: 4px;\n    border: none;\n    outline: none;\n    font-family: inherit;\n    font-size: inherit;\n}\n\n#taskName, #taskNotes, .taskName, .taskNotes {\n    width: 98%;\n}\n\n#taskNotes, #task-date-picker, .task-date-picker, .taskNotes {\n    color: var(--gray);\n}\n\nbutton {\n    padding: 4px 8px;\n    border: 1px solid var(--light-gray);\n    border-radius: 6px;\n    background-color: white;\n    box-shadow: 1px 1px 1px rgba(165, 165, 165, 0.548);\n}\n\n.modal-buttons {\n    display: flex;\n    flex-direction: row-reverse;\n    gap: 8px;\n}\n\n.my-lists-heading {\n    margin-top: 48px;\n    font-family: 'Rubik Doodle Shadow';\n    font-size: 24px;\n}\n\n.list-item {\n    display: flex;\n    align-items: center;\n    gap: 16px;\n    margin-top: 4px;\n    padding: 8px;\n}\n\n.list-color {\n    height: 1rem;\n    width: 1rem;\n    border-radius: 50%;\n}\n\n.list-clicked {\n    background-color: var(--light-gray);\n    border-radius: 10px;\n}\n\n#add-new-task-form, .task {\n    padding: 16px;\n    display: grid;\n    grid-template-columns: 1fr 40fr 1fr;\n    gap: 10px;\n    border-bottom: 1px solid var(--light-gray);\n}\n\n.task {\n    padding: 16px;\n    display: grid;\n    grid-template-columns: 1fr 40fr 1fr;\n    gap: 10px;\n    border-bottom: 1px solid var(--light-gray);\n}\n\n#done-btn, .done-btn {\n    margin-top: 5px;\n    width: 1rem;\n    height: 1rem;\n    border-radius: 50%;\n    box-shadow: none;\n    padding: 0;\n    border: 1px solid var(--gray); /* Серая граница */\n    position: relative; /* Позволяет позиционировать псевдоэлемент относительно кнопки */\n    background-color: transparent; /* Прозрачный фон */\n}\n\n#done-btn.radio-btn-clicked, .done-btn.radio-btn-clicked {\n    border-color: var(--orange); /* Оранжевая граница для нажатой кнопки */\n}\n\n#done-btn::before, .done-btn::before {\n    content: \"\"; /* Пустой контент для псевдоэлемента */\n    position: absolute; /* Позиционирование псевдоэлемента */\n    top: 50%; /* Расположение кружка по вертикали */\n    left: 50%; /* Расположение кружка по горизонтали */\n    transform: translate(-50%, -50%); /* Центрирование кружка */\n    width: 0.66rem; /* Диаметр кружка */\n    height: 0.66rem;\n    border-radius: 50%; /* Форма кружка */\n    background-color: var(--orange); /* Цвет кружка */\n    opacity: 0; /* Начальное скрытие кружка */\n}\n\n#done-btn.radio-btn-clicked::before, .done-btn.radio-btn-clicked::before {\n    opacity: 1; /* Показать кружок только когда кнопка нажата */\n}\n\n#done-btn:hover, .done-btn:hover {\n    cursor: pointer; /* Изменение курсора при наведении */\n}\n\n#important-btn, .important-btn {\n    font-size: 18px;\n    padding: 2px 5px;\n    align-self: center;\n}\n\n.important-btn-disabled {\n    color: rgba(128, 128, 128, 0.761);\n}\n\n.important-btn-clicked {\n    color: var(--orange);\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n:root {\n    --blue: rgb(0, 123, 255);\n    --dark-gray: rgb(51, 51, 51);\n    --light-gray: rgba(182, 182, 182, 0.304);\n    --gray: rgb(116, 116, 116);\n    --super-light-gray: rgba(214, 214, 214, 0.448);\n    --shadow: rgba(0, 0, 0, 0.05);\n    --red: rgba(255, 19, 19, 0.898);\n    --orange: rgba(261, 154, 15);\n    --header: rgb(244, 244, 244);\n}\n\nbody {\n    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n    color: var(--dark-gray);\n    display: grid;\n    grid-template-columns: 0.6fr 2fr;\n}\n\nh1 {\n    font-family: 'Rubik Doodle Shadow';\n    color: var(--blue);\n}\n\nh2 {\n    font-family: 'Rubik Doodle Shadow';\n}\n\n#sidebar {\n    background-color: var(--super-light-gray);\n    height: 100vh;\n    min-height: 384px;\n    padding: 24px;\n    border: 1px solid rgb(214, 214, 214);\n}\n\n.tiles {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 12px;\n}\n\n.tile {\n    background-color: var(--light-gray);\n    border-radius: 12px;\n    box-shadow: inset 2px 2px 2px var(--shadow);\n    padding: 8px 10px 8px 8px;\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    row-gap: 8px;\n    min-width: 128px;\n}\n\n#main-content {\n    box-shadow: -10px 0 20px var(--shadow);\n    background-color: white;\n}\n\n.logo {\n    display: flex;\n    align-items: center;\n    gap: 20px;\n    margin-bottom: 24px;\n}\n\n.logo-image {\n    width: 64px;\n    height: auto;\n}\n\n.new-list {\n    position: fixed;\n    left: 18px;\n    bottom: 18px;\n    color: var(--gray);\n    cursor: pointer;\n}\n\nspan.material-symbols-outlined {\n    position: relative;\n    top: 3px;\n    font-size: 1rem;\n    margin-right: 8px;\n}\n\ndiv.material-symbols-outlined {\n    border-radius: 50%;\n    padding: 0.2rem;\n    color: white;\n    font-size: 1rem;\n}\n\n.today .material-symbols-outlined {\n    background-color: var(--blue);\n}\n\n.all .material-symbols-outlined {\n    background-color: var(--dark-gray);\n}\n\n.week .material-symbols-outlined {\n    background-color: var(--red);\n}\n\n.important .material-symbols-outlined {\n    background-color: var(--orange);\n}\n\n.digit {\n    font-size: 1.4rem;\n    font-weight: 700;\n    color: var(--dark-gray);\n    text-align: end;\n}\n\nheader {\n    height: 60px;\n    background-color: var(--header);\n    display: flex;\n    justify-content: space-between;\n    padding: 16px;\n}\n\ndiv.plus {\n    color: var(--gray);\n    font-size: 24px;\n    cursor: pointer;\n}\n\n.hide {\n    display: none;\n}\n\n.today-tile-clicked {\n    background-color: var(--blue);\n    color: white;\n}\n\n.week-tile-clicked {\n    background-color: var(--red);\n    color: white;\n}\n\n.all-tile-clicked {\n    background-color: var(--dark-gray);\n    color: white;\n}\n\n.important-tile-clicked {\n    background-color: var(--orange);\n    color: white;\n}\n\ndialog {\n    position: fixed;\n    top: 32%;\n    left: 38%;\n    width: 350px;\n    border: none;\n    border-radius: 8px;\n    padding: 24px;\n}\n\nform h3 {\n    text-align: center;\n    margin-bottom: 20px;\n    font-family: 'Rubik Doodle Shadow';\n}\n\ndiv.input {\n    margin-bottom: 12px;\n}\n\n#name, #color {\n    margin-left: 10px;\n    width: 80%;\n}\n\n#task-name, #task-notes, #task-date-picker, .task-name, .task-notes, .task-date-picker {\n    margin-top: 4px;\n    border: none;\n    outline: none;\n    font-family: inherit;\n    font-size: inherit;\n}\n\n#task-name, #task-notes, .task-name, .task-notes {\n    width: 98%;\n}\n\n#task-notes, #task-date-picker, .task-date-picker, .task-notes {\n    color: var(--gray);\n}\n\nbutton {\n    padding: 4px 8px;\n    border: 1px solid var(--light-gray);\n    border-radius: 6px;\n    background-color: white;\n    box-shadow: 1px 1px 1px rgba(165, 165, 165, 0.548);\n}\n\n.modal-buttons {\n    display: flex;\n    flex-direction: row-reverse;\n    gap: 8px;\n}\n\n.my-lists-heading {\n    margin-top: 48px;\n    font-family: 'Rubik Doodle Shadow';\n    font-size: 24px;\n}\n\n.list-item {\n    display: flex;\n    align-items: center;\n    gap: 16px;\n    margin-top: 4px;\n    padding: 8px;\n}\n\n.list-color {\n    height: 1rem;\n    width: 1rem;\n    border-radius: 50%;\n}\n\n.list-clicked {\n    background-color: var(--light-gray);\n    border-radius: 10px;\n}\n\n#add-new-task-form, .task {\n    padding: 16px;\n    display: grid;\n    grid-template-columns: 1fr 40fr 1fr;\n    gap: 10px;\n    border-bottom: 1px solid var(--light-gray);\n}\n\n.task {\n    padding: 16px;\n    display: grid;\n    grid-template-columns: 1fr 40fr 1fr;\n    gap: 10px;\n    border-bottom: 1px solid var(--light-gray);\n}\n\n#done-btn, .done-btn {\n    margin-top: 5px;\n    width: 1rem;\n    height: 1rem;\n    border-radius: 50%;\n    box-shadow: none;\n    padding: 0;\n    border: 1px solid var(--gray); /* Серая граница */\n    position: relative; /* Позволяет позиционировать псевдоэлемент относительно кнопки */\n    background-color: transparent; /* Прозрачный фон */\n}\n\n#done-btn.radio-btn-clicked, .done-btn.radio-btn-clicked {\n    border-color: var(--orange); /* Оранжевая граница для нажатой кнопки */\n}\n\n.gray-crossed {\n    color: var(--light-gray);\n    text-decoration: line-through;\n}\n\n#done-btn::before, .done-btn::before {\n    content: \"\"; /* Пустой контент для псевдоэлемента */\n    position: absolute; /* Позиционирование псевдоэлемента */\n    top: 50%; /* Расположение кружка по вертикали */\n    left: 50%; /* Расположение кружка по горизонтали */\n    transform: translate(-50%, -50%); /* Центрирование кружка */\n    width: 0.66rem; /* Диаметр кружка */\n    height: 0.66rem;\n    border-radius: 50%; /* Форма кружка */\n    background-color: var(--orange); /* Цвет кружка */\n    opacity: 0; /* Начальное скрытие кружка */\n}\n\n#done-btn.radio-btn-clicked::before, .done-btn.radio-btn-clicked::before {\n    opacity: 1; /* Показать кружок только когда кнопка нажата */\n}\n\n#done-btn:hover, .done-btn:hover {\n    cursor: pointer; /* Изменение курсора при наведении */\n}\n\n#important-btn, .important-btn {\n    font-size: 18px;\n    padding: 2px 5px;\n    align-self: center;\n}\n\n.important-btn-disabled {\n    color: rgba(128, 128, 128, 0.761);\n}\n\n.important-btn-clicked {\n    color: var(--orange);\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -863,9 +868,12 @@ class ElementsCreator {
     }
 
     static createNewTaskForm() {
+        if(document.querySelector('#add-new-task-form')) return;
+
         const mainContent = document.querySelector('#main-content');
 
         const formElement = document.createElement('form');
+
         formElement.setAttribute('id', 'add-new-task-form');
 
         const radioBtn = ElementsCreator.createButton('button', 'done-btn', '', false);
@@ -873,8 +881,8 @@ class ElementsCreator {
 
         const divContainer = document.createElement('div');
 
-        const taskNameInputElement = ElementsCreator.createInput('text', 'taskName', 'taskName', 60, true, true, '', true);
-        const taskNotesInputElement = ElementsCreator.createInput('text', 'taskNotes', 'taskNotes', 60, false, false, 'Notes');
+        const taskNameInputElement = ElementsCreator.createInput('text', 'task-name', 'task-name', 60, true, true, '', true);
+        const taskNotesInputElement = ElementsCreator.createInput('text', 'task-notes', 'task-notes', 60, false, false, 'Notes');
         const datePicker = ElementsCreator.createInput('date', 'task-date-picker', 'task-date-picker');
 
         const importantBtn = ElementsCreator.createButton('button', 'important-btn', 'label_important', false);
@@ -907,31 +915,27 @@ class ElementsCreator {
         formWrapper.appendChild(doneBtn);
     
         const inputWrapper = document.createElement('div');
-    
-        const taskNameInput = document.createElement('input');
-        taskNameInput.type = 'text';
-        taskNameInput.name = 'taskName';
-        taskNameInput.classList.add('taskName');
+        
+        const taskNameInput = document.createElement('div');
+        taskNameInput.name = 'task-name';
+        taskNameInput.classList.add('task-name');
         taskNameInput.maxLength = '60';
-        taskNameInput.value = task.title;
-        taskNameInput.autofocus = true;
+        taskNameInput.textContent = task.title;
         inputWrapper.appendChild(taskNameInput);
     
-        const taskNotesInput = document.createElement('input');
-        taskNotesInput.type = 'text';
-        taskNotesInput.name = 'taskNotes';
-        taskNotesInput.classList.add('taskNotes');
+        const taskNotesInput = document.createElement('div');
+        taskNotesInput.name = 'task-notes';
+        taskNotesInput.classList.add('task-notes');
         taskNotesInput.maxLength = '60';
         taskNotesInput.placeholder = 'Notes';
-        taskNotesInput.value = task.description;
+        taskNotesInput.textContent = task.description;
         inputWrapper.appendChild(taskNotesInput);
     
-        const taskDatePickerInput = document.createElement('input');
-        taskDatePickerInput.type = 'date';
+        const taskDatePickerInput = document.createElement('div');
         taskDatePickerInput.name = 'task-date-picker';
         taskDatePickerInput.classList.add('task-date-picker');
         if (task.dueDate) {
-            taskDatePickerInput.value = task.dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_0__.format)(task.dueDate, 'yyyy-MM-dd') : '';
+            taskDatePickerInput.textContent = task.dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_0__.format)(task.dueDate, 'dd.MM.yyyy') : '';
         }
         inputWrapper.appendChild(taskDatePickerInput);
     
@@ -951,6 +955,17 @@ class ElementsCreator {
         // Добавление формы в основной контент
         const mainContent = document.querySelector('#main-content');
         mainContent.appendChild(formWrapper);
+
+        doneBtn.addEventListener('click', (event) => {
+            doneBtn.classList.toggle('radio-btn-clicked');
+            const formWrapper = event.target.closest('.task'); // Находим ближайший родительский элемент с классом 'task'
+            if (formWrapper) {
+                const firstDivInsideTask = formWrapper.querySelector('div:first-child'); // Находим первый div внутри 'task'
+                if (firstDivInsideTask) {
+                    firstDivInsideTask.classList.toggle('gray-crossed'); // Добавляем класс 'gray-crossed' к первому div внутри 'task'
+                }
+            }
+        });        
     }
 }
 
@@ -1154,8 +1169,8 @@ class Task {
   // Функция для создания объекта Task из данных формы
   static createTaskFromForm() {
     const taskRadioBtn = document.querySelector('#done-btn').classList.contains('radio-btn-clicked');
-    const taskNameInput = document.querySelector('#taskName');
-    const taskNotesInput = document.querySelector('#taskNotes');
+    const taskNameInput = document.querySelector('#task-name');
+    const taskNotesInput = document.querySelector('#task-notes');
     const datePicker = document.querySelector('#task-date-picker');
     const isImportant = document.querySelector('#important-btn').classList.contains('important-btn-clicked');
 
@@ -1354,7 +1369,7 @@ class UI {
                 event.preventDefault(); // Предотвращаем стандартное действие формы
                 
                 // Создаем объект Task только если поле задачи задано
-                const taskNameInput = document.getElementById('taskName');
+                const taskNameInput = document.getElementById('task-name');
                 if (!taskNameInput.value.trim()) {
                     return; // Если поле задачи не задано, прерываем выполнение
                 }
