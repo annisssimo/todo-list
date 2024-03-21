@@ -182,7 +182,7 @@ div.input {
     width: 80%;
 }
 
-#taskName, #taskNotes, #task-date-picker, .taskName, .taskNotes, .task-date-picker {
+#task-name, #task-notes, #task-date-picker, .task-name, .task-notes, .task-date-picker {
     margin-top: 4px;
     border: none;
     outline: none;
@@ -190,11 +190,11 @@ div.input {
     font-size: inherit;
 }
 
-#taskName, #taskNotes, .taskName, .taskNotes {
+#task-name, #task-notes, .task-name, .task-notes {
     width: 98%;
 }
 
-#taskNotes, #task-date-picker, .task-date-picker, .taskNotes {
+#task-notes, #task-date-picker, .task-date-picker, .task-notes {
     color: var(--gray);
 }
 
@@ -267,6 +267,11 @@ button {
 
 #done-btn.radio-btn-clicked, .done-btn.radio-btn-clicked {
     border-color: var(--orange); /* Оранжевая граница для нажатой кнопки */
+}
+
+.gray-crossed {
+    color: var(--light-gray);
+    text-decoration: line-through;
 }
 
 #done-btn::before, .done-btn::before {

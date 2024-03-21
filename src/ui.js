@@ -140,7 +140,7 @@ export class UI {
                 event.preventDefault(); // Предотвращаем стандартное действие формы
                 
                 // Создаем объект Task только если поле задачи задано
-                const taskNameInput = document.getElementById('taskName');
+                const taskNameInput = document.getElementById('task-name');
                 if (!taskNameInput.value.trim()) {
                     return; // Если поле задачи не задано, прерываем выполнение
                 }

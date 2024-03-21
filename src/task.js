@@ -17,8 +17,8 @@ export class Task {
   // Функция для создания объекта Task из данных формы
   static createTaskFromForm() {
     const taskRadioBtn = document.querySelector('#done-btn').classList.contains('radio-btn-clicked');
-    const taskNameInput = document.querySelector('#taskName');
-    const taskNotesInput = document.querySelector('#taskNotes');
+    const taskNameInput = document.querySelector('#task-name');
+    const taskNotesInput = document.querySelector('#task-notes');
     const datePicker = document.querySelector('#task-date-picker');
     const isImportant = document.querySelector('#important-btn').classList.contains('important-btn-clicked');
 

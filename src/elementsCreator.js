@@ -40,9 +40,12 @@ export class ElementsCreator {
     }
 
     static createNewTaskForm() {
+        if(document.querySelector('#add-new-task-form')) return;
+
         const mainContent = document.querySelector('#main-content');
 
         const formElement = document.createElement('form');
+
         formElement.setAttribute('id', 'add-new-task-form');
 
         const radioBtn = ElementsCreator.createButton('button', 'done-btn', '', false);
@@ -50,8 +53,8 @@ export class ElementsCreator {
 
         const divContainer = document.createElement('div');
 
-        const taskNameInputElement = ElementsCreator.createInput('text', 'taskName', 'taskName', 60, true, true, '', true);
-        const taskNotesInputElement = ElementsCreator.createInput('text', 'taskNotes', 'taskNotes', 60, false, false, 'Notes');
+        const taskNameInputElement = ElementsCreator.createInput('text', 'task-name', 'task-name', 60, true, true, '', true);
+        const taskNotesInputElement = ElementsCreator.createInput('text', 'task-notes', 'task-notes', 60, false, false, 'Notes');
         const datePicker = ElementsCreator.createInput('date', 'task-date-picker', 'task-date-picker');
 
         const importantBtn = ElementsCreator.createButton('button', 'important-btn', 'label_important', false);
@@ -84,31 +87,27 @@ export class ElementsCreator {
         formWrapper.appendChild(doneBtn);
     
         const inputWrapper = document.createElement('div');
-    
-        const taskNameInput = document.createElement('input');
-        taskNameInput.type = 'text';
-        taskNameInput.name = 'taskName';
-        taskNameInput.classList.add('taskName');
+        
+        const taskNameInput = document.createElement('div');
+        taskNameInput.name = 'task-name';
+        taskNameInput.classList.add('task-name');
         taskNameInput.maxLength = '60';
-        taskNameInput.value = task.title;
-        taskNameInput.autofocus = true;
+        taskNameInput.textContent = task.title;
         inputWrapper.appendChild(taskNameInput);
     
-        const taskNotesInput = document.createElement('input');
-        taskNotesInput.type = 'text';
-        taskNotesInput.name = 'taskNotes';
-        taskNotesInput.classList.add('taskNotes');
+        const taskNotesInput = document.createElement('div');
+        taskNotesInput.name = 'task-notes';
+        taskNotesInput.classList.add('task-notes');
         taskNotesInput.maxLength = '60';
         taskNotesInput.placeholder = 'Notes';
-        taskNotesInput.value = task.description;
+        taskNotesInput.textContent = task.description;
         inputWrapper.appendChild(taskNotesInput);
     
-        const taskDatePickerInput = document.createElement('input');
-        taskDatePickerInput.type = 'date';
+        const taskDatePickerInput = document.createElement('div');
         taskDatePickerInput.name = 'task-date-picker';
         taskDatePickerInput.classList.add('task-date-picker');
         if (task.dueDate) {
-            taskDatePickerInput.value = task.dueDate ? format(task.dueDate, 'yyyy-MM-dd') : '';
+            taskDatePickerInput.textContent = task.dueDate ? format(task.dueDate, 'dd.MM.yyyy') : '';
         }
         inputWrapper.appendChild(taskDatePickerInput);
     
@@ -128,5 +127,16 @@ export class ElementsCreator {
         // Добавление формы в основной контент
         const mainContent = document.querySelector('#main-content');
         mainContent.appendChild(formWrapper);
+
+        doneBtn.addEventListener('click', (event) => {
+            doneBtn.classList.toggle('radio-btn-clicked');
+            const formWrapper = event.target.closest('.task'); // Находим ближайший родительский элемент с классом 'task'
+            if (formWrapper) {
+                const firstDivInsideTask = formWrapper.querySelector('div:first-child'); // Находим первый div внутри 'task'
+                if (firstDivInsideTask) {
+                    firstDivInsideTask.classList.toggle('gray-crossed'); // Добавляем класс 'gray-crossed' к первому div внутри 'task'
+                }
+            }
+        });        
     }
 }
