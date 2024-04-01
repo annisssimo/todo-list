@@ -5,6 +5,7 @@ import { UI } from './ui';
 import { ElementsCreator } from './elementsCreator';
 import { todayList, weekList, allList, importantList } from './list';
 import { isToday, startOfWeek, endOfWeek } from 'date-fns';
+import { Task } from './task';
 
 WebFont.load({
   google: {
@@ -72,4 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
     ElementsCreator.createNewTaskForm();
     UI.handleEnterKeyOnForm();
   });
+
+  const externalContainer = document.querySelector('.clickable-free-space');
+  externalContainer.addEventListener('click', () => {
+    Task.createTask();
+  });
+
 });

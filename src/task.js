@@ -1,6 +1,8 @@
 import { parse } from 'date-fns';
 import { List, todayList, weekList, allList, importantList } from './list';
 import todo from './todo';
+import { UI } from './ui';
+import { ElementsCreator } from './elementsCreator';
 
 
 export class Task {
@@ -47,5 +49,19 @@ export class Task {
     const list = todo.lists.find(obj => obj.heading === listName);
 
     return list;
+  }
+
+  static createTask() {
+    // Сопоставляем выбранный список с существующим в массиве
+    const list = Task.findListFromHeader();
+
+    // Создаем объект Task с данными из полей формы
+    const task = Task.createTaskFromForm();
+
+    //Добавляем только что созданную задачу в список
+    list.addTaskToList(task);
+    
+    // Выводим задачу в main-content
+    UI.updateTaskListInMainContent(list);
   }
 }

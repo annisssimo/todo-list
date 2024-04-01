@@ -308,3 +308,12 @@ button {
 .important-btn-clicked {
     color: var(--orange);
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.clickable-free-space {
+    flex-grow: 1; /* Растягиваем элемент до доступного пространства */
+}

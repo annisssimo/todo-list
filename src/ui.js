@@ -139,16 +139,7 @@ export class UI {
             if (event.key === 'Enter') {
                 event.preventDefault(); // Предотвращаем стандартное действие формы
 
-                const list = Task.findListFromHeader();
-
-                // Создаем объект Task с данными из полей формы
-                const task = Task.createTaskFromForm();
-
-                //Добавляем только что созданную задачу в список
-                list.addTask(task);
-                
-                // Выводим задачу в main-content
-                UI.updateTaskListInMainContent(list);
+                Task.createTask();
 
                 // Создаем новую пустую форму таски
                 ElementsCreator.createNewTaskForm();

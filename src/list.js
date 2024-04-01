@@ -27,8 +27,8 @@ class List {
         this.tasks.push(task);
     }
 
-    static addTaskToList(){
-        list.addTask(task);
+    addTaskToList(task){
+        this.addTask(task);
         task.addToAllTasksList();
     }
 }
