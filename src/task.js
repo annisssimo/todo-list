@@ -1,5 +1,7 @@
 import { parse } from 'date-fns';
 import { List, todayList, weekList, allList, importantList } from './list';
+import todo from './todo';
+
 
 export class Task {
   constructor(isDone, title, description, dueDate, isImportant) {
@@ -12,6 +14,13 @@ export class Task {
 
   addToAllTasksList() {
     allList.addTask(this);
+  }
+
+  static checkTheTaskNameForCompleteness() {
+    // Создаем объект Task только если поле задачи задано
+    const taskNameInput = document.getElementById('task-name');
+
+    return taskNameInput.value.trim();
   }
 
   // Функция для создания объекта Task из данных формы
@@ -29,5 +38,14 @@ export class Task {
     // Создаем объект Task
     const task = new Task(taskRadioBtn, taskName, taskNotes, dueDate, isImportant);
     return task;
+  }
+
+  static findListFromHeader() {
+
+    if (!Task.checkTheTaskNameForCompleteness()) return;
+    const listName = document.querySelector('h2').textContent;
+    const list = todo.lists.find(obj => obj.heading === listName);
+
+    return list;
   }
 }

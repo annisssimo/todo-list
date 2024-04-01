@@ -138,20 +138,14 @@ export class UI {
             // Проверяем, была ли нажата клавиша Enter
             if (event.key === 'Enter') {
                 event.preventDefault(); // Предотвращаем стандартное действие формы
-                
-                // Создаем объект Task только если поле задачи задано
-                const taskNameInput = document.getElementById('task-name');
-                if (!taskNameInput.value.trim()) {
-                    return; // Если поле задачи не задано, прерываем выполнение
-                }
 
-                const listName = document.querySelector('h2').textContent;
-                const list = todo.lists.find(obj => obj.heading === listName);
-      
+                const list = Task.findListFromHeader();
+
                 // Создаем объект Task с данными из полей формы
                 const task = Task.createTaskFromForm();
+
+                //Добавляем только что созданную задачу в список
                 list.addTask(task);
-                task.addToAllTasksList();
                 
                 // Выводим задачу в main-content
                 UI.updateTaskListInMainContent(list);

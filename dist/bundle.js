@@ -1016,6 +1016,11 @@ class List {
     addTask(task) {
         this.tasks.push(task);
     }
+
+    static addTaskToList(){
+        list.addTask(task);
+        task.addToAllTasksList();
+    }
 }
 
 const todayList = new List('default', 'Today', 'var(--blue)');
@@ -1148,8 +1153,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Task: () => (/* binding */ Task)
 /* harmony export */ });
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/parse.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/parse.mjs");
 /* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./list */ "./src/list.js");
+/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
+
+
 
 
 
@@ -1158,12 +1166,19 @@ class Task {
     this.isDone = isDone;
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_1__.parse)(dueDate, 'yyyy-MM-dd', new Date()) : '';
+    this.dueDate = dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.parse)(dueDate, 'yyyy-MM-dd', new Date()) : '';
     this.isImportant = isImportant;
   }
 
   addToAllTasksList() {
     _list__WEBPACK_IMPORTED_MODULE_0__.allList.addTask(this);
+  }
+
+  static checkTheTaskNameForCompleteness() {
+    // Создаем объект Task только если поле задачи задано
+    const taskNameInput = document.getElementById('task-name');
+
+    return taskNameInput.value.trim();
   }
 
   // Функция для создания объекта Task из данных формы
@@ -1181,6 +1196,15 @@ class Task {
     // Создаем объект Task
     const task = new Task(taskRadioBtn, taskName, taskNotes, dueDate, isImportant);
     return task;
+  }
+
+  static findListFromHeader() {
+
+    if (!Task.checkTheTaskNameForCompleteness()) return;
+    const listName = document.querySelector('h2').textContent;
+    const list = _todo__WEBPACK_IMPORTED_MODULE_1__["default"].lists.find(obj => obj.heading === listName);
+
+    return list;
   }
 }
 
@@ -1367,20 +1391,14 @@ class UI {
             // Проверяем, была ли нажата клавиша Enter
             if (event.key === 'Enter') {
                 event.preventDefault(); // Предотвращаем стандартное действие формы
-                
-                // Создаем объект Task только если поле задачи задано
-                const taskNameInput = document.getElementById('task-name');
-                if (!taskNameInput.value.trim()) {
-                    return; // Если поле задачи не задано, прерываем выполнение
-                }
 
-                const listName = document.querySelector('h2').textContent;
-                const list = _todo__WEBPACK_IMPORTED_MODULE_0__["default"].lists.find(obj => obj.heading === listName);
-      
+                const list = _task__WEBPACK_IMPORTED_MODULE_1__.Task.findListFromHeader();
+
                 // Создаем объект Task с данными из полей формы
                 const task = _task__WEBPACK_IMPORTED_MODULE_1__.Task.createTaskFromForm();
+
+                //Добавляем только что созданную задачу в список
                 list.addTask(task);
-                task.addToAllTasksList();
                 
                 // Выводим задачу в main-content
                 UI.updateTaskListInMainContent(list);

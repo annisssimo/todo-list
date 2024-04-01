@@ -26,6 +26,11 @@ class List {
     addTask(task) {
         this.tasks.push(task);
     }
+
+    static addTaskToList(){
+        list.addTask(task);
+        task.addToAllTasksList();
+    }
 }
 
 const todayList = new List('default', 'Today', 'var(--blue)');
