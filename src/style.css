@@ -21,6 +21,7 @@ body {
     color: var(--dark-gray);
     display: grid;
     grid-template-columns: 0.6fr 2fr;
+    overflow: hidden;
 }
 
 h1 {
@@ -34,8 +35,8 @@ h2 {
 
 #sidebar {
     background-color: var(--super-light-gray);
-    height: 100vh;
-    min-height: 384px;
+    height: 100%;
+    min-height: 100vh;
     padding: 24px;
     border: 1px solid rgb(214, 214, 214);
 }
@@ -60,6 +61,8 @@ h2 {
 #main-content {
     box-shadow: -10px 0 20px var(--shadow);
     background-color: white;
+    height: calc(100vh - 60px); /* 100% высоты видимой области минус высота шапки */
+    overflow-y: auto; /* Добавляем прокрутку по вертикали, если контент выходит за границы блока */
 }
 
 .logo {
@@ -307,13 +310,4 @@ button {
 
 .important-btn-clicked {
     color: var(--orange);
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-}
-
-.clickable-free-space {
-    flex-grow: 1; /* Растягиваем элемент до доступного пространства */
 }

@@ -74,9 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
     UI.handleEnterKeyOnForm();
   });
 
-  const externalContainer = document.querySelector('.clickable-free-space');
-  externalContainer.addEventListener('click', () => {
-    Task.createTask();
+  const mainContent = document.querySelector('#main-content');
+  mainContent.addEventListener('click', (event) => {
+    if(!event.target.closest('.task') && !event.target.closest('#add-new-task-form')) Task.createTask();
   });
 
 });
