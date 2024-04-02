@@ -44,7 +44,6 @@ export class Task {
 
   static findListFromHeader() {
 
-    if (!Task.checkTheTaskNameForCompleteness()) return;
     const listName = document.querySelector('h2').textContent;
     const list = todo.lists.find(obj => obj.heading === listName);
 
@@ -52,6 +51,12 @@ export class Task {
   }
 
   static createTask() {
+
+    if (!Task.checkTheTaskNameForCompleteness()) {
+      document.querySelector('#add-new-task-form').remove();
+      return;
+    };
+
     // Сопоставляем выбранный список с существующим в массиве
     const list = Task.findListFromHeader();
 

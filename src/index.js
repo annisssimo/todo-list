@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
       UI.resetListsColors();
       UI.updateHeading(clickedTile);
       UI.changeTileColor(clickedTile);
+      
       if (clickedTile.id === 'all') {
         UI.updateTaskListInMainContent(allList);
       } else if (clickedTile.id === 'today') {
