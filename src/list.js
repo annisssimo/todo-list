@@ -1,5 +1,7 @@
 import {UI} from './ui';
 import todo from './todo';
+import { isToday, startOfWeek, endOfWeek } from 'date-fns';
+
 
 class List {
     constructor(type, heading, color) {
@@ -30,6 +32,35 @@ class List {
     addTaskToList(task){
         this.addTask(task);
         task.addToAllTasksList();
+    }
+
+    static filterTodayTasks() {
+        todayList.tasks = [];
+        allList.tasks.forEach(task => {
+          if (isToday(task.dueDate)) {
+            todayList.addTask(task);
+          }
+        });
+    }
+
+    static filterWeekTasks() {
+        weekList.tasks = [];
+        const startDate = startOfWeek(new Date(), { weekStartsOn: 1 }); // Начало текущей недели (понедельник)
+        const endDate = endOfWeek(new Date(), { weekStartsOn: 1 }); // Конец текущей недели (воскресенье)
+        allList.tasks.forEach(task => {
+          if (task.dueDate >= startDate && task.dueDate <= endDate) {
+            weekList.addTask(task);
+          }
+        });
+    }
+
+    static filterImportantTasks() {
+        importantList.tasks = [];
+        allList.tasks.forEach(task => {
+          if (task.isImportant) {
+            importantList.addTask(task);
+          }
+        });
     }
 }
 

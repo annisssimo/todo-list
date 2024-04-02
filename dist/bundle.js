@@ -992,6 +992,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
 /* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/isToday.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/startOfWeek.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/endOfWeek.mjs");
+
+
 
 
 
@@ -1024,6 +1029,35 @@ class List {
     addTaskToList(task){
         this.addTask(task);
         task.addToAllTasksList();
+    }
+
+    static filterTodayTasks() {
+        todayList.tasks = [];
+        allList.tasks.forEach(task => {
+          if ((0,date_fns__WEBPACK_IMPORTED_MODULE_2__.isToday)(task.dueDate)) {
+            todayList.addTask(task);
+          }
+        });
+    }
+
+    static filterWeekTasks() {
+        weekList.tasks = [];
+        const startDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__.startOfWeek)(new Date(), { weekStartsOn: 1 }); // Начало текущей недели (понедельник)
+        const endDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__.endOfWeek)(new Date(), { weekStartsOn: 1 }); // Конец текущей недели (воскресенье)
+        allList.tasks.forEach(task => {
+          if (task.dueDate >= startDate && task.dueDate <= endDate) {
+            weekList.addTask(task);
+          }
+        });
+    }
+
+    static filterImportantTasks() {
+        importantList.tasks = [];
+        allList.tasks.forEach(task => {
+          if (task.isImportant) {
+            importantList.addTask(task);
+          }
+        });
     }
 }
 
@@ -9017,9 +9051,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
 /* harmony import */ var _elementsCreator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./elementsCreator */ "./src/elementsCreator.js");
 /* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./list */ "./src/list.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/isToday.mjs");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/startOfWeek.mjs");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/endOfWeek.mjs");
 /* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./task */ "./src/task.js");
 
 
@@ -9052,30 +9083,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (clickedTile.id === 'all') {
         _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.allList);
       } else if (clickedTile.id === 'today') {
-        _list__WEBPACK_IMPORTED_MODULE_5__.todayList.tasks = [];
-        _list__WEBPACK_IMPORTED_MODULE_5__.allList.tasks.forEach(task => {
-          if ((0,date_fns__WEBPACK_IMPORTED_MODULE_7__.isToday)(task.dueDate)) {
-            _list__WEBPACK_IMPORTED_MODULE_5__.todayList.addTask(task);
-          }
-        });
+        _list__WEBPACK_IMPORTED_MODULE_5__.List.filterTodayTasks();
         _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.todayList);
       } else if (clickedTile.id === 'week') {
-        _list__WEBPACK_IMPORTED_MODULE_5__.weekList.tasks = [];
-        const startDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_8__.startOfWeek)(new Date(), { weekStartsOn: 1 }); // Начало текущей недели (понедельник)
-        const endDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_9__.endOfWeek)(new Date(), { weekStartsOn: 1 }); // Конец текущей недели (воскресенье)
-        _list__WEBPACK_IMPORTED_MODULE_5__.allList.tasks.forEach(task => {
-          if (task.dueDate >= startDate && task.dueDate <= endDate) {
-            _list__WEBPACK_IMPORTED_MODULE_5__.weekList.addTask(task);
-          }
-        });
+        _list__WEBPACK_IMPORTED_MODULE_5__.List.filterWeekTasks();
         _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.weekList);
       } else if (clickedTile.id === 'important') {
-        _list__WEBPACK_IMPORTED_MODULE_5__.importantList.tasks = [];
-        _list__WEBPACK_IMPORTED_MODULE_5__.allList.tasks.forEach(task => {
-          if (task.isImportant) {
-            _list__WEBPACK_IMPORTED_MODULE_5__.importantList.addTask(task);
-          }
-        });
+        _list__WEBPACK_IMPORTED_MODULE_5__.List.filterImportantTasks();
         _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.importantList);
       }
     }
