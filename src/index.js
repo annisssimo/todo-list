@@ -26,18 +26,25 @@ document.addEventListener('DOMContentLoaded', () => {
       UI.resetListsColors();
       UI.updateHeading(clickedTile);
       UI.changeTileColor(clickedTile);
-      
-      if (clickedTile.id === 'all') {
-        UI.updateTaskListInMainContent(allList);
-      } else if (clickedTile.id === 'today') {
-        List.filterTodayTasks();
-        UI.updateTaskListInMainContent(todayList);
-      } else if (clickedTile.id === 'week') {
-        List.filterWeekTasks();
-        UI.updateTaskListInMainContent(weekList);
-      } else if (clickedTile.id === 'important') {
-        List.filterImportantTasks();
-        UI.updateTaskListInMainContent(importantList);
+
+      switch(clickedTile.id) {
+        case 'all':
+          UI.updateTaskListInMainContent(allList);
+          break;
+        case 'today':
+          List.filterTodayTasks();
+          UI.updateTaskListInMainContent(todayList);
+          break;
+        case 'week':
+          List.filterWeekTasks();
+          UI.updateTaskListInMainContent(weekList);
+          break;
+        case 'important':
+          List.filterImportantTasks();
+          UI.updateTaskListInMainContent(importantList);
+          break;
+        default:
+          break;
       }
     }
   });

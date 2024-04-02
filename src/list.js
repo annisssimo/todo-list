@@ -34,6 +34,13 @@ class List {
         task.addToAllTasksList();
     }
 
+    countTasksInList() {
+        List.filterTodayTasks();
+        List.filterWeekTasks();
+        List.filterImportantTasks();
+        return this.tasks.length;
+    }
+
     static filterTodayTasks() {
         todayList.tasks = [];
         allList.tasks.forEach(task => {
@@ -61,6 +68,19 @@ class List {
             importantList.addTask(task);
           }
         });
+    }
+
+    static updateNumbers() {
+
+        const todayDigit = document.querySelector('#today > .digit');
+        const weeklyDigit = document.querySelector('#week > .digit');
+        const allDigit = document.querySelector('#all > .digit');
+        const importantDigit = document.querySelector('#important > .digit');
+
+        todayDigit.textContent = todayList.countTasksInList();
+        weeklyDigit.textContent = weekList.countTasksInList();
+        allDigit.textContent = allList.countTasksInList();
+        importantDigit.textContent = importantList.countTasksInList();
     }
 }
 

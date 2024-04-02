@@ -66,7 +66,11 @@ export class Task {
     //Добавляем только что созданную задачу в список
     list.addTaskToList(task);
     
-    // Выводим задачу в main-content
+    // Выводим задачи текущего списка в main-content
     UI.updateTaskListInMainContent(list);
+
+    //Обновляем счетчики
+    List.updateNumbers(list);
+
   }
 }

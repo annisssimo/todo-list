@@ -1031,6 +1031,13 @@ class List {
         task.addToAllTasksList();
     }
 
+    countTasksInList() {
+        List.filterTodayTasks();
+        List.filterWeekTasks();
+        List.filterImportantTasks();
+        return this.tasks.length;
+    }
+
     static filterTodayTasks() {
         todayList.tasks = [];
         allList.tasks.forEach(task => {
@@ -1058,6 +1065,19 @@ class List {
             importantList.addTask(task);
           }
         });
+    }
+
+    static updateNumbers() {
+
+        const todayDigit = document.querySelector('#today > .digit');
+        const weeklyDigit = document.querySelector('#week > .digit');
+        const allDigit = document.querySelector('#all > .digit');
+        const importantDigit = document.querySelector('#important > .digit');
+
+        todayDigit.textContent = todayList.countTasksInList();
+        weeklyDigit.textContent = weekList.countTasksInList();
+        allDigit.textContent = allList.countTasksInList();
+        importantDigit.textContent = importantList.countTasksInList();
     }
 }
 
@@ -1264,8 +1284,12 @@ class Task {
     //Добавляем только что созданную задачу в список
     list.addTaskToList(task);
     
-    // Выводим задачу в main-content
+    // Выводим задачи текущего списка в main-content
     _ui__WEBPACK_IMPORTED_MODULE_2__.UI.updateTaskListInMainContent(list);
+
+    //Обновляем счетчики
+    _list__WEBPACK_IMPORTED_MODULE_0__.List.updateNumbers(list);
+
   }
 }
 
@@ -9085,18 +9109,25 @@ document.addEventListener('DOMContentLoaded', () => {
       _ui__WEBPACK_IMPORTED_MODULE_3__.UI.resetListsColors();
       _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateHeading(clickedTile);
       _ui__WEBPACK_IMPORTED_MODULE_3__.UI.changeTileColor(clickedTile);
-      
-      if (clickedTile.id === 'all') {
-        _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.allList);
-      } else if (clickedTile.id === 'today') {
-        _list__WEBPACK_IMPORTED_MODULE_5__.List.filterTodayTasks();
-        _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.todayList);
-      } else if (clickedTile.id === 'week') {
-        _list__WEBPACK_IMPORTED_MODULE_5__.List.filterWeekTasks();
-        _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.weekList);
-      } else if (clickedTile.id === 'important') {
-        _list__WEBPACK_IMPORTED_MODULE_5__.List.filterImportantTasks();
-        _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.importantList);
+
+      switch(clickedTile.id) {
+        case 'all':
+          _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.allList);
+          break;
+        case 'today':
+          _list__WEBPACK_IMPORTED_MODULE_5__.List.filterTodayTasks();
+          _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.todayList);
+          break;
+        case 'week':
+          _list__WEBPACK_IMPORTED_MODULE_5__.List.filterWeekTasks();
+          _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.weekList);
+          break;
+        case 'important':
+          _list__WEBPACK_IMPORTED_MODULE_5__.List.filterImportantTasks();
+          _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.importantList);
+          break;
+        default:
+          break;
       }
     }
   });
