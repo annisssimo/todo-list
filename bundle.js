@@ -1242,7 +1242,6 @@ class Task {
 
   static findListFromHeader() {
 
-    if (!Task.checkTheTaskNameForCompleteness()) return;
     const listName = document.querySelector('h2').textContent;
     const list = _todo__WEBPACK_IMPORTED_MODULE_1__["default"].lists.find(obj => obj.heading === listName);
 
@@ -1250,6 +1249,12 @@ class Task {
   }
 
   static createTask() {
+
+    if (!Task.checkTheTaskNameForCompleteness()) {
+      document.querySelector('#add-new-task-form').remove();
+      return;
+    };
+
     // Сопоставляем выбранный список с существующим в массиве
     const list = Task.findListFromHeader();
 
@@ -9080,6 +9085,7 @@ document.addEventListener('DOMContentLoaded', () => {
       _ui__WEBPACK_IMPORTED_MODULE_3__.UI.resetListsColors();
       _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateHeading(clickedTile);
       _ui__WEBPACK_IMPORTED_MODULE_3__.UI.changeTileColor(clickedTile);
+      
       if (clickedTile.id === 'all') {
         _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.allList);
       } else if (clickedTile.id === 'today') {
