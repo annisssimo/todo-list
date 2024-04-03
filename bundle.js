@@ -1264,7 +1264,7 @@ class List {
       const newList = new List('custom', (0,uuid__WEBPACK_IMPORTED_MODULE_5__["default"])(), nameInput.value, colorInput.value);
       _todo__WEBPACK_IMPORTED_MODULE_1__["default"].addList(newList);
       _ui__WEBPACK_IMPORTED_MODULE_0__.UI.displayMyLists(_todo__WEBPACK_IMPORTED_MODULE_1__["default"].lists);
-      //choose list that has just been created
+      return newList;
     }
 }
 
@@ -1346,7 +1346,9 @@ class Modal {
     static handleConfirmBtn(confirmButton, dialogElement, nameInput, colorInput) {
         confirmButton.addEventListener('click', (event) => {
             event.preventDefault();
-            _list__WEBPACK_IMPORTED_MODULE_0__.List.createCustomList(nameInput, colorInput);
+            const newList = _list__WEBPACK_IMPORTED_MODULE_0__.List.createCustomList(nameInput, colorInput);
+            console.log(newList)
+            _ui__WEBPACK_IMPORTED_MODULE_1__.UI.makeNewListActive(newList);
             dialogElement.close();
         });
     }
@@ -1678,6 +1680,19 @@ class UI {
     static hidePlusElement() {
         const plusAddTaskElement = document.querySelector('.plus');
         plusAddTaskElement.classList.remove('hide');
+    }
+
+    static makeNewListActive(newList) {
+        const listItems = document.querySelectorAll('.list-item');
+
+        listItems.forEach(listItem => {
+            const dataId = listItem.getAttribute('data-id');
+
+            if(dataId === newList.id) {
+                UI.changeListColor(listItem);
+                UI.updateHeading(listItem);
+            }
+        });
     }
 }
 
