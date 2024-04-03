@@ -71,9 +71,7 @@ export class ElementsCreator {
             importantBtn.classList.toggle('important-btn-clicked');
         }); 
         
-        radioBtn.addEventListener('click', () => {
-            radioBtn.classList.toggle('radio-btn-clicked');
-        });
+        UI.changeColorOfDoneButtonOnClick(radioBtn);
 
     }
 
@@ -91,6 +89,7 @@ export class ElementsCreator {
         taskNameInput.classList.add('task-name');
         taskNameInput.maxLength = '60';
         taskNameInput.textContent = task.title;
+        task.isDone ? taskNameInput.classList.add('gray-crossed') : taskNameInput.classList.remove('gray-crossed');
         return taskNameInput;
     }
 

@@ -157,6 +157,11 @@ export class UI {
         plusAddTaskElement.classList.remove('hide');
     }
 
+    static hidePlusElement() {
+        const plusAddTaskElement = document.querySelector('.plus');
+        plusAddTaskElement.classList.add('hide');
+    }
+
     static makeNewListActive(newList) {
         const listItems = document.querySelectorAll('.list-item');
 
@@ -171,16 +176,20 @@ export class UI {
         });
     }
 
+    static changeTaskNameColor(formWrapper) {
+        if (formWrapper) {
+            const firstDivInsideTask = formWrapper.querySelector('div:first-child'); // Находим первый div внутри 'task'
+            if (firstDivInsideTask) {
+                firstDivInsideTask.classList.toggle('gray-crossed'); // Добавляем класс 'gray-crossed' к первому div внутри 'task'
+            }
+        }
+    }
+
     static changeColorOfDoneButtonOnClick(doneBtn) {
         doneBtn.addEventListener('click', (event) => {
             doneBtn.classList.toggle('radio-btn-clicked');
             const formWrapper = event.target.closest('.task'); // Находим ближайший родительский элемент с классом 'task'
-            if (formWrapper) {
-                const firstDivInsideTask = formWrapper.querySelector('div:first-child'); // Находим первый div внутри 'task'
-                if (firstDivInsideTask) {
-                    firstDivInsideTask.classList.toggle('gray-crossed'); // Добавляем класс 'gray-crossed' к первому div внутри 'task'
-                }
-            }
+            UI.changeTaskNameColor(formWrapper);
         });
     }
 

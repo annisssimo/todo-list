@@ -1,9 +1,7 @@
 import { parse } from 'date-fns';
-import { List, todayList, weekList, allList, importantList } from './list';
+import { List, allList } from './list';
 import todo from './todo';
 import { UI } from './ui';
-import { ElementsCreator } from './elementsCreator';
-
 
 export class Task {
   constructor(isDone, title, description, dueDate, isImportant) {
@@ -22,11 +20,11 @@ export class Task {
     const taskNameInput = document.getElementById('task-name');
     // Check if taskNameInput exists
     if (taskNameInput) {
-        return taskNameInput.value.trim();
+      return taskNameInput.value.trim();
     } else {
-        return false; // Return false if taskNameInput is null
+      return false; // Return false if taskNameInput is null
     }
-}
+  }
 
   // Функция для создания объекта Task из данных формы
   static createTaskFromForm() {
@@ -57,7 +55,13 @@ export class Task {
     const taskName = Task.checkTheTaskNameForCompleteness();
     // Exit method if taskName is false (indicating taskNameInput doesn't exist)
     if (!taskName) {
-        return;
+      // Check if the form exists before removing it
+      const addNewTaskForm = document.querySelector('#add-new-task-form');
+      if (addNewTaskForm) {
+        // If the form exists, remove it
+        addNewTaskForm.remove();
+      }
+      return;
     }
 
     // Сопоставляем выбранный список с существующим в массиве

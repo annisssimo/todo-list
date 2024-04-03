@@ -1086,9 +1086,7 @@ class ElementsCreator {
             importantBtn.classList.toggle('important-btn-clicked');
         }); 
         
-        radioBtn.addEventListener('click', () => {
-            radioBtn.classList.toggle('radio-btn-clicked');
-        });
+        _ui__WEBPACK_IMPORTED_MODULE_0__.UI.changeColorOfDoneButtonOnClick(radioBtn);
 
     }
 
@@ -1106,6 +1104,7 @@ class ElementsCreator {
         taskNameInput.classList.add('task-name');
         taskNameInput.maxLength = '60';
         taskNameInput.textContent = task.title;
+        task.isDone ? taskNameInput.classList.add('gray-crossed') : taskNameInput.classList.remove('gray-crossed');
         return taskNameInput;
     }
 
@@ -1417,13 +1416,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Task: () => (/* binding */ Task)
 /* harmony export */ });
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/parse.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/parse.mjs");
 /* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./list */ "./src/list.js");
 /* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
-/* harmony import */ var _elementsCreator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./elementsCreator */ "./src/elementsCreator.js");
-
-
 
 
 
@@ -1434,7 +1430,7 @@ class Task {
     this.isDone = isDone;
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_4__.parse)(dueDate, 'yyyy-MM-dd', new Date()) : '';
+    this.dueDate = dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_3__.parse)(dueDate, 'yyyy-MM-dd', new Date()) : '';
     this.isImportant = isImportant;
   }
 
@@ -1446,11 +1442,11 @@ class Task {
     const taskNameInput = document.getElementById('task-name');
     // Check if taskNameInput exists
     if (taskNameInput) {
-        return taskNameInput.value.trim();
+      return taskNameInput.value.trim();
     } else {
-        return false; // Return false if taskNameInput is null
+      return false; // Return false if taskNameInput is null
     }
-}
+  }
 
   // Функция для создания объекта Task из данных формы
   static createTaskFromForm() {
@@ -1481,7 +1477,13 @@ class Task {
     const taskName = Task.checkTheTaskNameForCompleteness();
     // Exit method if taskName is false (indicating taskNameInput doesn't exist)
     if (!taskName) {
-        return;
+      // Check if the form exists before removing it
+      const addNewTaskForm = document.querySelector('#add-new-task-form');
+      if (addNewTaskForm) {
+        // If the form exists, remove it
+        addNewTaskForm.remove();
+      }
+      return;
     }
 
     // Сопоставляем выбранный список с существующим в массиве
@@ -1704,6 +1706,11 @@ class UI {
         plusAddTaskElement.classList.remove('hide');
     }
 
+    static hidePlusElement() {
+        const plusAddTaskElement = document.querySelector('.plus');
+        plusAddTaskElement.classList.add('hide');
+    }
+
     static makeNewListActive(newList) {
         const listItems = document.querySelectorAll('.list-item');
 
@@ -1718,16 +1725,20 @@ class UI {
         });
     }
 
+    static changeTaskNameColor(formWrapper) {
+        if (formWrapper) {
+            const firstDivInsideTask = formWrapper.querySelector('div:first-child'); // Находим первый div внутри 'task'
+            if (firstDivInsideTask) {
+                firstDivInsideTask.classList.toggle('gray-crossed'); // Добавляем класс 'gray-crossed' к первому div внутри 'task'
+            }
+        }
+    }
+
     static changeColorOfDoneButtonOnClick(doneBtn) {
         doneBtn.addEventListener('click', (event) => {
             doneBtn.classList.toggle('radio-btn-clicked');
             const formWrapper = event.target.closest('.task'); // Находим ближайший родительский элемент с классом 'task'
-            if (formWrapper) {
-                const firstDivInsideTask = formWrapper.querySelector('div:first-child'); // Находим первый div внутри 'task'
-                if (firstDivInsideTask) {
-                    firstDivInsideTask.classList.toggle('gray-crossed'); // Добавляем класс 'gray-crossed' к первому div внутри 'task'
-                }
-            }
+            UI.changeTaskNameColor(formWrapper);
         });
     }
 
