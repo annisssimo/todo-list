@@ -156,4 +156,17 @@ export class UI {
         const plusAddTaskElement = document.querySelector('.plus');
         plusAddTaskElement.classList.remove('hide');
     }
+
+    static makeNewListActive(newList) {
+        const listItems = document.querySelectorAll('.list-item');
+
+        listItems.forEach(listItem => {
+            const dataId = listItem.getAttribute('data-id');
+
+            if(dataId === newList.id) {
+                UI.changeListColor(listItem);
+                UI.updateHeading(listItem);
+            }
+        });
+    }
 }

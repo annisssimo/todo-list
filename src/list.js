@@ -84,7 +84,7 @@ class List {
       const newList = new List('custom', uuidv4(), nameInput.value, colorInput.value);
       todo.addList(newList);
       UI.displayMyLists(todo.lists);
-      //choose list that has just been created
+      return newList;
     }
 }
 
