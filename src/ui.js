@@ -152,7 +152,7 @@ export class UI {
         });
     }
 
-    static hidePlusElement() {
+    static showPlusElement() {
         const plusAddTaskElement = document.querySelector('.plus');
         plusAddTaskElement.classList.remove('hide');
     }
@@ -164,9 +164,29 @@ export class UI {
             const dataId = listItem.getAttribute('data-id');
 
             if(dataId === newList.id) {
-                UI.changeListColor(listItem);
+                UI.showPlusElement();    
                 UI.updateHeading(listItem);
+                UI.changeListColor(listItem);
             }
+        });
+    }
+
+    static changeColorOfDoneButtonOnClick(doneBtn) {
+        doneBtn.addEventListener('click', (event) => {
+            doneBtn.classList.toggle('radio-btn-clicked');
+            const formWrapper = event.target.closest('.task'); // Находим ближайший родительский элемент с классом 'task'
+            if (formWrapper) {
+                const firstDivInsideTask = formWrapper.querySelector('div:first-child'); // Находим первый div внутри 'task'
+                if (firstDivInsideTask) {
+                    firstDivInsideTask.classList.toggle('gray-crossed'); // Добавляем класс 'gray-crossed' к первому div внутри 'task'
+                }
+            }
+        });
+    }
+
+    static changeColorOfImportantButtonOnClick(importantBtn) {
+        importantBtn.addEventListener('click', () => {
+            importantBtn.classList.toggle('important-btn-clicked');
         });
     }
 }

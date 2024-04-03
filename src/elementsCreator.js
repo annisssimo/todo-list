@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { UI } from './ui';
 
 export class ElementsCreator {
     static createElement(tagName, textContent) {
@@ -76,43 +77,44 @@ export class ElementsCreator {
 
     }
 
-    static createTaskDiv(task) {
-        const formWrapper = document.createElement('div');
-        formWrapper.classList.add('task');
-    
+    static createDoneBtn(task) {
         const doneBtn = document.createElement('button');
         doneBtn.type = 'button';
         doneBtn.classList.add('done-btn');
         doneBtn.classList.add(task.isDone ? 'radio-btn-clicked' : 'radio-btn-disabled');
-        formWrapper.appendChild(doneBtn);
-    
-        const inputWrapper = document.createElement('div');
-        
+        return doneBtn;
+    }
+
+    static createTaskNameInput(task) {
         const taskNameInput = document.createElement('div');
         taskNameInput.name = 'task-name';
         taskNameInput.classList.add('task-name');
         taskNameInput.maxLength = '60';
         taskNameInput.textContent = task.title;
-        inputWrapper.appendChild(taskNameInput);
-    
+        return taskNameInput;
+    }
+
+    static createTaskNotesInput(task) {
         const taskNotesInput = document.createElement('div');
         taskNotesInput.name = 'task-notes';
         taskNotesInput.classList.add('task-notes');
         taskNotesInput.maxLength = '60';
         taskNotesInput.placeholder = 'Notes';
         taskNotesInput.textContent = task.description;
-        inputWrapper.appendChild(taskNotesInput);
-    
+        return taskNotesInput;
+    }
+
+    static createTaskDatePickerInput(task) {
         const taskDatePickerInput = document.createElement('div');
         taskDatePickerInput.name = 'task-date-picker';
         taskDatePickerInput.classList.add('task-date-picker');
         if (task.dueDate) {
             taskDatePickerInput.textContent = task.dueDate ? format(task.dueDate, 'dd.MM.yyyy') : '';
         }
-        inputWrapper.appendChild(taskDatePickerInput);
-    
-        formWrapper.appendChild(inputWrapper);
-    
+        return taskDatePickerInput;
+    }
+
+    static createImportantBtn(task) {
         const importantBtn = document.createElement('button');
         importantBtn.type = 'button';
         importantBtn.classList.add('important-btn', 'material-symbols-outlined');
@@ -122,21 +124,37 @@ export class ElementsCreator {
             importantBtn.classList.add('important-btn-disabled');
         }
         importantBtn.textContent = 'label_important';
+        return importantBtn;
+    }
+
+    static createTaskDiv(task) {
+        const formWrapper = document.createElement('div');
+        formWrapper.classList.add('task');
+    
+        const doneBtn = ElementsCreator.createDoneBtn(task);
+        formWrapper.appendChild(doneBtn);
+    
+        const inputWrapper = document.createElement('div');
+        
+        const taskNameInput = ElementsCreator.createTaskNameInput(task);
+        inputWrapper.appendChild(taskNameInput);
+    
+        const taskNotesInput = ElementsCreator.createTaskNotesInput(task);
+        inputWrapper.appendChild(taskNotesInput);
+    
+        const taskDatePickerInput = ElementsCreator.createTaskDatePickerInput(task);
+        inputWrapper.appendChild(taskDatePickerInput);
+    
+        formWrapper.appendChild(inputWrapper);
+    
+        const importantBtn = ElementsCreator.createImportantBtn(task);
         formWrapper.appendChild(importantBtn);
     
         // Добавление формы в основной контент
         const mainContent = document.querySelector('#main-content');
         mainContent.appendChild(formWrapper);
 
-        doneBtn.addEventListener('click', (event) => {
-            doneBtn.classList.toggle('radio-btn-clicked');
-            const formWrapper = event.target.closest('.task'); // Находим ближайший родительский элемент с классом 'task'
-            if (formWrapper) {
-                const firstDivInsideTask = formWrapper.querySelector('div:first-child'); // Находим первый div внутри 'task'
-                if (firstDivInsideTask) {
-                    firstDivInsideTask.classList.toggle('gray-crossed'); // Добавляем класс 'gray-crossed' к первому div внутри 'task'
-                }
-            }
-        });        
+        UI.changeColorOfDoneButtonOnClick(doneBtn);
+        UI.changeColorOfImportantButtonOnClick(importantBtn);
     }
 }

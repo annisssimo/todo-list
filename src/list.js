@@ -17,7 +17,7 @@ class List {
       const listHeading = clickedList.querySelector('.text').textContent;
       const list = todo.lists.find(obj => obj.heading === listHeading);
 
-      UI.hidePlusElement();    
+      UI.showPlusElement();    
       UI.updateHeading(clickedList);
       UI.changeListColor(clickedList);
       UI.updateTaskListInMainContent(list);
