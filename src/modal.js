@@ -52,9 +52,7 @@ export class Modal {
     static handleConfirmBtn(confirmButton, dialogElement, nameInput, colorInput) {
         confirmButton.addEventListener('click', (event) => {
             event.preventDefault();
-            const newList = new List('custom', nameInput.value, colorInput.value);
-            todo.addList(newList);
-            UI.displayMyLists(todo.lists);
+            List.createCustomList(nameInput, colorInput);
             dialogElement.close();
         });
     }

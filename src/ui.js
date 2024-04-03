@@ -97,6 +97,7 @@ export class UI {
         lists.forEach(list => {
             const listItem = document.createElement('div');
             listItem.classList.add('list-item');
+            listItem.setAttribute('data-id', list.id);
             listContainer.appendChild(listItem);
 
             const listColor = document.createElement('div');
@@ -120,6 +121,7 @@ export class UI {
     }
 
     static changeListColor(clickedList) {
+        UI.resetTilesColors();
         UI.resetListsColors();
         clickedList.classList.add('list-clicked');
     }
@@ -148,5 +150,10 @@ export class UI {
                 UI.handleEnterKeyOnForm();
             }
         });
+    }
+
+    static hidePlusElement() {
+        const plusAddTaskElement = document.querySelector('.plus');
+        plusAddTaskElement.classList.remove('hide');
     }
 }
