@@ -19,11 +19,14 @@ export class Task {
   }
 
   static checkTheTaskNameForCompleteness() {
-    // Создаем объект Task только если поле задачи задано
     const taskNameInput = document.getElementById('task-name');
-
-    return taskNameInput.value.trim();
-  }
+    // Check if taskNameInput exists
+    if (taskNameInput) {
+        return taskNameInput.value.trim();
+    } else {
+        return false; // Return false if taskNameInput is null
+    }
+}
 
   // Функция для создания объекта Task из данных формы
   static createTaskFromForm() {
@@ -51,11 +54,11 @@ export class Task {
   }
 
   static createTask() {
-
-    if (!Task.checkTheTaskNameForCompleteness()) {
-      document.querySelector('#add-new-task-form').remove();
-      return;
-    };
+    const taskName = Task.checkTheTaskNameForCompleteness();
+    // Exit method if taskName is false (indicating taskNameInput doesn't exist)
+    if (!taskName) {
+        return;
+    }
 
     // Сопоставляем выбранный список с существующим в массиве
     const list = Task.findListFromHeader();
