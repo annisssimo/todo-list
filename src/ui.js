@@ -186,16 +186,12 @@ export class UI {
     }
 
     static changeColorOfDoneButtonOnClick(doneBtn) {
-        doneBtn.addEventListener('click', (event) => {
-            doneBtn.classList.toggle('radio-btn-clicked');
-            const formWrapper = event.target.closest('.task'); // Находим ближайший родительский элемент с классом 'task'
-            UI.changeTaskNameColor(formWrapper);
-        });
+        doneBtn.classList.toggle('radio-btn-clicked');
+        const formWrapper = event.target.closest('.task'); // Находим ближайший родительский элемент с классом 'task'
+        UI.changeTaskNameColor(formWrapper);
     }
 
     static changeColorOfImportantButtonOnClick(importantBtn) {
-        importantBtn.addEventListener('click', () => {
-            importantBtn.classList.toggle('important-btn-clicked');
-        });
+        importantBtn.classList.toggle('important-btn-clicked');
     }
 }

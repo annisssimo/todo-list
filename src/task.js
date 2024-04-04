@@ -16,6 +16,10 @@ export class Task {
     allList.addTask(this);
   }
 
+  toggleImportant() {
+    this.isImportant = !this.isImportant;
+  }
+
   static checkTheTaskNameForCompleteness() {
     const taskNameInput = document.getElementById('task-name');
     // Check if taskNameInput exists

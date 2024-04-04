@@ -1011,8 +1011,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ElementsCreator: () => (/* binding */ ElementsCreator)
 /* harmony export */ });
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/format.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/format.mjs");
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
+/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./list */ "./src/list.js");
+
+
 
 
 
@@ -1083,11 +1086,12 @@ class ElementsCreator {
         taskNameInputElement.focus();
 
         importantBtn.addEventListener('click', () => {
-            importantBtn.classList.toggle('important-btn-clicked');
-        }); 
-        
-        _ui__WEBPACK_IMPORTED_MODULE_0__.UI.changeColorOfDoneButtonOnClick(radioBtn);
+            _ui__WEBPACK_IMPORTED_MODULE_0__.UI.changeColorOfImportantButtonOnClick(importantBtn);
+        });
 
+        radioBtn.addEventListener('click', () => {
+            _ui__WEBPACK_IMPORTED_MODULE_0__.UI.changeColorOfDoneButtonOnClick(radioBtn);
+        });
     }
 
     static createDoneBtn(task) {
@@ -1123,7 +1127,7 @@ class ElementsCreator {
         taskDatePickerInput.name = 'task-date-picker';
         taskDatePickerInput.classList.add('task-date-picker');
         if (task.dueDate) {
-            taskDatePickerInput.textContent = task.dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_1__.format)(task.dueDate, 'dd.MM.yyyy') : '';
+            taskDatePickerInput.textContent = task.dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.format)(task.dueDate, 'dd.MM.yyyy') : '';
         }
         return taskDatePickerInput;
     }
@@ -1168,8 +1172,15 @@ class ElementsCreator {
         const mainContent = document.querySelector('#main-content');
         mainContent.appendChild(formWrapper);
 
-        _ui__WEBPACK_IMPORTED_MODULE_0__.UI.changeColorOfDoneButtonOnClick(doneBtn);
-        _ui__WEBPACK_IMPORTED_MODULE_0__.UI.changeColorOfImportantButtonOnClick(importantBtn);
+        importantBtn.addEventListener('click', () => {
+            _ui__WEBPACK_IMPORTED_MODULE_0__.UI.changeColorOfImportantButtonOnClick(importantBtn);
+            task.toggleImportant();
+            _list__WEBPACK_IMPORTED_MODULE_1__.List.updateNumbers();
+        });
+
+        doneBtn.addEventListener('click', () => {
+            _ui__WEBPACK_IMPORTED_MODULE_0__.UI.changeColorOfDoneButtonOnClick(radioBtn);
+        });
     }
 }
 
@@ -1440,6 +1451,10 @@ class Task {
 
   addToAllTasksList() {
     _list__WEBPACK_IMPORTED_MODULE_0__.allList.addTask(this);
+  }
+
+  toggleImportant() {
+    this.isImportant = !this.isImportant;
   }
 
   static checkTheTaskNameForCompleteness() {
@@ -1738,17 +1753,13 @@ class UI {
     }
 
     static changeColorOfDoneButtonOnClick(doneBtn) {
-        doneBtn.addEventListener('click', (event) => {
-            doneBtn.classList.toggle('radio-btn-clicked');
-            const formWrapper = event.target.closest('.task'); // Находим ближайший родительский элемент с классом 'task'
-            UI.changeTaskNameColor(formWrapper);
-        });
+        doneBtn.classList.toggle('radio-btn-clicked');
+        const formWrapper = event.target.closest('.task'); // Находим ближайший родительский элемент с классом 'task'
+        UI.changeTaskNameColor(formWrapper);
     }
 
     static changeColorOfImportantButtonOnClick(importantBtn) {
-        importantBtn.addEventListener('click', () => {
-            importantBtn.classList.toggle('important-btn-clicked');
-        });
+        importantBtn.classList.toggle('important-btn-clicked');
     }
 }
 

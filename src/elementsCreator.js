@@ -1,5 +1,7 @@
 import { format } from 'date-fns';
 import { UI } from './ui';
+import { List } from './list';
+
 
 export class ElementsCreator {
     static createElement(tagName, textContent) {
@@ -68,11 +70,12 @@ export class ElementsCreator {
         taskNameInputElement.focus();
 
         importantBtn.addEventListener('click', () => {
-            importantBtn.classList.toggle('important-btn-clicked');
-        }); 
-        
-        UI.changeColorOfDoneButtonOnClick(radioBtn);
+            UI.changeColorOfImportantButtonOnClick(importantBtn);
+        });
 
+        radioBtn.addEventListener('click', () => {
+            UI.changeColorOfDoneButtonOnClick(radioBtn);
+        });
     }
 
     static createDoneBtn(task) {
@@ -153,7 +156,14 @@ export class ElementsCreator {
         const mainContent = document.querySelector('#main-content');
         mainContent.appendChild(formWrapper);
 
-        UI.changeColorOfDoneButtonOnClick(doneBtn);
-        UI.changeColorOfImportantButtonOnClick(importantBtn);
+        importantBtn.addEventListener('click', () => {
+            UI.changeColorOfImportantButtonOnClick(importantBtn);
+            task.toggleImportant();
+            List.updateNumbers();
+        });
+
+        doneBtn.addEventListener('click', () => {
+            UI.changeColorOfDoneButtonOnClick(radioBtn);
+        });
     }
 }
