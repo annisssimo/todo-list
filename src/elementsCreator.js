@@ -61,7 +61,7 @@ export class ElementsCreator {
         const datePicker = ElementsCreator.createInput('date', 'task-date-picker', 'task-date-picker');
 
         const importantBtn = ElementsCreator.createButton('button', 'important-btn', 'label_important', false);
-        importantBtn.classList.add('material-symbols-outlined', 'important-btn-disabled');
+        importantBtn.classList.add('material-symbols-outlined', 'important-btn');
 
         formElement.append(radioBtn, divContainer, importantBtn);
         divContainer.append(taskNameInputElement, taskNotesInputElement, datePicker);
@@ -122,8 +122,6 @@ export class ElementsCreator {
         importantBtn.classList.add('important-btn', 'material-symbols-outlined');
         if (task.isImportant) {
             importantBtn.classList.add('important-btn-clicked');
-        } else {
-            importantBtn.classList.add('important-btn-disabled');
         }
         importantBtn.textContent = 'label_important';
         return importantBtn;
