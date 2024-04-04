@@ -161,7 +161,8 @@ export class ElementsCreator {
         });
 
         doneBtn.addEventListener('click', () => {
-            UI.changeColorOfDoneButtonOnClick(radioBtn);
+            UI.changeColorOfDoneButtonOnClick(doneBtn);
+            task.toggleDone();
         });
     }
 }

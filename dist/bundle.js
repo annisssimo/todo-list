@@ -1177,7 +1177,8 @@ class ElementsCreator {
         });
 
         doneBtn.addEventListener('click', () => {
-            _ui__WEBPACK_IMPORTED_MODULE_0__.UI.changeColorOfDoneButtonOnClick(radioBtn);
+            _ui__WEBPACK_IMPORTED_MODULE_0__.UI.changeColorOfDoneButtonOnClick(doneBtn);
+            task.toggleDone();
         });
     }
 }
@@ -1453,6 +1454,10 @@ class Task {
 
   toggleImportant() {
     this.isImportant = !this.isImportant;
+  }
+
+  toggleDone() {
+    this.isDone = !this.isDone;
   }
 
   static checkTheTaskNameForCompleteness() {
