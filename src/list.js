@@ -12,10 +12,15 @@ class List {
       this.tasks = [];
     }
 
+    static findClickedListById(clickedList) {
+      const listId = clickedList.getAttribute('data-id');
+      const list = todo.lists.find(obj => obj.id === listId);
+      return list;
+    }
+
     chooseList(event) {
       const clickedList = event.currentTarget;
-      const listHeading = clickedList.querySelector('.text').textContent;
-      const list = todo.lists.find(obj => obj.heading === listHeading);
+      let list = List.findClickedListById(clickedList);
 
       UI.showPlusElement();    
       UI.updateHeading(clickedList);

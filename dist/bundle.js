@@ -1210,10 +1210,15 @@ class List {
       this.tasks = [];
     }
 
+    static findClickedListById(clickedList) {
+      const listId = clickedList.getAttribute('data-id');
+      const list = _todo__WEBPACK_IMPORTED_MODULE_1__["default"].lists.find(obj => obj.id === listId);
+      return list;
+    }
+
     chooseList(event) {
       const clickedList = event.currentTarget;
-      const listHeading = clickedList.querySelector('.text').textContent;
-      const list = _todo__WEBPACK_IMPORTED_MODULE_1__["default"].lists.find(obj => obj.heading === listHeading);
+      let list = List.findClickedListById(clickedList);
 
       _ui__WEBPACK_IMPORTED_MODULE_0__.UI.showPlusElement();    
       _ui__WEBPACK_IMPORTED_MODULE_0__.UI.updateHeading(clickedList);
