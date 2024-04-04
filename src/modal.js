@@ -53,7 +53,6 @@ export class Modal {
         confirmButton.addEventListener('click', (event) => {
             event.preventDefault();
             const newList = List.createCustomList(nameInput, colorInput);
-            console.log(newList)
             UI.makeNewListActive(newList);
             dialogElement.close();
         });

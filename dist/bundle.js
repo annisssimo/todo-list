@@ -1370,7 +1370,6 @@ class Modal {
         confirmButton.addEventListener('click', (event) => {
             event.preventDefault();
             const newList = _list__WEBPACK_IMPORTED_MODULE_0__.List.createCustomList(nameInput, colorInput);
-            console.log(newList)
             _ui__WEBPACK_IMPORTED_MODULE_1__.UI.makeNewListActive(newList);
             dialogElement.close();
         });
@@ -1470,10 +1469,9 @@ class Task {
     return task;
   }
 
-  static findListFromHeader() {
-
-    const listName = document.querySelector('h2').textContent;
-    const list = _todo__WEBPACK_IMPORTED_MODULE_1__["default"].lists.find(obj => obj.heading === listName);
+  static getActiveCustomList() {
+    const activeList = document.querySelector('.list-clicked');
+    const list = _list__WEBPACK_IMPORTED_MODULE_0__.List.findClickedListById(activeList);
 
     return list;
   }
@@ -1492,7 +1490,7 @@ class Task {
     }
 
     // Сопоставляем выбранный список с существующим в массиве
-    const list = Task.findListFromHeader();
+    const list = Task.getActiveCustomList();
 
     // Создаем объект Task с данными из полей формы
     const task = Task.createTaskFromForm();
@@ -1683,7 +1681,6 @@ class UI {
     static updateTaskListInMainContent(list) {
         const mainContent = document.querySelector('#main-content');
         mainContent.innerHTML = '';
-
         list.tasks.forEach(task => _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createTaskDiv(task));
     }
     
@@ -1726,6 +1723,7 @@ class UI {
                 UI.showPlusElement();    
                 UI.updateHeading(listItem);
                 UI.changeListColor(listItem);
+                UI.updateTaskListInMainContent(newList);
             }
         });
     }

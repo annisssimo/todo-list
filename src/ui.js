@@ -129,7 +129,6 @@ export class UI {
     static updateTaskListInMainContent(list) {
         const mainContent = document.querySelector('#main-content');
         mainContent.innerHTML = '';
-
         list.tasks.forEach(task => ElementsCreator.createTaskDiv(task));
     }
     
@@ -172,6 +171,7 @@ export class UI {
                 UI.showPlusElement();    
                 UI.updateHeading(listItem);
                 UI.changeListColor(listItem);
+                UI.updateTaskListInMainContent(newList);
             }
         });
     }

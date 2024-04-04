@@ -43,10 +43,9 @@ export class Task {
     return task;
   }
 
-  static findListFromHeader() {
-
-    const listName = document.querySelector('h2').textContent;
-    const list = todo.lists.find(obj => obj.heading === listName);
+  static getActiveCustomList() {
+    const activeList = document.querySelector('.list-clicked');
+    const list = List.findClickedListById(activeList);
 
     return list;
   }
@@ -65,7 +64,7 @@ export class Task {
     }
 
     // Сопоставляем выбранный список с существующим в массиве
-    const list = Task.findListFromHeader();
+    const list = Task.getActiveCustomList();
 
     // Создаем объект Task с данными из полей формы
     const task = Task.createTaskFromForm();
