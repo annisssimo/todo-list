@@ -69,11 +69,13 @@ export class ElementsCreator {
 
         taskNameInputElement.focus();
 
-        importantBtn.addEventListener('click', () => {
+        importantBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
             UI.changeColorOfImportantButtonOnClick(importantBtn);
         });
 
-        radioBtn.addEventListener('click', () => {
+        radioBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
             UI.changeColorOfDoneButtonOnClick(radioBtn);
         });
     }
@@ -154,15 +156,23 @@ export class ElementsCreator {
         const mainContent = document.querySelector('#main-content');
         mainContent.appendChild(formWrapper);
 
-        importantBtn.addEventListener('click', () => {
+        importantBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
             UI.changeColorOfImportantButtonOnClick(importantBtn);
             task.toggleImportant();
             List.updateNumbers();
         });
 
-        doneBtn.addEventListener('click', () => {
+        doneBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
             UI.changeColorOfDoneButtonOnClick(doneBtn);
             task.toggleDone();
+        });
+
+        formWrapper.addEventListener('click', () => {
+            const tasks = document.querySelectorAll('.task');
+            tasks.forEach(t => t.classList.remove('selected-task'));
+            formWrapper.classList.add('selected-task');
         });
     }
 }

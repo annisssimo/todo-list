@@ -66,6 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const mainContent = document.querySelector('#main-content');
   mainContent.addEventListener('click', (event) => {
     if(!event.target.closest('.task') && !event.target.closest('#add-new-task-form')) Task.createTask();
+    
+    const tasks = document.querySelectorAll('.task');
+    const clickedElement = event.target;
+    if (!clickedElement.closest('.task')) {
+      tasks.forEach(t => t.classList.remove('selected-task'));
+    }
   });
-
 });
