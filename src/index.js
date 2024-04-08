@@ -73,4 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
       tasks.forEach(t => t.classList.remove('selected-task'));
     }
   });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Delete' || event.key === 'Backspace') {
+      const selectedTask = document.querySelector('.selected-task'); // Находим задачу с классом .selected
+      if (selectedTask) { // Если такая задача есть
+        selectedTask.remove(); // Удаляем div задачи
+      }
+    }
+});
+
 });

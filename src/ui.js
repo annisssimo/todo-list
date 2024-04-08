@@ -194,4 +194,10 @@ export class UI {
     static changeColorOfImportantButtonOnClick(importantBtn) {
         importantBtn.classList.toggle('important-btn-clicked');
     }
+
+    static highlightSelectedTask(formWrapper) {
+        const tasks = document.querySelectorAll('.task');
+        tasks.forEach(t => t.classList.remove('selected-task'));
+        formWrapper.classList.add('selected-task');
+    }
 }

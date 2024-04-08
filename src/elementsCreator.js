@@ -170,9 +170,7 @@ export class ElementsCreator {
         });
 
         formWrapper.addEventListener('click', () => {
-            const tasks = document.querySelectorAll('.task');
-            tasks.forEach(t => t.classList.remove('selected-task'));
-            formWrapper.classList.add('selected-task');
+            UI.highlightSelectedTask(formWrapper);
         });
     }
 }
