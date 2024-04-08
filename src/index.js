@@ -78,6 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (event.key === 'Delete' || event.key === 'Backspace') {
       const selectedTask = document.querySelector('.selected-task'); // Находим задачу с классом .selected
       if (selectedTask) { // Если такая задача есть
+        let taskId = selectedTask.getAttribute('data-id');
+        let activeList = Task.getActiveCustomList();
+        activeList.removeTaskFromAllLists(taskId);
+        List.updateNumbers(activeList);
         selectedTask.remove(); // Удаляем div задачи
       }
     }

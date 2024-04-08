@@ -37,11 +37,24 @@ class List {
       task.addToAllTasksList();
     }
 
+    removeTaskById(taskId) {
+      this.tasks = this.tasks.filter(task => task.id !== taskId);
+    }
+
+    removeTaskFromAllLists(taskId) {
+      this.removeTaskById(taskId);
+      List.removeFromAllTasksList(taskId);
+    }
+
     countTasksInList() {
       List.filterTodayTasks();
       List.filterWeekTasks();
       List.filterImportantTasks();
       return this.tasks.length;
+    }
+
+    static removeFromAllTasksList(taskId) {
+      allList.removeTaskById(taskId);
     }
 
     static filterTodayTasks() {

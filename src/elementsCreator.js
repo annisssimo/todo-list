@@ -132,6 +132,7 @@ export class ElementsCreator {
     static createTaskDiv(task) {
         const formWrapper = document.createElement('div');
         formWrapper.classList.add('task');
+        formWrapper.setAttribute('data-id', task.id);
     
         const doneBtn = ElementsCreator.createDoneBtn(task);
         formWrapper.appendChild(doneBtn);

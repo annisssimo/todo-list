@@ -1,10 +1,12 @@
 import { parse } from 'date-fns';
 import { List, allList } from './list';
-import todo from './todo';
 import { UI } from './ui';
+import { v4 as uuidv4 } from 'uuid';
+
 
 export class Task {
   constructor(isDone, title, description, dueDate, isImportant) {
+    this.id = uuidv4();
     this.isDone = isDone;
     this.title = title;
     this.description = description;
