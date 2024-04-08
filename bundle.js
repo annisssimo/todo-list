@@ -1191,9 +1191,7 @@ class ElementsCreator {
         });
 
         formWrapper.addEventListener('click', () => {
-            const tasks = document.querySelectorAll('.task');
-            tasks.forEach(t => t.classList.remove('selected-task'));
-            formWrapper.classList.add('selected-task');
+            _ui__WEBPACK_IMPORTED_MODULE_0__.UI.highlightSelectedTask(formWrapper);
         });
     }
 }
@@ -1778,6 +1776,12 @@ class UI {
 
     static changeColorOfImportantButtonOnClick(importantBtn) {
         importantBtn.classList.toggle('important-btn-clicked');
+    }
+
+    static highlightSelectedTask(formWrapper) {
+        const tasks = document.querySelectorAll('.task');
+        tasks.forEach(t => t.classList.remove('selected-task'));
+        formWrapper.classList.add('selected-task');
     }
 }
 
@@ -9448,6 +9452,16 @@ document.addEventListener('DOMContentLoaded', () => {
       tasks.forEach(t => t.classList.remove('selected-task'));
     }
   });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Delete' || event.key === 'Backspace') {
+      const selectedTask = document.querySelector('.selected-task'); // Находим задачу с классом .selected
+      if (selectedTask) { // Если такая задача есть
+        selectedTask.remove(); // Удаляем div задачи
+      }
+    }
+});
+
 });
 
 })();
