@@ -1153,6 +1153,7 @@ class ElementsCreator {
     static createTaskDiv(task) {
         const formWrapper = document.createElement('div');
         formWrapper.classList.add('task');
+        formWrapper.setAttribute('data-id', task.id);
     
         const doneBtn = ElementsCreator.createDoneBtn(task);
         formWrapper.appendChild(doneBtn);
@@ -1258,11 +1259,24 @@ class List {
       task.addToAllTasksList();
     }
 
+    removeTaskById(taskId) {
+      this.tasks = this.tasks.filter(task => task.id !== taskId);
+    }
+
+    removeTaskFromAllLists(taskId) {
+      this.removeTaskById(taskId);
+      List.removeFromAllTasksList(taskId);
+    }
+
     countTasksInList() {
       List.filterTodayTasks();
       List.filterWeekTasks();
       List.filterImportantTasks();
       return this.tasks.length;
+    }
+
+    static removeFromAllTasksList(taskId) {
+      allList.removeTaskById(taskId);
     }
 
     static filterTodayTasks() {
@@ -1445,8 +1459,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/parse.mjs");
 /* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./list */ "./src/list.js");
-/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
-/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
+/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/v4.js");
+
 
 
 
@@ -1454,6 +1469,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class Task {
   constructor(isDone, title, description, dueDate, isImportant) {
+    this.id = (0,uuid__WEBPACK_IMPORTED_MODULE_2__["default"])();
     this.isDone = isDone;
     this.title = title;
     this.description = description;
@@ -1530,7 +1546,7 @@ class Task {
     list.addTaskToList(task);
     
     // Выводим задачи текущего списка в main-content
-    _ui__WEBPACK_IMPORTED_MODULE_2__.UI.updateTaskListInMainContent(list);
+    _ui__WEBPACK_IMPORTED_MODULE_1__.UI.updateTaskListInMainContent(list);
 
     //Обновляем счетчики
     _list__WEBPACK_IMPORTED_MODULE_0__.List.updateNumbers(list);
@@ -9457,13 +9473,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (event.key === 'Delete' || event.key === 'Backspace') {
       const selectedTask = document.querySelector('.selected-task'); // Находим задачу с классом .selected
       if (selectedTask) { // Если такая задача есть
+        let taskId = selectedTask.getAttribute('data-id');
+        let activeList = _task__WEBPACK_IMPORTED_MODULE_6__.Task.getActiveCustomList();
+        activeList.removeTaskFromAllLists(taskId);
+        _list__WEBPACK_IMPORTED_MODULE_5__.List.updateNumbers(activeList);
         selectedTask.remove(); // Удаляем div задачи
       }
     }
 });
 
 });
-
 })();
 
 /******/ })()
