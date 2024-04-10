@@ -4,7 +4,6 @@ import { UI } from './ui';
 import { v4 as uuidv4 } from 'uuid';
 import { ElementsCreator } from './elementsCreator';
 
-
 export class Task {
   constructor(isDone, title, description, dueDate, isImportant) {
     this.id = uuidv4();
@@ -53,13 +52,6 @@ export class Task {
     return task;
   }
 
-  static getActiveCustomList() {
-    const activeList = document.querySelector('.list-clicked');
-    if(!activeList) return;
-    const list = List.findClickedListById(activeList);
-    return list;
-  }
-
   static createTask() {
     const taskName = Task.checkTheTaskNameForCompleteness();
     // Exit method if taskName is false (indicating taskNameInput doesn't exist)
@@ -74,7 +66,7 @@ export class Task {
     }
 
     // Сопоставляем выбранный список с существующим в массиве
-    const list = Task.getActiveCustomList();
+    const list = List.getActiveCustomList();
 
     // Создаем объект Task с данными из полей формы
     const task = Task.createTaskFromForm();
@@ -92,7 +84,7 @@ export class Task {
 
   static deleteTask(selectedTask) {
     let taskId = selectedTask.getAttribute('data-id');
-    let activeList = Task.getActiveCustomList();
+    let activeList = List.getActiveCustomList();
     if(!activeList) return;
     activeList.removeTaskFromAllLists(taskId);
     List.updateNumbers();
@@ -102,7 +94,7 @@ export class Task {
   static editTask(event) {
     const taskDiv = event.target.closest('.task');
     const taskId = taskDiv.getAttribute('data-id');
-    const activeList = Task.getActiveCustomList();
+    const activeList = List.getActiveCustomList();
     if(!activeList) return;
     const task = activeList.getTaskById(taskId);
 

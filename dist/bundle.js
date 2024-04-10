@@ -1281,110 +1281,125 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class List {
-    constructor(type, id, heading, color) {
-      this.type = type;
-      this.id = id;
-      this.heading = heading;
-      this.color = color;
-      this.tasks = [];
-    }
+  constructor(type, id, heading, color) {
+    this.type = type;
+    this.id = id;
+    this.heading = heading;
+    this.color = color;
+    this.tasks = [];
+  }
 
-    static findClickedListById(clickedList) {
-      const listId = clickedList.getAttribute('data-id');
-      const list = _todo__WEBPACK_IMPORTED_MODULE_1__["default"].lists.find(obj => obj.id === listId);
-      return list;
-    }
+  static findClickedListById(clickedList) {
+    const listId = clickedList.getAttribute('data-id');
+    const list = _todo__WEBPACK_IMPORTED_MODULE_1__["default"].lists.find(obj => obj.id === listId);
+    return list;
+  }
 
-    chooseList(event) {
-      const clickedList = event.currentTarget;
-      let list = List.findClickedListById(clickedList);
+  chooseList(event) {
+    const clickedList = event.currentTarget;
+    let list = List.findClickedListById(clickedList);
 
-      _ui__WEBPACK_IMPORTED_MODULE_0__.UI.showPlusElement();    
-      _ui__WEBPACK_IMPORTED_MODULE_0__.UI.updateHeading(clickedList);
-      _ui__WEBPACK_IMPORTED_MODULE_0__.UI.changeListColor(clickedList);
-      _ui__WEBPACK_IMPORTED_MODULE_0__.UI.updateTaskListInMainContent(list);
-    }
+    _ui__WEBPACK_IMPORTED_MODULE_0__.UI.showPlusElement();    
+    _ui__WEBPACK_IMPORTED_MODULE_0__.UI.updateHeading(clickedList);
+    _ui__WEBPACK_IMPORTED_MODULE_0__.UI.changeListColor(clickedList);
+    _ui__WEBPACK_IMPORTED_MODULE_0__.UI.updateTaskListInMainContent(list);
+  }
 
-    addTask(task) {
-      this.tasks.push(task);
-    }
+  addTask(task) {
+    this.tasks.push(task);
+  }
 
-    addTaskToList(task){
-      this.addTask(task);
-      task.addToAllTasksList();
-    }
+  addTaskToList(task){
+    this.addTask(task);
+    task.addToAllTasksList();
+  }
 
-    getTaskById(taskId) {
-      return this.tasks.find(task => task.id === taskId);
-    }
+  getTaskById(taskId) {
+    return this.tasks.find(task => task.id === taskId);
+  }
 
-    removeTaskById(taskId) {
-      this.tasks = this.tasks.filter(task => task.id !== taskId);
-    }
+  removeTaskById(taskId) {
+    this.tasks = this.tasks.filter(task => task.id !== taskId);
+  }
 
-    removeTaskFromAllLists(taskId) {
-      this.removeTaskById(taskId);
-      List.removeFromAllTasksList(taskId);
-    }
+  removeTaskFromAllLists(taskId) {
+    this.removeTaskById(taskId);
+    List.removeFromAllTasksList(taskId);
+  }
 
-    countTasksInList() {
-      List.filterTodayTasks();
-      List.filterWeekTasks();
-      List.filterImportantTasks();
-      return this.tasks.length;
-    }
+  countTasksInList() {
+    List.filterTodayTasks();
+    List.filterWeekTasks();
+    List.filterImportantTasks();
+    return this.tasks.length;
+  }
 
-    static removeFromAllTasksList(taskId) {
-      allList.removeTaskById(taskId);
-    }
+  static removeFromAllTasksList(taskId) {
+    allList.removeTaskById(taskId);
+  }
 
-    static filterTodayTasks() {
-      todayList.tasks = [];
-      allList.tasks.forEach(task => {
-        if ((0,date_fns__WEBPACK_IMPORTED_MODULE_2__.isToday)(task.dueDate)) {
-          todayList.addTask(task);
-        }
-      });
-    }
+  static filterTodayTasks() {
+    todayList.tasks = [];
+    allList.tasks.forEach(task => {
+      if ((0,date_fns__WEBPACK_IMPORTED_MODULE_2__.isToday)(task.dueDate)) {
+        todayList.addTask(task);
+      }
+    });
+  }
 
-    static filterWeekTasks() {
-      weekList.tasks = [];
-      const startDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__.startOfWeek)(new Date(), { weekStartsOn: 1 }); // Начало текущей недели (понедельник)
-      const endDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__.endOfWeek)(new Date(), { weekStartsOn: 1 }); // Конец текущей недели (воскресенье)
-      allList.tasks.forEach(task => {
-        if (task.dueDate >= startDate && task.dueDate <= endDate) {
-          weekList.addTask(task);
-        }
-      });
-    }
+  static filterWeekTasks() {
+    weekList.tasks = [];
+    const startDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__.startOfWeek)(new Date(), { weekStartsOn: 1 }); // Начало текущей недели (понедельник)
+    const endDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__.endOfWeek)(new Date(), { weekStartsOn: 1 }); // Конец текущей недели (воскресенье)
+    allList.tasks.forEach(task => {
+      if (task.dueDate >= startDate && task.dueDate <= endDate) {
+        weekList.addTask(task);
+      }
+    });
+  }
 
-    static filterImportantTasks() {
-      importantList.tasks = [];
-      allList.tasks.forEach(task => {
-        if (task.isImportant) {
-          importantList.addTask(task);
-        }
-      });
-    }
+  static filterImportantTasks() {
+    importantList.tasks = [];
+    allList.tasks.forEach(task => {
+      if (task.isImportant) {
+        importantList.addTask(task);
+      }
+    });
+  }
 
-    static updateNumbers() {
-      const todayDigit = document.querySelector('#today > .digit');
-      const weeklyDigit = document.querySelector('#week > .digit');
-      const allDigit = document.querySelector('#all > .digit');
-      const importantDigit = document.querySelector('#important > .digit');
+  static updateNumbers() {
+    const todayDigit = document.querySelector('#today > .digit');
+    const weeklyDigit = document.querySelector('#week > .digit');
+    const allDigit = document.querySelector('#all > .digit');
+    const importantDigit = document.querySelector('#important > .digit');
 
-      todayDigit.textContent = todayList.countTasksInList();
-      weeklyDigit.textContent = weekList.countTasksInList();
-      allDigit.textContent = allList.countTasksInList();
-      importantDigit.textContent = importantList.countTasksInList();
-    }
+    todayDigit.textContent = todayList.countTasksInList();
+    weeklyDigit.textContent = weekList.countTasksInList();
+    allDigit.textContent = allList.countTasksInList();
+    importantDigit.textContent = importantList.countTasksInList();
+  }
 
-    static createCustomList(nameInput, colorInput) {
-      const newList = new List('custom', (0,uuid__WEBPACK_IMPORTED_MODULE_5__["default"])(), nameInput.value, colorInput.value);
-      _todo__WEBPACK_IMPORTED_MODULE_1__["default"].addList(newList);
-      _ui__WEBPACK_IMPORTED_MODULE_0__.UI.displayMyLists(_todo__WEBPACK_IMPORTED_MODULE_1__["default"].lists);
-      return newList;
-    }
+  static createCustomList(nameInput, colorInput) {
+    const newList = new List('custom', (0,uuid__WEBPACK_IMPORTED_MODULE_5__["default"])(), nameInput.value, colorInput.value);
+    _todo__WEBPACK_IMPORTED_MODULE_1__["default"].addList(newList);
+    _ui__WEBPACK_IMPORTED_MODULE_0__.UI.displayMyLists();
+    return newList;
+  }
+
+  static getActiveCustomList() {
+    const activeList = document.querySelector('.list-clicked');
+    if(!activeList) return;
+    const list = List.findClickedListById(activeList);
+    return list;
+  }
+
+  static editList(listToEdit) {
+    const editListNameInput = document.querySelector('#edit-list-name');
+    const editListColorInput = document.querySelector('#edit-list-color');
+
+    listToEdit.heading = editListNameInput.value;
+    listToEdit.color = editListColorInput.value;
+}
 }
 
 const todayList = new List('default', 1, 'Today', 'var(--blue)');
@@ -1443,7 +1458,7 @@ class Modal {
         const colorInputElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createInput('color', 'color', `${id}-color`);
 
         const cancelButtonElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createButton('button', `${id}-cancel-btn`, 'Cancel');
-        const confirmButtonElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createButton('submit', `${id}-confirm-btn`, 'OK', true);
+        const confirmButtonElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createButton('submit', `${id}-confirm-btn`, 'OK', false);
 
         formElement.append(
             headingElement,
@@ -1463,8 +1478,15 @@ class Modal {
     static handleConfirmBtn(confirmButton, dialogElement, nameInput, colorInput) {
         confirmButton.addEventListener('click', (event) => {
             event.preventDefault();
-            const newList = _list__WEBPACK_IMPORTED_MODULE_0__.List.createCustomList(nameInput, colorInput);
-            _ui__WEBPACK_IMPORTED_MODULE_1__.UI.makeNewListActive(newList);
+            if(confirmButton.id === 'add-new-list-confirm-btn') {
+                const newList = _list__WEBPACK_IMPORTED_MODULE_0__.List.createCustomList(nameInput, colorInput);
+                _ui__WEBPACK_IMPORTED_MODULE_1__.UI.makeNewListActive(newList);
+            }
+            else if (confirmButton.id === 'edit-list-confirm-btn') {
+                const activeListToEdit = _list__WEBPACK_IMPORTED_MODULE_0__.List.getActiveCustomList();
+                _list__WEBPACK_IMPORTED_MODULE_0__.List.editList(activeListToEdit);
+                _ui__WEBPACK_IMPORTED_MODULE_1__.UI.displayMyLists();
+            }
             dialogElement.close();
         });
     }
@@ -1483,14 +1505,14 @@ class Modal {
 
     static showNewListModal() {
         const dialogElement = document.querySelector('#add-new-list-dialog');
-        Modal.resetDialog('add-new-list');
+        Modal.resetDialog();
         dialogElement.showModal();
     }
 
-    static resetDialog(id) {
-        const nameInput = document.getElementById(`${id}-name`);
-        const colorInput = document.getElementById(`${id}-color`);
-        const confirmButton = document.getElementById(`${id}-confirm-btn`);
+    static resetDialog() {
+        const nameInput = document.getElementById(`add-new-list-name`);
+        const colorInput = document.getElementById(`add-new-list-color`);
+        const confirmButton = document.getElementById(`add-new-list-confirm-btn`);
 
         // Clear input fields
         nameInput.value = '';
@@ -1511,13 +1533,30 @@ class Modal {
 
     static showEditListModal(event) {
         const dialogElement = document.querySelector('#edit-list-dialog');
-        Modal.resetDialog('edit-list');
         Modal.fillModalWithListData(event);
         dialogElement.showModal();
     }
 
     static fillModalWithListData(event) {
+        const listDiv = event.target.closest('.list-item');
+        
+        // Получаем текст и цвет списка
+        const listName = listDiv.querySelector('.text').textContent;
+        const listColor = listDiv.querySelector('.list-color').style.backgroundColor;
 
+        // Convert RGB color to HEX format
+        const hexColor = _ui__WEBPACK_IMPORTED_MODULE_1__.UI.rgbToHex(listColor);
+        
+        console.log('List Color:', listColor);
+        console.log('Hex Color:', hexColor);
+
+        // Находим нужные элементы в модальном окне для редактирования
+        const editListNameInput = document.querySelector('#edit-list-name');
+        const editListColorInput = document.querySelector('#edit-list-color');
+        
+        // Устанавливаем значения в соответствующие поля в модальном окне
+        editListNameInput.value = listName;
+        editListColorInput.value = `#${hexColor}`;
     }
 }
 
@@ -1539,7 +1578,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
 /* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/v4.js");
 /* harmony import */ var _elementsCreator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./elementsCreator */ "./src/elementsCreator.js");
-
 
 
 
@@ -1594,13 +1632,6 @@ class Task {
     return task;
   }
 
-  static getActiveCustomList() {
-    const activeList = document.querySelector('.list-clicked');
-    if(!activeList) return;
-    const list = _list__WEBPACK_IMPORTED_MODULE_0__.List.findClickedListById(activeList);
-    return list;
-  }
-
   static createTask() {
     const taskName = Task.checkTheTaskNameForCompleteness();
     // Exit method if taskName is false (indicating taskNameInput doesn't exist)
@@ -1615,7 +1646,7 @@ class Task {
     }
 
     // Сопоставляем выбранный список с существующим в массиве
-    const list = Task.getActiveCustomList();
+    const list = _list__WEBPACK_IMPORTED_MODULE_0__.List.getActiveCustomList();
 
     // Создаем объект Task с данными из полей формы
     const task = Task.createTaskFromForm();
@@ -1633,7 +1664,7 @@ class Task {
 
   static deleteTask(selectedTask) {
     let taskId = selectedTask.getAttribute('data-id');
-    let activeList = Task.getActiveCustomList();
+    let activeList = _list__WEBPACK_IMPORTED_MODULE_0__.List.getActiveCustomList();
     if(!activeList) return;
     activeList.removeTaskFromAllLists(taskId);
     _list__WEBPACK_IMPORTED_MODULE_0__.List.updateNumbers();
@@ -1643,7 +1674,7 @@ class Task {
   static editTask(event) {
     const taskDiv = event.target.closest('.task');
     const taskId = taskDiv.getAttribute('data-id');
-    const activeList = Task.getActiveCustomList();
+    const activeList = _list__WEBPACK_IMPORTED_MODULE_0__.List.getActiveCustomList();
     if(!activeList) return;
     const task = activeList.getTaskById(taskId);
 
@@ -1748,6 +1779,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var webfontloader__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(webfontloader__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./task */ "./src/task.js");
 /* harmony import */ var _elementsCreator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./elementsCreator */ "./src/elementsCreator.js");
+/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
+
+
 
 
 
@@ -1761,6 +1795,22 @@ class UI {
                 families: ['Rubik Doodle Shadow:400'],
             },
         });
+    }
+
+    // Function to convert RGB color to HEX format
+    static rgbToHex(rgb) {
+        // Check if the input is in the correct RGB format
+        const match = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+        if (!match) {
+            // Return default color or handle the error accordingly
+            return '000000'; // Default to black color
+        }
+
+        // Convert each RGB component to HEX format
+        const [, r, g, b] = match;
+        const hexColor = ((1 << 24) + (parseInt(r) << 16) + (parseInt(g) << 8) + parseInt(b)).toString(16).slice(1);
+
+        return hexColor;
     }
 
     static updateHeading(clickedList) {
@@ -1833,7 +1883,7 @@ class UI {
         listContainer.innerHTML = '';
     }
 
-    static displayMyLists(lists) {
+    static displayMyLists() {
         const sidebar = document.querySelector('#sidebar');
         let listContainer = document.querySelector('#list-container');
         
@@ -1852,7 +1902,7 @@ class UI {
         sidebar.appendChild(listContainer);
         listContainer.appendChild(listsHeading);
 
-        lists.forEach(list => _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createListDiv(list, listContainer));
+        _todo__WEBPACK_IMPORTED_MODULE_3__["default"].lists.forEach(list => _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createListDiv(list, listContainer));
     }
 
     static resetListsColors() {
@@ -1943,10 +1993,6 @@ class UI {
 
     static deleteTaskDiv(selectedTask) {
         selectedTask.remove();
-    }
-
-    static handleDoubleClickOnListItem() {
-
     }
 }
 

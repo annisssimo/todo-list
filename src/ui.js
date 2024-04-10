@@ -1,6 +1,8 @@
 import WebFont from 'webfontloader';
 import { Task } from './task';
 import { ElementsCreator } from './elementsCreator';
+import todo from './todo';
+
 
 
 export class UI {
@@ -11,6 +13,22 @@ export class UI {
                 families: ['Rubik Doodle Shadow:400'],
             },
         });
+    }
+
+    // Function to convert RGB color to HEX format
+    static rgbToHex(rgb) {
+        // Check if the input is in the correct RGB format
+        const match = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+        if (!match) {
+            // Return default color or handle the error accordingly
+            return '000000'; // Default to black color
+        }
+
+        // Convert each RGB component to HEX format
+        const [, r, g, b] = match;
+        const hexColor = ((1 << 24) + (parseInt(r) << 16) + (parseInt(g) << 8) + parseInt(b)).toString(16).slice(1);
+
+        return hexColor;
     }
 
     static updateHeading(clickedList) {
@@ -83,7 +101,7 @@ export class UI {
         listContainer.innerHTML = '';
     }
 
-    static displayMyLists(lists) {
+    static displayMyLists() {
         const sidebar = document.querySelector('#sidebar');
         let listContainer = document.querySelector('#list-container');
         
@@ -102,7 +120,7 @@ export class UI {
         sidebar.appendChild(listContainer);
         listContainer.appendChild(listsHeading);
 
-        lists.forEach(list => ElementsCreator.createListDiv(list, listContainer));
+        todo.lists.forEach(list => ElementsCreator.createListDiv(list, listContainer));
     }
 
     static resetListsColors() {
@@ -193,9 +211,5 @@ export class UI {
 
     static deleteTaskDiv(selectedTask) {
         selectedTask.remove();
-    }
-
-    static handleDoubleClickOnListItem() {
-
     }
 }

@@ -31,7 +31,7 @@ export class Modal {
         const colorInputElement = ElementsCreator.createInput('color', 'color', `${id}-color`);
 
         const cancelButtonElement = ElementsCreator.createButton('button', `${id}-cancel-btn`, 'Cancel');
-        const confirmButtonElement = ElementsCreator.createButton('submit', `${id}-confirm-btn`, 'OK', true);
+        const confirmButtonElement = ElementsCreator.createButton('submit', `${id}-confirm-btn`, 'OK', false);
 
         formElement.append(
             headingElement,
@@ -51,8 +51,15 @@ export class Modal {
     static handleConfirmBtn(confirmButton, dialogElement, nameInput, colorInput) {
         confirmButton.addEventListener('click', (event) => {
             event.preventDefault();
-            const newList = List.createCustomList(nameInput, colorInput);
-            UI.makeNewListActive(newList);
+            if(confirmButton.id === 'add-new-list-confirm-btn') {
+                const newList = List.createCustomList(nameInput, colorInput);
+                UI.makeNewListActive(newList);
+            }
+            else if (confirmButton.id === 'edit-list-confirm-btn') {
+                const activeListToEdit = List.getActiveCustomList();
+                List.editList(activeListToEdit);
+                UI.displayMyLists();
+            }
             dialogElement.close();
         });
     }
@@ -71,14 +78,14 @@ export class Modal {
 
     static showNewListModal() {
         const dialogElement = document.querySelector('#add-new-list-dialog');
-        Modal.resetDialog('add-new-list');
+        Modal.resetDialog();
         dialogElement.showModal();
     }
 
-    static resetDialog(id) {
-        const nameInput = document.getElementById(`${id}-name`);
-        const colorInput = document.getElementById(`${id}-color`);
-        const confirmButton = document.getElementById(`${id}-confirm-btn`);
+    static resetDialog() {
+        const nameInput = document.getElementById(`add-new-list-name`);
+        const colorInput = document.getElementById(`add-new-list-color`);
+        const confirmButton = document.getElementById(`add-new-list-confirm-btn`);
 
         // Clear input fields
         nameInput.value = '';
@@ -99,12 +106,29 @@ export class Modal {
 
     static showEditListModal(event) {
         const dialogElement = document.querySelector('#edit-list-dialog');
-        Modal.resetDialog('edit-list');
         Modal.fillModalWithListData(event);
         dialogElement.showModal();
     }
 
     static fillModalWithListData(event) {
+        const listDiv = event.target.closest('.list-item');
+        
+        // Получаем текст и цвет списка
+        const listName = listDiv.querySelector('.text').textContent;
+        const listColor = listDiv.querySelector('.list-color').style.backgroundColor;
 
+        // Convert RGB color to HEX format
+        const hexColor = UI.rgbToHex(listColor);
+        
+        console.log('List Color:', listColor);
+        console.log('Hex Color:', hexColor);
+
+        // Находим нужные элементы в модальном окне для редактирования
+        const editListNameInput = document.querySelector('#edit-list-name');
+        const editListColorInput = document.querySelector('#edit-list-color');
+        
+        // Устанавливаем значения в соответствующие поля в модальном окне
+        editListNameInput.value = listName;
+        editListColorInput.value = `#${hexColor}`;
     }
 }

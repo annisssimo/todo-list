@@ -25,6 +25,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "color-convert": "^2.0.1",
     "date-fns": "^3.3.1",
     "emoji-mart": "^5.5.2",
     "uuid": "^9.0.1"
