@@ -1016,10 +1016,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ElementsCreator: () => (/* binding */ ElementsCreator)
 /* harmony export */ });
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/format.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/format.mjs");
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
 /* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./list */ "./src/list.js");
 /* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./task */ "./src/task.js");
+/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modal */ "./src/modal.js");
+
 
 
 
@@ -1027,6 +1029,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class ElementsCreator {
+
+    static createListDiv(list, listContainer) {
+        const listItem = document.createElement('div');
+        listItem.classList.add('list-item');
+        listItem.setAttribute('data-id', list.id);
+        listContainer.appendChild(listItem);
+
+        const listColor = document.createElement('div');
+        const listName = document.createElement('p');
+        listColor.classList.add('list-color');
+        listName.classList.add('text');
+
+        listColor.style.backgroundColor = list.color;
+        listName.textContent = list.heading;
+        
+        listItem.appendChild(listColor);
+        listItem.appendChild(listName);
+
+        listItem.addEventListener('click', list.chooseList); 
+        listItem.addEventListener('dblclick', _modal__WEBPACK_IMPORTED_MODULE_3__.Modal.editList); 
+    }
+
     static createElement(tagName, textContent) {
         const element = document.createElement(tagName);
         element.textContent = textContent;
@@ -1138,7 +1162,7 @@ class ElementsCreator {
         taskDatePickerInput.name = 'task-date-picker';
         taskDatePickerInput.classList.add('task-date-picker');
         if (task.dueDate) {
-            taskDatePickerInput.textContent = task.dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_3__.format)(task.dueDate, 'dd.MM.yyyy') : '';
+            taskDatePickerInput.textContent = task.dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_4__.format)(task.dueDate, 'dd.MM.yyyy') : '';
         }
         return taskDatePickerInput;
     }
@@ -1209,7 +1233,7 @@ class ElementsCreator {
         taskNameInput.value = task.title;
         taskNotesInput.value = task.description;
         if (task.dueDate) {
-            taskDatePicker.value = task.dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_3__.format)(task.dueDate, 'yyyy-MM-dd') : '';
+            taskDatePicker.value = task.dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_4__.format)(task.dueDate, 'yyyy-MM-dd') : '';
         }
         if (task.isImportant) {
             importantBtn.classList.add('important-btn-clicked');
@@ -1385,17 +1409,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./list */ "./src/list.js");
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
-/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
-/* harmony import */ var _elementsCreator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./elementsCreator */ "./src/elementsCreator.js");
-
+/* harmony import */ var _elementsCreator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./elementsCreator */ "./src/elementsCreator.js");
 
 
 
 
 class Modal {
 
-    static checkIfModalExists() {
-        let dialog = document.querySelector('#add-new-list-dialog');
+    static checkIfModalExists(modalId) {
+        let dialog = document.querySelector(modalId);
 
         if (dialog) {
             return true;
@@ -1405,29 +1427,29 @@ class Modal {
 
     }
 
-    static createModal() {
+    static createModal(heading, id) {
         const dialogElement = document.createElement('dialog');
-        dialogElement.id = 'add-new-list-dialog';
+        dialogElement.id = id;
 
         const formElement = document.createElement('form');
         formElement.id = 'add-new-list-form';
 
-        const headingElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_3__.ElementsCreator.createElement('h3', 'New list');
+        const headingElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createElement('h3', heading);
 
-        const nameLabelElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_3__.ElementsCreator.createInputLabel('name', 'Name:');
-        const nameInputElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_3__.ElementsCreator.createInput('text', 'name', 'name', 60, true, true, '');
+        const nameLabelElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createInputLabel('name', 'Name:');
+        const nameInputElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createInput('text', 'name', 'name', 60, true, true, '');
 
-        const colorLabelElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_3__.ElementsCreator.createInputLabel('color', 'Color:');
-        const colorInputElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_3__.ElementsCreator.createInput('color', 'color', 'color');
+        const colorLabelElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createInputLabel('color', 'Color:');
+        const colorInputElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createInput('color', 'color', 'color');
 
-        const cancelButtonElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_3__.ElementsCreator.createButton('button', 'cancel-btn', 'Cancel');
-        const confirmButtonElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_3__.ElementsCreator.createButton('submit', 'confirm-btn', 'OK', true);
+        const cancelButtonElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createButton('button', 'cancel-btn', 'Cancel');
+        const confirmButtonElement = _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createButton('submit', 'confirm-btn', 'OK', true);
 
         formElement.append(
             headingElement,
-            _elementsCreator__WEBPACK_IMPORTED_MODULE_3__.ElementsCreator.createInputDiv(nameLabelElement, nameInputElement),
-            _elementsCreator__WEBPACK_IMPORTED_MODULE_3__.ElementsCreator.createInputDiv(colorLabelElement, colorInputElement),
-            _elementsCreator__WEBPACK_IMPORTED_MODULE_3__.ElementsCreator.createModalButtonsDiv(cancelButtonElement, confirmButtonElement)
+            _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createInputDiv(nameLabelElement, nameInputElement),
+            _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createInputDiv(colorLabelElement, colorInputElement),
+            _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createModalButtonsDiv(cancelButtonElement, confirmButtonElement)
         );
 
         dialogElement.appendChild(formElement);
@@ -1476,6 +1498,21 @@ class Modal {
 
         // Reset confirm button state
         confirmButton.disabled = true;
+    }
+
+    static editList() {
+        if(!Modal.checkIfModalExists('#edit-list-dialog')) {   
+            Modal.createModal('Edit List', 'edit-list-dialog');
+            Modal.showEditListModal();
+          } else {
+            Modal.showEditListModal();
+        }
+    }
+
+    static showEditListModal() {
+        const dialogElement = document.querySelector('#edit-list-dialog');
+        Modal.resetDialog();
+        dialogElement.showModal();
     }
 }
 
@@ -1810,25 +1847,7 @@ class UI {
         sidebar.appendChild(listContainer);
         listContainer.appendChild(listsHeading);
 
-        lists.forEach(list => {
-            const listItem = document.createElement('div');
-            listItem.classList.add('list-item');
-            listItem.setAttribute('data-id', list.id);
-            listContainer.appendChild(listItem);
-
-            const listColor = document.createElement('div');
-            const listName = document.createElement('p');
-            listColor.classList.add('list-color');
-            listName.classList.add('text');
-
-            listColor.style.backgroundColor = list.color;
-            listName.textContent = list.heading;
-            
-            listItem.appendChild(listColor);
-            listItem.appendChild(listName);
-
-            listItem.addEventListener('click', list.chooseList);
-        });
+        lists.forEach(list => _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createListDiv(list, listContainer));
     }
 
     static resetListsColors() {
@@ -1919,6 +1938,10 @@ class UI {
 
     static deleteTaskDiv(selectedTask) {
         selectedTask.remove();
+    }
+
+    static handleDoubleClickOnListItem() {
+
     }
 }
 
@@ -9558,8 +9581,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const newListBtn = document.querySelector('.new-list');
   newListBtn.addEventListener('click', () => {
-    if(!_modal__WEBPACK_IMPORTED_MODULE_1__.Modal.checkIfModalExists()) {   
-      _modal__WEBPACK_IMPORTED_MODULE_1__.Modal.createModal();
+    if(!_modal__WEBPACK_IMPORTED_MODULE_1__.Modal.checkIfModalExists('#add-new-list-dialog')) {   
+      _modal__WEBPACK_IMPORTED_MODULE_1__.Modal.createModal('New List', 'add-new-list-dialog');
       _modal__WEBPACK_IMPORTED_MODULE_1__.Modal.showNewListModal();
     } else {
       _modal__WEBPACK_IMPORTED_MODULE_1__.Modal.showNewListModal();
