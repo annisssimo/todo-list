@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import { UI } from './ui';
 import { List } from './list';
+import { Task } from './task';
 
 
 export class ElementsCreator {
@@ -42,14 +43,14 @@ export class ElementsCreator {
         return divElement;
     }
 
-    static createNewTaskForm() {
-        if(document.querySelector('#add-new-task-form')) return;
+    static createNewTaskForm(id) {
+        if(document.querySelector(id)) return;
 
         const mainContent = document.querySelector('#main-content');
 
         const formElement = document.createElement('form');
 
-        formElement.setAttribute('id', 'add-new-task-form');
+        formElement.setAttribute('id', id);
 
         const radioBtn = ElementsCreator.createButton('button', 'done-btn', '', false);
         radioBtn.classList.add('radio-btn-disabled');
@@ -65,7 +66,7 @@ export class ElementsCreator {
 
         formElement.append(radioBtn, divContainer, importantBtn);
         divContainer.append(taskNameInputElement, taskNotesInputElement, datePicker);
-        mainContent.append(formElement);
+        mainContent.appendChild(formElement);
 
         taskNameInputElement.focus();
 
@@ -78,6 +79,8 @@ export class ElementsCreator {
             event.stopPropagation();
             UI.changeColorOfDoneButtonOnClick(radioBtn);
         });
+
+        return formElement;
     }
 
     static createDoneBtn(task) {
@@ -173,5 +176,32 @@ export class ElementsCreator {
         formWrapper.addEventListener('click', () => {
             UI.highlightSelectedTask(formWrapper);
         });
+
+        // Обработчик для редактирования задачи при двойном клике
+        formWrapper.addEventListener('dblclick', (event) => Task.editTask(event));
+    }
+
+    static fillNewTaskForm(task) {
+        const [taskNameInput, taskNotesInput, taskDatePicker, importantBtn, doneBtn] = ElementsCreator.getFormFields();
+
+        taskNameInput.value = task.title;
+        taskNotesInput.value = task.description;
+        if (task.dueDate) {
+            taskDatePicker.value = task.dueDate ? format(task.dueDate, 'yyyy-MM-dd') : '';
+        }
+        if (task.isImportant) {
+            importantBtn.classList.add('important-btn-clicked');
+        }
+        doneBtn.classList.add(task.isDone ? 'radio-btn-clicked' : 'radio-btn-disabled');
+    }
+
+    static getFormFields() {
+        const taskNameInput = document.querySelector('#task-name');
+        const taskNotesInput = document.querySelector('#task-notes');
+        const taskDatePicker = document.querySelector('#task-date-picker');
+        const importantBtn = document.querySelector('#important-btn');
+        const doneBtn = document.querySelector('#done-btn');
+
+        return [ taskNameInput, taskNotesInput, taskDatePicker, importantBtn, doneBtn ];
     }
 }

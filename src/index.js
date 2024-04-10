@@ -1,5 +1,4 @@
 import './style.css';
-import WebFont from 'webfontloader';
 import { Modal } from './modal';
 import { UI } from './ui';
 import { ElementsCreator } from './elementsCreator';
@@ -7,11 +6,7 @@ import { todayList, weekList, allList, importantList } from './list';
 import { Task } from './task';
 import { List } from './list';
 
-WebFont.load({
-  google: {
-    families: ['Rubik Doodle Shadow:400'],
-  },
-});
+UI.loadFonts();
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -59,13 +54,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const newTaskBtn = document.querySelector('.plus');
   newTaskBtn.addEventListener('click', () => {
-    ElementsCreator.createNewTaskForm();
+    ElementsCreator.createNewTaskForm('add-new-task-form');
     UI.handleEnterKeyOnForm();
   });
 
   const mainContent = document.querySelector('#main-content');
   mainContent.addEventListener('click', (event) => {
-    if(!event.target.closest('.task') && !event.target.closest('#add-new-task-form')) Task.createTask();
+    if(!event.target.closest('.task') && !event.target.closest('#add-new-task-form') && !event.target.closest('#edit-task-form')) {
+      if (document.querySelector('#add-new-task-form')) {
+        Task.createTask();
+      }
+    }
     
     const tasks = document.querySelectorAll('.task');
     const clickedElement = event.target;
@@ -78,13 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (event.key === 'Delete' || event.key === 'Backspace') {
       const selectedTask = document.querySelector('.selected-task'); // Находим задачу с классом .selected
       if (selectedTask) { // Если такая задача есть
-        let taskId = selectedTask.getAttribute('data-id');
-        let activeList = Task.getActiveCustomList();
-        activeList.removeTaskFromAllLists(taskId);
-        List.updateNumbers(activeList);
-        selectedTask.remove(); // Удаляем div задачи
+        Task.deleteTask(selectedTask);
+        UI.deleteTaskDiv(selectedTask);
       }
     }
-});
+  });
 
 });

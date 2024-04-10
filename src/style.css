@@ -241,7 +241,7 @@ button {
     border-radius: 10px;
 }
 
-#add-new-task-form, .task {
+#add-new-task-form, #edit-task-form, .task {
     padding: 16px;
     display: grid;
     grid-template-columns: 1fr 40fr 1fr;

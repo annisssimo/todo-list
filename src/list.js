@@ -37,6 +37,10 @@ class List {
       task.addToAllTasksList();
     }
 
+    getTaskById(taskId) {
+      return this.tasks.find(task => task.id === taskId);
+    }
+
     removeTaskById(taskId) {
       this.tasks = this.tasks.filter(task => task.id !== taskId);
     }

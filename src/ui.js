@@ -1,9 +1,17 @@
-import todo from './todo';
+import WebFont from 'webfontloader';
 import { Task } from './task';
 import { ElementsCreator } from './elementsCreator';
 
 
 export class UI {
+
+    static loadFonts() {
+        WebFont.load({
+            google: {
+                families: ['Rubik Doodle Shadow:400'],
+            },
+        });
+    }
 
     static updateHeading(clickedList) {
         const text = clickedList.querySelector('.text');
@@ -143,7 +151,7 @@ export class UI {
                 Task.createTask();
 
                 // Создаем новую пустую форму таски
-                ElementsCreator.createNewTaskForm();
+                ElementsCreator.createNewTaskForm('add-new-task-form');
 
                 // Вешаем на новую форму слушатель Enter
                 UI.handleEnterKeyOnForm();
@@ -199,5 +207,9 @@ export class UI {
         const tasks = document.querySelectorAll('.task');
         tasks.forEach(t => t.classList.remove('selected-task'));
         formWrapper.classList.add('selected-task');
+    }
+
+    static deleteTaskDiv(selectedTask) {
+        selectedTask.remove();
     }
 }
