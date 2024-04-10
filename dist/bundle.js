@@ -1711,9 +1711,7 @@ class Task {
   }
 
   static editTask(event) {
-    if(document.querySelector('#edit-task-form')) {
-      
-    };
+    if(document.querySelector('#edit-task-form')) return;
 
     const taskDiv = event.target.closest('.task');
     const taskId = taskDiv.getAttribute('data-id');
@@ -1763,8 +1761,8 @@ class Task {
     this.title = taskNameInput.value;
     this.description = taskNotesInput.value;
     this.dueDate = taskDatePicker.value;
-    this.isImportant = importantBtn.value;
-    this.isDone = doneBtn.value;
+    this.isImportant = importantBtn.classList.contains('important-btn-clicked');
+    this.isDone = doneBtn.classList.contains('radio-btn-clicked');
   }
 
   static saveEditedTask(task, activeList) {
