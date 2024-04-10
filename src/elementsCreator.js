@@ -59,10 +59,15 @@ export class ElementsCreator {
         return divElement;
     }
 
-    static createModalButtonsDiv(cancelButton, confirmButton) {
+    static createModalButtonsDiv(cancelButton, confirmButton, deleteListBtn) {
         const divElement = document.createElement('div');
         divElement.className = 'modal-buttons';
-        divElement.append(cancelButton, confirmButton);
+        if (deleteListBtn) {
+            divElement.append(cancelButton, confirmButton, deleteListBtn);
+        }
+        else {
+            divElement.append(cancelButton, confirmButton);
+        }
         return divElement;
     }
 

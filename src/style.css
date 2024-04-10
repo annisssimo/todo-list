@@ -183,7 +183,7 @@ div.input {
 
 #add-new-list-name, #add-new-list-color, #edit-list-name, #edit-list-color {
     margin-left: 10px;
-    width: 80%;
+    width: 82%;
 }
 
 #task-name, #task-notes, #task-date-picker, .task-name, .task-notes, .task-date-picker {
@@ -213,7 +213,7 @@ button {
 .modal-buttons {
     display: flex;
     flex-direction: row-reverse;
-    gap: 8px;
+    justify-content: space-between;
 }
 
 .my-lists-heading {
@@ -315,4 +315,16 @@ button {
 
 .selected-task {
     background-color: rgb(209, 214, 218);
+}
+
+
+#edit-list-delete-btn {
+    background-color: var(--red);
+    color: var(--header);
+    margin-right: 120px;
+}
+
+#add-new-list-confirm-btn, 
+#add-new-list-cancel-btn {
+    width: 80px;
 }

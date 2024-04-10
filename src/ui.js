@@ -31,6 +31,13 @@ export class UI {
         return hexColor;
     }
 
+    static resetAll() {
+        const heading = document.querySelector('h2');
+        heading.textContent = '';
+        const mainContent = document.querySelector('#main-content');
+        mainContent.innerHTML = '';
+    }
+
     static updateHeading(clickedList) {
         const text = clickedList.querySelector('.text');
         const heading = document.querySelector('h2');

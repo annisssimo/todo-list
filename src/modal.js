@@ -1,6 +1,8 @@
 import { List } from './list';
 import { UI } from './ui';
 import { ElementsCreator } from './elementsCreator';
+import todo from './todo';
+
 
 export class Modal {
 
@@ -37,15 +39,36 @@ export class Modal {
             headingElement,
             ElementsCreator.createInputDiv(nameLabelElement, nameInputElement),
             ElementsCreator.createInputDiv(colorLabelElement, colorInputElement),
-            ElementsCreator.createModalButtonsDiv(cancelButtonElement, confirmButtonElement)
         );
 
-        dialogElement.appendChild(formElement);
-        document.body.appendChild(dialogElement);
+        if (id === 'add-new-list') {
+            formElement.appendChild(ElementsCreator.createModalButtonsDiv(cancelButtonElement, confirmButtonElement));
+            dialogElement.appendChild(formElement);
+            document.body.appendChild(dialogElement);
+        }
+        else if (id === 'edit-list') {
+            const deleteListBtn = ElementsCreator.createButton('button', 'edit-list-delete-btn', 'Delete');
+            formElement.appendChild(ElementsCreator.createModalButtonsDiv(cancelButtonElement, confirmButtonElement, deleteListBtn));
+            dialogElement.appendChild(formElement);
+            document.body.appendChild(dialogElement);
+            Modal.handleDeleteClick(deleteListBtn, dialogElement);
+        }
 
         Modal.handleConfirmBtn(confirmButtonElement, dialogElement, nameInputElement, colorInputElement);
         Modal.handleCancelBtn(cancelButtonElement, dialogElement);
         Modal.checkNameInput(nameInputElement, confirmButtonElement);
+
+    }
+
+    static handleDeleteClick(deleteListBtn, dialogElement) {
+        deleteListBtn.addEventListener('click', () => {
+            const activeListToDelete = List.getActiveCustomList();
+            todo.deleteList(activeListToDelete);
+            UI.displayMyLists();
+            UI.resetAll();
+            dialogElement.close();
+        })
+        
     }
 
     static handleConfirmBtn(confirmButton, dialogElement, nameInput, colorInput) {
@@ -59,6 +82,7 @@ export class Modal {
                 const activeListToEdit = List.getActiveCustomList();
                 List.editList(activeListToEdit);
                 UI.displayMyLists();
+                UI.makeNewListActive(activeListToEdit);
             }
             dialogElement.close();
         });
@@ -119,9 +143,6 @@ export class Modal {
 
         // Convert RGB color to HEX format
         const hexColor = UI.rgbToHex(listColor);
-        
-        console.log('List Color:', listColor);
-        console.log('Hex Color:', hexColor);
 
         // Находим нужные элементы в модальном окне для редактирования
         const editListNameInput = document.querySelector('#edit-list-name');
