@@ -72,7 +72,7 @@ export class ElementsCreator {
     }
 
     static createNewTaskForm(id) {
-        if(document.querySelector(id)) return;
+        if(document.querySelector(`#${id}`)) return;
 
         const mainContent = document.querySelector('#main-content');
 

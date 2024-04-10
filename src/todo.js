@@ -1,3 +1,5 @@
+import { allList } from './list';
+
 class ToDo {
     constructor () {
         this.lists = [];
@@ -12,6 +14,15 @@ class ToDo {
         if (index !== -1) {
             this.lists.splice(index, 1); // Remove the list from the array
         }
+    }
+
+    updateAllTasksList() {
+        allList.tasks = [];
+        this.lists.forEach(list => {
+            list.tasks.forEach(task => {
+                task.addToAllTasksList();
+            });
+        });
     }
 }
 

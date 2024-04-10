@@ -92,6 +92,10 @@ export class Task {
   }
 
   static editTask(event) {
+    if(document.querySelector('#edit-task-form')) {
+      
+    };
+
     const taskDiv = event.target.closest('.task');
     const taskId = taskDiv.getAttribute('data-id');
     const activeList = List.getActiveCustomList();

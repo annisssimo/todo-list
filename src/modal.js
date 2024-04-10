@@ -64,11 +64,12 @@ export class Modal {
         deleteListBtn.addEventListener('click', () => {
             const activeListToDelete = List.getActiveCustomList();
             todo.deleteList(activeListToDelete);
+            todo.updateAllTasksList();
+            List.updateNumbers();
             UI.displayMyLists();
             UI.resetAll();
             dialogElement.close();
-        })
-        
+        });
     }
 
     static handleConfirmBtn(confirmButton, dialogElement, nameInput, colorInput) {
