@@ -264,7 +264,7 @@ button {
     border-radius: 10px;
 }
 
-#add-new-task-form, .task {
+#add-new-task-form, #edit-task-form, .task {
     padding: 16px;
     display: grid;
     grid-template-columns: 1fr 40fr 1fr;
@@ -339,7 +339,7 @@ button {
 .selected-task {
     background-color: rgb(209, 214, 218);
 }
-`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n:root {\n    --blue: rgb(0, 123, 255);\n    --dark-gray: rgb(51, 51, 51);\n    --light-gray: rgba(182, 182, 182, 0.304);\n    --gray: rgb(116, 116, 116);\n    --super-light-gray: rgba(214, 214, 214, 0.448);\n    --shadow: rgba(0, 0, 0, 0.05);\n    --red: rgba(255, 19, 19, 0.898);\n    --orange: rgba(261, 154, 15);\n    --header: rgb(244, 244, 244);\n}\n\nbody {\n    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n    color: var(--dark-gray);\n    display: grid;\n    grid-template-columns: 0.6fr 2fr;\n    overflow: hidden;\n}\n\nh1 {\n    font-family: 'Rubik Doodle Shadow';\n    color: var(--blue);\n}\n\nh2 {\n    font-family: 'Rubik Doodle Shadow';\n}\n\n#sidebar {\n    background-color: var(--super-light-gray);\n    height: 100%;\n    min-height: 100vh;\n    padding: 24px;\n    border: 1px solid rgb(214, 214, 214);\n}\n\n.tiles {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 12px;\n}\n\n.tile {\n    background-color: var(--light-gray);\n    border-radius: 12px;\n    box-shadow: inset 2px 2px 2px var(--shadow);\n    padding: 8px 10px 8px 8px;\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    row-gap: 8px;\n    min-width: 128px;\n}\n\n#main-content {\n    box-shadow: -10px 0 20px var(--shadow);\n    background-color: white;\n    height: calc(100vh - 60px); /* 100% высоты видимой области минус высота шапки */\n    overflow-y: auto; /* Добавляем прокрутку по вертикали, если контент выходит за границы блока */\n    padding-bottom: 100px;\n}\n\n.logo {\n    display: flex;\n    align-items: center;\n    gap: 20px;\n    margin-bottom: 24px;\n}\n\n.logo-image {\n    width: 64px;\n    height: auto;\n}\n\n.new-list {\n    position: fixed;\n    left: 18px;\n    bottom: 18px;\n    color: var(--gray);\n    cursor: pointer;\n}\n\nspan.material-symbols-outlined {\n    position: relative;\n    top: 3px;\n    font-size: 1rem;\n    margin-right: 8px;\n}\n\ndiv.material-symbols-outlined {\n    border-radius: 50%;\n    padding: 0.2rem;\n    color: white;\n    font-size: 1rem;\n}\n\n.today .material-symbols-outlined {\n    background-color: var(--blue);\n}\n\n.all .material-symbols-outlined {\n    background-color: var(--dark-gray);\n}\n\n.week .material-symbols-outlined {\n    background-color: var(--red);\n}\n\n.important .material-symbols-outlined {\n    background-color: var(--orange);\n}\n\n.digit {\n    font-size: 1.4rem;\n    font-weight: 700;\n    color: var(--dark-gray);\n    text-align: end;\n}\n\nheader {\n    height: 60px;\n    background-color: var(--header);\n    display: flex;\n    justify-content: space-between;\n    padding: 16px;\n}\n\ndiv.plus {\n    color: var(--gray);\n    font-size: 24px;\n    cursor: pointer;\n}\n\n.hide {\n    display: none;\n}\n\n.today-tile-clicked {\n    background-color: var(--blue);\n    color: white;\n}\n\n.week-tile-clicked {\n    background-color: var(--red);\n    color: white;\n}\n\n.all-tile-clicked {\n    background-color: var(--dark-gray);\n    color: white;\n}\n\n.important-tile-clicked {\n    background-color: var(--orange);\n    color: white;\n}\n\ndialog {\n    position: fixed;\n    top: 32%;\n    left: 38%;\n    width: 350px;\n    border: none;\n    border-radius: 8px;\n    padding: 24px;\n}\n\nform h3 {\n    text-align: center;\n    margin-bottom: 20px;\n    font-family: 'Rubik Doodle Shadow';\n}\n\ndiv.input {\n    margin-bottom: 12px;\n}\n\n#name, #color {\n    margin-left: 10px;\n    width: 80%;\n}\n\n#task-name, #task-notes, #task-date-picker, .task-name, .task-notes, .task-date-picker {\n    margin-top: 4px;\n    border: none;\n    outline: none;\n    font-family: inherit;\n    font-size: inherit;\n}\n\n#task-name, #task-notes, .task-name, .task-notes {\n    width: 98%;\n}\n\n#task-notes, #task-date-picker, .task-date-picker, .task-notes {\n    color: var(--gray);\n}\n\nbutton {\n    padding: 4px 8px;\n    border: 1px solid var(--light-gray);\n    border-radius: 6px;\n    background-color: white;\n    box-shadow: 1px 1px 1px rgba(165, 165, 165, 0.548);\n}\n\n.modal-buttons {\n    display: flex;\n    flex-direction: row-reverse;\n    gap: 8px;\n}\n\n.my-lists-heading {\n    margin-top: 48px;\n    font-family: 'Rubik Doodle Shadow';\n    font-size: 24px;\n}\n\n.list-item {\n    display: flex;\n    align-items: center;\n    gap: 16px;\n    margin-top: 4px;\n    padding: 8px;\n}\n\n.list-color {\n    height: 1rem;\n    width: 1rem;\n    border-radius: 50%;\n}\n\n.list-clicked {\n    background-color: var(--light-gray);\n    border-radius: 10px;\n}\n\n#add-new-task-form, .task {\n    padding: 16px;\n    display: grid;\n    grid-template-columns: 1fr 40fr 1fr;\n    gap: 10px;\n    border-bottom: 1px solid var(--light-gray);\n}\n\n.task {\n    padding: 16px;\n    display: grid;\n    grid-template-columns: 1fr 40fr 1fr;\n    gap: 10px;\n    border-bottom: 1px solid var(--light-gray);\n}\n\n#done-btn, .done-btn {\n    margin-top: 5px;\n    width: 1rem;\n    height: 1rem;\n    border-radius: 50%;\n    box-shadow: none;\n    padding: 0;\n    border: 1px solid var(--gray); /* Серая граница */\n    position: relative; /* Позволяет позиционировать псевдоэлемент относительно кнопки */\n    background-color: transparent; /* Прозрачный фон */\n}\n\n#done-btn.radio-btn-clicked, .done-btn.radio-btn-clicked {\n    border-color: var(--orange); /* Оранжевая граница для нажатой кнопки */\n}\n\n.gray-crossed {\n    color: var(--gray);\n    text-decoration: line-through;\n}\n\n#done-btn::before, .done-btn::before {\n    content: \"\"; /* Пустой контент для псевдоэлемента */\n    position: absolute; /* Позиционирование псевдоэлемента */\n    top: 50%; /* Расположение кружка по вертикали */\n    left: 50%; /* Расположение кружка по горизонтали */\n    transform: translate(-50%, -50%); /* Центрирование кружка */\n    width: 0.66rem; /* Диаметр кружка */\n    height: 0.66rem;\n    border-radius: 50%; /* Форма кружка */\n    background-color: var(--orange); /* Цвет кружка */\n    opacity: 0; /* Начальное скрытие кружка */\n}\n\n#done-btn.radio-btn-clicked::before, .done-btn.radio-btn-clicked::before {\n    opacity: 1; /* Показать кружок только когда кнопка нажата */\n}\n\n#done-btn:hover, .done-btn:hover {\n    cursor: pointer; /* Изменение курсора при наведении */\n}\n\n#important-btn, .important-btn {\n    font-size: 18px;\n    padding: 2px 5px;\n    align-self: center;\n}\n\n.important-btn {\n    color: rgba(128, 128, 128, 0.761);\n}\n\n.important-btn-clicked {\n    color: var(--orange);\n}\n\n.selected-task {\n    background-color: rgb(209, 214, 218);\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n:root {\n    --blue: rgb(0, 123, 255);\n    --dark-gray: rgb(51, 51, 51);\n    --light-gray: rgba(182, 182, 182, 0.304);\n    --gray: rgb(116, 116, 116);\n    --super-light-gray: rgba(214, 214, 214, 0.448);\n    --shadow: rgba(0, 0, 0, 0.05);\n    --red: rgba(255, 19, 19, 0.898);\n    --orange: rgba(261, 154, 15);\n    --header: rgb(244, 244, 244);\n}\n\nbody {\n    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n    color: var(--dark-gray);\n    display: grid;\n    grid-template-columns: 0.6fr 2fr;\n    overflow: hidden;\n}\n\nh1 {\n    font-family: 'Rubik Doodle Shadow';\n    color: var(--blue);\n}\n\nh2 {\n    font-family: 'Rubik Doodle Shadow';\n}\n\n#sidebar {\n    background-color: var(--super-light-gray);\n    height: 100%;\n    min-height: 100vh;\n    padding: 24px;\n    border: 1px solid rgb(214, 214, 214);\n}\n\n.tiles {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 12px;\n}\n\n.tile {\n    background-color: var(--light-gray);\n    border-radius: 12px;\n    box-shadow: inset 2px 2px 2px var(--shadow);\n    padding: 8px 10px 8px 8px;\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    row-gap: 8px;\n    min-width: 128px;\n}\n\n#main-content {\n    box-shadow: -10px 0 20px var(--shadow);\n    background-color: white;\n    height: calc(100vh - 60px); /* 100% высоты видимой области минус высота шапки */\n    overflow-y: auto; /* Добавляем прокрутку по вертикали, если контент выходит за границы блока */\n    padding-bottom: 100px;\n}\n\n.logo {\n    display: flex;\n    align-items: center;\n    gap: 20px;\n    margin-bottom: 24px;\n}\n\n.logo-image {\n    width: 64px;\n    height: auto;\n}\n\n.new-list {\n    position: fixed;\n    left: 18px;\n    bottom: 18px;\n    color: var(--gray);\n    cursor: pointer;\n}\n\nspan.material-symbols-outlined {\n    position: relative;\n    top: 3px;\n    font-size: 1rem;\n    margin-right: 8px;\n}\n\ndiv.material-symbols-outlined {\n    border-radius: 50%;\n    padding: 0.2rem;\n    color: white;\n    font-size: 1rem;\n}\n\n.today .material-symbols-outlined {\n    background-color: var(--blue);\n}\n\n.all .material-symbols-outlined {\n    background-color: var(--dark-gray);\n}\n\n.week .material-symbols-outlined {\n    background-color: var(--red);\n}\n\n.important .material-symbols-outlined {\n    background-color: var(--orange);\n}\n\n.digit {\n    font-size: 1.4rem;\n    font-weight: 700;\n    color: var(--dark-gray);\n    text-align: end;\n}\n\nheader {\n    height: 60px;\n    background-color: var(--header);\n    display: flex;\n    justify-content: space-between;\n    padding: 16px;\n}\n\ndiv.plus {\n    color: var(--gray);\n    font-size: 24px;\n    cursor: pointer;\n}\n\n.hide {\n    display: none;\n}\n\n.today-tile-clicked {\n    background-color: var(--blue);\n    color: white;\n}\n\n.week-tile-clicked {\n    background-color: var(--red);\n    color: white;\n}\n\n.all-tile-clicked {\n    background-color: var(--dark-gray);\n    color: white;\n}\n\n.important-tile-clicked {\n    background-color: var(--orange);\n    color: white;\n}\n\ndialog {\n    position: fixed;\n    top: 32%;\n    left: 38%;\n    width: 350px;\n    border: none;\n    border-radius: 8px;\n    padding: 24px;\n}\n\nform h3 {\n    text-align: center;\n    margin-bottom: 20px;\n    font-family: 'Rubik Doodle Shadow';\n}\n\ndiv.input {\n    margin-bottom: 12px;\n}\n\n#name, #color {\n    margin-left: 10px;\n    width: 80%;\n}\n\n#task-name, #task-notes, #task-date-picker, .task-name, .task-notes, .task-date-picker {\n    margin-top: 4px;\n    border: none;\n    outline: none;\n    font-family: inherit;\n    font-size: inherit;\n}\n\n#task-name, #task-notes, .task-name, .task-notes {\n    width: 98%;\n}\n\n#task-notes, #task-date-picker, .task-date-picker, .task-notes {\n    color: var(--gray);\n}\n\nbutton {\n    padding: 4px 8px;\n    border: 1px solid var(--light-gray);\n    border-radius: 6px;\n    background-color: white;\n    box-shadow: 1px 1px 1px rgba(165, 165, 165, 0.548);\n}\n\n.modal-buttons {\n    display: flex;\n    flex-direction: row-reverse;\n    gap: 8px;\n}\n\n.my-lists-heading {\n    margin-top: 48px;\n    font-family: 'Rubik Doodle Shadow';\n    font-size: 24px;\n}\n\n.list-item {\n    display: flex;\n    align-items: center;\n    gap: 16px;\n    margin-top: 4px;\n    padding: 8px;\n}\n\n.list-color {\n    height: 1rem;\n    width: 1rem;\n    border-radius: 50%;\n}\n\n.list-clicked {\n    background-color: var(--light-gray);\n    border-radius: 10px;\n}\n\n#add-new-task-form, #edit-task-form, .task {\n    padding: 16px;\n    display: grid;\n    grid-template-columns: 1fr 40fr 1fr;\n    gap: 10px;\n    border-bottom: 1px solid var(--light-gray);\n}\n\n.task {\n    padding: 16px;\n    display: grid;\n    grid-template-columns: 1fr 40fr 1fr;\n    gap: 10px;\n    border-bottom: 1px solid var(--light-gray);\n}\n\n#done-btn, .done-btn {\n    margin-top: 5px;\n    width: 1rem;\n    height: 1rem;\n    border-radius: 50%;\n    box-shadow: none;\n    padding: 0;\n    border: 1px solid var(--gray); /* Серая граница */\n    position: relative; /* Позволяет позиционировать псевдоэлемент относительно кнопки */\n    background-color: transparent; /* Прозрачный фон */\n}\n\n#done-btn.radio-btn-clicked, .done-btn.radio-btn-clicked {\n    border-color: var(--orange); /* Оранжевая граница для нажатой кнопки */\n}\n\n.gray-crossed {\n    color: var(--gray);\n    text-decoration: line-through;\n}\n\n#done-btn::before, .done-btn::before {\n    content: \"\"; /* Пустой контент для псевдоэлемента */\n    position: absolute; /* Позиционирование псевдоэлемента */\n    top: 50%; /* Расположение кружка по вертикали */\n    left: 50%; /* Расположение кружка по горизонтали */\n    transform: translate(-50%, -50%); /* Центрирование кружка */\n    width: 0.66rem; /* Диаметр кружка */\n    height: 0.66rem;\n    border-radius: 50%; /* Форма кружка */\n    background-color: var(--orange); /* Цвет кружка */\n    opacity: 0; /* Начальное скрытие кружка */\n}\n\n#done-btn.radio-btn-clicked::before, .done-btn.radio-btn-clicked::before {\n    opacity: 1; /* Показать кружок только когда кнопка нажата */\n}\n\n#done-btn:hover, .done-btn:hover {\n    cursor: pointer; /* Изменение курсора при наведении */\n}\n\n#important-btn, .important-btn {\n    font-size: 18px;\n    padding: 2px 5px;\n    align-self: center;\n}\n\n.important-btn {\n    color: rgba(128, 128, 128, 0.761);\n}\n\n.important-btn-clicked {\n    color: var(--orange);\n}\n\n.selected-task {\n    background-color: rgb(209, 214, 218);\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1016,9 +1016,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ElementsCreator: () => (/* binding */ ElementsCreator)
 /* harmony export */ });
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/format.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/format.mjs");
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
 /* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./list */ "./src/list.js");
+/* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./task */ "./src/task.js");
+
 
 
 
@@ -1063,14 +1065,14 @@ class ElementsCreator {
         return divElement;
     }
 
-    static createNewTaskForm() {
-        if(document.querySelector('#add-new-task-form')) return;
+    static createNewTaskForm(id) {
+        if(document.querySelector(id)) return;
 
         const mainContent = document.querySelector('#main-content');
 
         const formElement = document.createElement('form');
 
-        formElement.setAttribute('id', 'add-new-task-form');
+        formElement.setAttribute('id', id);
 
         const radioBtn = ElementsCreator.createButton('button', 'done-btn', '', false);
         radioBtn.classList.add('radio-btn-disabled');
@@ -1086,7 +1088,7 @@ class ElementsCreator {
 
         formElement.append(radioBtn, divContainer, importantBtn);
         divContainer.append(taskNameInputElement, taskNotesInputElement, datePicker);
-        mainContent.append(formElement);
+        mainContent.appendChild(formElement);
 
         taskNameInputElement.focus();
 
@@ -1099,6 +1101,8 @@ class ElementsCreator {
             event.stopPropagation();
             _ui__WEBPACK_IMPORTED_MODULE_0__.UI.changeColorOfDoneButtonOnClick(radioBtn);
         });
+
+        return formElement;
     }
 
     static createDoneBtn(task) {
@@ -1134,7 +1138,7 @@ class ElementsCreator {
         taskDatePickerInput.name = 'task-date-picker';
         taskDatePickerInput.classList.add('task-date-picker');
         if (task.dueDate) {
-            taskDatePickerInput.textContent = task.dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.format)(task.dueDate, 'dd.MM.yyyy') : '';
+            taskDatePickerInput.textContent = task.dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_3__.format)(task.dueDate, 'dd.MM.yyyy') : '';
         }
         return taskDatePickerInput;
     }
@@ -1194,6 +1198,33 @@ class ElementsCreator {
         formWrapper.addEventListener('click', () => {
             _ui__WEBPACK_IMPORTED_MODULE_0__.UI.highlightSelectedTask(formWrapper);
         });
+
+        // Обработчик для редактирования задачи при двойном клике
+        formWrapper.addEventListener('dblclick', (event) => _task__WEBPACK_IMPORTED_MODULE_2__.Task.editTask(event));
+    }
+
+    static fillNewTaskForm(task) {
+        const [taskNameInput, taskNotesInput, taskDatePicker, importantBtn, doneBtn] = ElementsCreator.getFormFields();
+
+        taskNameInput.value = task.title;
+        taskNotesInput.value = task.description;
+        if (task.dueDate) {
+            taskDatePicker.value = task.dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_3__.format)(task.dueDate, 'yyyy-MM-dd') : '';
+        }
+        if (task.isImportant) {
+            importantBtn.classList.add('important-btn-clicked');
+        }
+        doneBtn.classList.add(task.isDone ? 'radio-btn-clicked' : 'radio-btn-disabled');
+    }
+
+    static getFormFields() {
+        const taskNameInput = document.querySelector('#task-name');
+        const taskNotesInput = document.querySelector('#task-notes');
+        const taskDatePicker = document.querySelector('#task-date-picker');
+        const importantBtn = document.querySelector('#important-btn');
+        const doneBtn = document.querySelector('#done-btn');
+
+        return [ taskNameInput, taskNotesInput, taskDatePicker, importantBtn, doneBtn ];
     }
 }
 
@@ -1257,6 +1288,10 @@ class List {
     addTaskToList(task){
       this.addTask(task);
       task.addToAllTasksList();
+    }
+
+    getTaskById(taskId) {
+      return this.tasks.find(task => task.id === taskId);
     }
 
     removeTaskById(taskId) {
@@ -1457,10 +1492,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Task: () => (/* binding */ Task)
 /* harmony export */ });
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/parse.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/parse.mjs");
 /* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./list */ "./src/list.js");
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/v4.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/v4.js");
+/* harmony import */ var _elementsCreator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./elementsCreator */ "./src/elementsCreator.js");
+
 
 
 
@@ -1469,11 +1506,11 @@ __webpack_require__.r(__webpack_exports__);
 
 class Task {
   constructor(isDone, title, description, dueDate, isImportant) {
-    this.id = (0,uuid__WEBPACK_IMPORTED_MODULE_2__["default"])();
+    this.id = (0,uuid__WEBPACK_IMPORTED_MODULE_3__["default"])();
     this.isDone = isDone;
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_3__.parse)(dueDate, 'yyyy-MM-dd', new Date()) : '';
+    this.dueDate = dueDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_4__.parse)(dueDate, 'yyyy-MM-dd', new Date()) : '';
     this.isImportant = isImportant;
   }
 
@@ -1501,15 +1538,14 @@ class Task {
 
   // Функция для создания объекта Task из данных формы
   static createTaskFromForm() {
-    const taskRadioBtn = document.querySelector('#done-btn').classList.contains('radio-btn-clicked');
-    const taskNameInput = document.querySelector('#task-name');
-    const taskNotesInput = document.querySelector('#task-notes');
-    const datePicker = document.querySelector('#task-date-picker');
-    const isImportant = document.querySelector('#important-btn').classList.contains('important-btn-clicked');
+    const [taskNameInput, taskNotesInput, taskDatePicker, importantBtn, doneBtn] = _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.getFormFields();
 
     const taskName = taskNameInput.value;
     const taskNotes = taskNotesInput.value;
-    const dueDate = datePicker.value;
+    const dueDate = taskDatePicker.value;
+
+    const taskRadioBtn = doneBtn.classList.contains('radio-btn-clicked');
+    const isImportant = importantBtn.classList.contains('important-btn-clicked');
 
     // Создаем объект Task
     const task = new Task(taskRadioBtn, taskName, taskNotes, dueDate, isImportant);
@@ -1551,6 +1587,77 @@ class Task {
     //Обновляем счетчики
     _list__WEBPACK_IMPORTED_MODULE_0__.List.updateNumbers(list);
 
+  }
+
+  static deleteTask(selectedTask) {
+    let taskId = selectedTask.getAttribute('data-id');
+    let activeList = Task.getActiveCustomList();
+    activeList.removeTaskFromAllLists(taskId);
+    _list__WEBPACK_IMPORTED_MODULE_0__.List.updateNumbers(activeList);
+  }
+
+  static editTask(event) {
+    const taskDiv = event.target.closest('.task');
+    const taskId = taskDiv.getAttribute('data-id');
+    const activeList = Task.getActiveCustomList();
+    const task = activeList.getTaskById(taskId);
+
+    // Создаем новую форму
+    const newTaskForm = _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createNewTaskForm('edit-task-form');
+
+    //Заполняем новую форму данными из задачи
+    _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.fillNewTaskForm(task);
+
+    if (newTaskForm) {
+      // Заменяем текущую задачу формой на том же месте
+      taskDiv.replaceWith(newTaskForm);
+    }
+
+    newTaskForm.addEventListener('keypress', function(event) {
+      // Проверяем, была ли нажата клавиша Enter
+      if (event.key === 'Enter') {
+        event.preventDefault(); // Предотвращаем стандартное действие формы
+
+        //Заменяем поля задачи данными из формы
+        task.updateTaskUsingDataFromForm();
+
+        //Полностью обновляем список
+        _ui__WEBPACK_IMPORTED_MODULE_1__.UI.updateTaskListInMainContent(activeList);
+
+        // Создаем новую пустую форму таски
+        _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createNewTaskForm('add-new-task-form');
+
+        // Вешаем на новую форму слушатель Enter
+        _ui__WEBPACK_IMPORTED_MODULE_1__.UI.handleEnterKeyOnForm();
+      }
+    });
+
+    const mainContent = document.querySelector('#main-content');
+    mainContent.addEventListener('click', (event) => {
+      if(!event.target.closest('.task') && !event.target.closest('#add-new-task-form') && !event.target.closest('#edit-task-form')) {
+        if (document.querySelector('#edit-task-form')) {
+          Task.saveEditedTask(task, activeList);
+        }
+      }
+    });
+  }
+
+  updateTaskUsingDataFromForm() {
+    const [taskNameInput, taskNotesInput, taskDatePicker, importantBtn, doneBtn] = _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.getFormFields();
+
+    this.title = taskNameInput.value;
+    this.description = taskNotesInput.value;
+    this.dueDate = taskDatePicker.value;
+    this.isImportant = importantBtn.value;
+    this.isDone = doneBtn.value;
+  }
+
+  static saveEditedTask(task, activeList) {
+    //Заменяем поля задачи данными из формы
+    task.updateTaskUsingDataFromForm();
+
+    //Полностью обновляем список
+    _ui__WEBPACK_IMPORTED_MODULE_1__.UI.updateTaskListInMainContent(activeList);
   }
 }
 
@@ -1594,7 +1701,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   UI: () => (/* binding */ UI)
 /* harmony export */ });
-/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
+/* harmony import */ var webfontloader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! webfontloader */ "./node_modules/webfontloader/webfontloader.js");
+/* harmony import */ var webfontloader__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(webfontloader__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./task */ "./src/task.js");
 /* harmony import */ var _elementsCreator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./elementsCreator */ "./src/elementsCreator.js");
 
@@ -1603,6 +1711,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class UI {
+
+    static loadFonts() {
+        webfontloader__WEBPACK_IMPORTED_MODULE_0___default().load({
+            google: {
+                families: ['Rubik Doodle Shadow:400'],
+            },
+        });
+    }
 
     static updateHeading(clickedList) {
         const text = clickedList.querySelector('.text');
@@ -1742,7 +1858,7 @@ class UI {
                 _task__WEBPACK_IMPORTED_MODULE_1__.Task.createTask();
 
                 // Создаем новую пустую форму таски
-                _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createNewTaskForm();
+                _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createNewTaskForm('add-new-task-form');
 
                 // Вешаем на новую форму слушатель Enter
                 UI.handleEnterKeyOnForm();
@@ -1798,6 +1914,10 @@ class UI {
         const tasks = document.querySelectorAll('.task');
         tasks.forEach(t => t.classList.remove('selected-task'));
         formWrapper.classList.add('selected-task');
+    }
+
+    static deleteTaskDiv(selectedTask) {
+        selectedTask.remove();
     }
 }
 
@@ -9386,13 +9506,11 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
-/* harmony import */ var webfontloader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! webfontloader */ "./node_modules/webfontloader/webfontloader.js");
-/* harmony import */ var webfontloader__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(webfontloader__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal */ "./src/modal.js");
-/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
-/* harmony import */ var _elementsCreator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./elementsCreator */ "./src/elementsCreator.js");
-/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./list */ "./src/list.js");
-/* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./task */ "./src/task.js");
+/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modal */ "./src/modal.js");
+/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
+/* harmony import */ var _elementsCreator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./elementsCreator */ "./src/elementsCreator.js");
+/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./list */ "./src/list.js");
+/* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./task */ "./src/task.js");
 
 
 
@@ -9401,12 +9519,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-webfontloader__WEBPACK_IMPORTED_MODULE_1___default().load({
-  google: {
-    families: ['Rubik Doodle Shadow:400'],
-  },
-});
+_ui__WEBPACK_IMPORTED_MODULE_2__.UI.loadFonts();
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -9415,26 +9528,26 @@ document.addEventListener('DOMContentLoaded', () => {
   tilesDiv.addEventListener('click', (event) => {
     let clickedTile = event.target.closest('.tile');
     if (clickedTile) {
-      _ui__WEBPACK_IMPORTED_MODULE_3__.UI.hidePlusElement();
-      _ui__WEBPACK_IMPORTED_MODULE_3__.UI.resetListsColors();
-      _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateHeading(clickedTile);
-      _ui__WEBPACK_IMPORTED_MODULE_3__.UI.changeTileColor(clickedTile);
+      _ui__WEBPACK_IMPORTED_MODULE_2__.UI.hidePlusElement();
+      _ui__WEBPACK_IMPORTED_MODULE_2__.UI.resetListsColors();
+      _ui__WEBPACK_IMPORTED_MODULE_2__.UI.updateHeading(clickedTile);
+      _ui__WEBPACK_IMPORTED_MODULE_2__.UI.changeTileColor(clickedTile);
 
       switch(clickedTile.id) {
         case 'all':
-          _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.allList);
+          _ui__WEBPACK_IMPORTED_MODULE_2__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.allList);
           break;
         case 'today':
-          _list__WEBPACK_IMPORTED_MODULE_5__.List.filterTodayTasks();
-          _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.todayList);
+          _list__WEBPACK_IMPORTED_MODULE_4__.List.filterTodayTasks();
+          _ui__WEBPACK_IMPORTED_MODULE_2__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.todayList);
           break;
         case 'week':
-          _list__WEBPACK_IMPORTED_MODULE_5__.List.filterWeekTasks();
-          _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.weekList);
+          _list__WEBPACK_IMPORTED_MODULE_4__.List.filterWeekTasks();
+          _ui__WEBPACK_IMPORTED_MODULE_2__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.weekList);
           break;
         case 'important':
-          _list__WEBPACK_IMPORTED_MODULE_5__.List.filterImportantTasks();
-          _ui__WEBPACK_IMPORTED_MODULE_3__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_5__.importantList);
+          _list__WEBPACK_IMPORTED_MODULE_4__.List.filterImportantTasks();
+          _ui__WEBPACK_IMPORTED_MODULE_2__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.importantList);
           break;
         default:
           break;
@@ -9444,23 +9557,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const newListBtn = document.querySelector('.new-list');
   newListBtn.addEventListener('click', () => {
-    if(!_modal__WEBPACK_IMPORTED_MODULE_2__.Modal.checkIfModalExists()) {   
-      _modal__WEBPACK_IMPORTED_MODULE_2__.Modal.createModal();
-      _modal__WEBPACK_IMPORTED_MODULE_2__.Modal.showNewListModal();
+    if(!_modal__WEBPACK_IMPORTED_MODULE_1__.Modal.checkIfModalExists()) {   
+      _modal__WEBPACK_IMPORTED_MODULE_1__.Modal.createModal();
+      _modal__WEBPACK_IMPORTED_MODULE_1__.Modal.showNewListModal();
     } else {
-      _modal__WEBPACK_IMPORTED_MODULE_2__.Modal.showNewListModal();
+      _modal__WEBPACK_IMPORTED_MODULE_1__.Modal.showNewListModal();
     }
   });
 
   const newTaskBtn = document.querySelector('.plus');
   newTaskBtn.addEventListener('click', () => {
-    _elementsCreator__WEBPACK_IMPORTED_MODULE_4__.ElementsCreator.createNewTaskForm();
-    _ui__WEBPACK_IMPORTED_MODULE_3__.UI.handleEnterKeyOnForm();
+    _elementsCreator__WEBPACK_IMPORTED_MODULE_3__.ElementsCreator.createNewTaskForm('add-new-task-form');
+    _ui__WEBPACK_IMPORTED_MODULE_2__.UI.handleEnterKeyOnForm();
   });
 
   const mainContent = document.querySelector('#main-content');
   mainContent.addEventListener('click', (event) => {
-    if(!event.target.closest('.task') && !event.target.closest('#add-new-task-form')) _task__WEBPACK_IMPORTED_MODULE_6__.Task.createTask();
+    if(!event.target.closest('.task') && !event.target.closest('#add-new-task-form') && !event.target.closest('#edit-task-form')) {
+      if (document.querySelector('#add-new-task-form')) {
+        _task__WEBPACK_IMPORTED_MODULE_5__.Task.createTask();
+      }
+    }
     
     const tasks = document.querySelectorAll('.task');
     const clickedElement = event.target;
@@ -9473,14 +9590,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (event.key === 'Delete' || event.key === 'Backspace') {
       const selectedTask = document.querySelector('.selected-task'); // Находим задачу с классом .selected
       if (selectedTask) { // Если такая задача есть
-        let taskId = selectedTask.getAttribute('data-id');
-        let activeList = _task__WEBPACK_IMPORTED_MODULE_6__.Task.getActiveCustomList();
-        activeList.removeTaskFromAllLists(taskId);
-        _list__WEBPACK_IMPORTED_MODULE_5__.List.updateNumbers(activeList);
-        selectedTask.remove(); // Удаляем div задачи
+        _task__WEBPACK_IMPORTED_MODULE_5__.Task.deleteTask(selectedTask);
+        _ui__WEBPACK_IMPORTED_MODULE_2__.UI.deleteTaskDiv(selectedTask);
       }
     }
-});
+  });
 
 });
 })();
