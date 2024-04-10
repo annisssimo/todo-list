@@ -1106,7 +1106,7 @@ class ElementsCreator {
     }
 
     static createNewTaskForm(id) {
-        if(document.querySelector(id)) return;
+        if(document.querySelector(`#${id}`)) return;
 
         const mainContent = document.querySelector('#main-content');
 
@@ -1508,11 +1508,12 @@ class Modal {
         deleteListBtn.addEventListener('click', () => {
             const activeListToDelete = _list__WEBPACK_IMPORTED_MODULE_0__.List.getActiveCustomList();
             _todo__WEBPACK_IMPORTED_MODULE_3__["default"].deleteList(activeListToDelete);
+            _todo__WEBPACK_IMPORTED_MODULE_3__["default"].updateAllTasksList();
+            _list__WEBPACK_IMPORTED_MODULE_0__.List.updateNumbers();
             _ui__WEBPACK_IMPORTED_MODULE_1__.UI.displayMyLists();
             _ui__WEBPACK_IMPORTED_MODULE_1__.UI.resetAll();
             dialogElement.close();
-        })
-        
+        });
     }
 
     static handleConfirmBtn(confirmButton, dialogElement, nameInput, colorInput) {
@@ -1710,6 +1711,10 @@ class Task {
   }
 
   static editTask(event) {
+    if(document.querySelector('#edit-task-form')) {
+      
+    };
+
     const taskDiv = event.target.closest('.task');
     const taskId = taskDiv.getAttribute('data-id');
     const activeList = _list__WEBPACK_IMPORTED_MODULE_0__.List.getActiveCustomList();
@@ -1786,6 +1791,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./list */ "./src/list.js");
+
+
 class ToDo {
     constructor () {
         this.lists = [];
@@ -1800,6 +1808,15 @@ class ToDo {
         if (index !== -1) {
             this.lists.splice(index, 1); // Remove the list from the array
         }
+    }
+
+    updateAllTasksList() {
+        _list__WEBPACK_IMPORTED_MODULE_0__.allList.tasks = [];
+        this.lists.forEach(list => {
+            list.tasks.forEach(task => {
+                task.addToAllTasksList();
+            });
+        });
     }
 }
 
