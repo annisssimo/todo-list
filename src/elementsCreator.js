@@ -2,9 +2,32 @@ import { format } from 'date-fns';
 import { UI } from './ui';
 import { List } from './list';
 import { Task } from './task';
+import { Modal } from './modal';
 
 
 export class ElementsCreator {
+
+    static createListDiv(list, listContainer) {
+        const listItem = document.createElement('div');
+        listItem.classList.add('list-item');
+        listItem.setAttribute('data-id', list.id);
+        listContainer.appendChild(listItem);
+
+        const listColor = document.createElement('div');
+        const listName = document.createElement('p');
+        listColor.classList.add('list-color');
+        listName.classList.add('text');
+
+        listColor.style.backgroundColor = list.color;
+        listName.textContent = list.heading;
+        
+        listItem.appendChild(listColor);
+        listItem.appendChild(listName);
+
+        listItem.addEventListener('click', list.chooseList); 
+        listItem.addEventListener('dblclick', Modal.editList); 
+    }
+
     static createElement(tagName, textContent) {
         const element = document.createElement(tagName);
         element.textContent = textContent;

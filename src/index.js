@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const newListBtn = document.querySelector('.new-list');
   newListBtn.addEventListener('click', () => {
-    if(!Modal.checkIfModalExists()) {   
-      Modal.createModal();
+    if(!Modal.checkIfModalExists('#add-new-list-dialog')) {   
+      Modal.createModal('New List', 'add-new-list-dialog');
       Modal.showNewListModal();
     } else {
       Modal.showNewListModal();

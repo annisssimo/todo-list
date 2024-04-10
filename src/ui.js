@@ -102,25 +102,7 @@ export class UI {
         sidebar.appendChild(listContainer);
         listContainer.appendChild(listsHeading);
 
-        lists.forEach(list => {
-            const listItem = document.createElement('div');
-            listItem.classList.add('list-item');
-            listItem.setAttribute('data-id', list.id);
-            listContainer.appendChild(listItem);
-
-            const listColor = document.createElement('div');
-            const listName = document.createElement('p');
-            listColor.classList.add('list-color');
-            listName.classList.add('text');
-
-            listColor.style.backgroundColor = list.color;
-            listName.textContent = list.heading;
-            
-            listItem.appendChild(listColor);
-            listItem.appendChild(listName);
-
-            listItem.addEventListener('click', list.chooseList);
-        });
+        lists.forEach(list => ElementsCreator.createListDiv(list, listContainer));
     }
 
     static resetListsColors() {
@@ -211,5 +193,9 @@ export class UI {
 
     static deleteTaskDiv(selectedTask) {
         selectedTask.remove();
+    }
+
+    static handleDoubleClickOnListItem() {
+
     }
 }

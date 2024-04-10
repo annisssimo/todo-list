@@ -1,12 +1,11 @@
 import { List } from './list';
 import { UI } from './ui';
-import todo from './todo';
 import { ElementsCreator } from './elementsCreator';
 
 export class Modal {
 
-    static checkIfModalExists() {
-        let dialog = document.querySelector('#add-new-list-dialog');
+    static checkIfModalExists(modalId) {
+        let dialog = document.querySelector(modalId);
 
         if (dialog) {
             return true;
@@ -16,14 +15,14 @@ export class Modal {
 
     }
 
-    static createModal() {
+    static createModal(heading, id) {
         const dialogElement = document.createElement('dialog');
-        dialogElement.id = 'add-new-list-dialog';
+        dialogElement.id = id;
 
         const formElement = document.createElement('form');
         formElement.id = 'add-new-list-form';
 
-        const headingElement = ElementsCreator.createElement('h3', 'New list');
+        const headingElement = ElementsCreator.createElement('h3', heading);
 
         const nameLabelElement = ElementsCreator.createInputLabel('name', 'Name:');
         const nameInputElement = ElementsCreator.createInput('text', 'name', 'name', 60, true, true, '');
@@ -87,5 +86,20 @@ export class Modal {
 
         // Reset confirm button state
         confirmButton.disabled = true;
+    }
+
+    static editList() {
+        if(!Modal.checkIfModalExists('#edit-list-dialog')) {   
+            Modal.createModal('Edit List', 'edit-list-dialog');
+            Modal.showEditListModal();
+          } else {
+            Modal.showEditListModal();
+        }
+    }
+
+    static showEditListModal() {
+        const dialogElement = document.querySelector('#edit-list-dialog');
+        Modal.resetDialog();
+        dialogElement.showModal();
     }
 }
