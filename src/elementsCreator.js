@@ -25,7 +25,7 @@ export class ElementsCreator {
         listItem.appendChild(listName);
 
         listItem.addEventListener('click', list.chooseList); 
-        listItem.addEventListener('dblclick', Modal.editList); 
+        listItem.addEventListener('dblclick', (event) => {Modal.handleDoubleClickOnList(event)}); 
     }
 
     static createElement(tagName, textContent) {

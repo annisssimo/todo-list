@@ -17,21 +17,21 @@ export class Modal {
 
     static createModal(heading, id) {
         const dialogElement = document.createElement('dialog');
-        dialogElement.id = id;
+        dialogElement.id = `${id}-dialog`;
 
         const formElement = document.createElement('form');
-        formElement.id = 'add-new-list-form';
+        formElement.id = `${id}-form`;
 
         const headingElement = ElementsCreator.createElement('h3', heading);
 
-        const nameLabelElement = ElementsCreator.createInputLabel('name', 'Name:');
-        const nameInputElement = ElementsCreator.createInput('text', 'name', 'name', 60, true, true, '');
+        const nameLabelElement = ElementsCreator.createInputLabel(`${id}-name`, 'Name:');
+        const nameInputElement = ElementsCreator.createInput('text', 'name', `${id}-name`, 60, true, true, '');
 
-        const colorLabelElement = ElementsCreator.createInputLabel('color', 'Color:');
-        const colorInputElement = ElementsCreator.createInput('color', 'color', 'color');
+        const colorLabelElement = ElementsCreator.createInputLabel(`${id}-color`, 'Color:');
+        const colorInputElement = ElementsCreator.createInput('color', 'color', `${id}-color`);
 
-        const cancelButtonElement = ElementsCreator.createButton('button', 'cancel-btn', 'Cancel');
-        const confirmButtonElement = ElementsCreator.createButton('submit', 'confirm-btn', 'OK', true);
+        const cancelButtonElement = ElementsCreator.createButton('button', `${id}-cancel-btn`, 'Cancel');
+        const confirmButtonElement = ElementsCreator.createButton('submit', `${id}-confirm-btn`, 'OK', true);
 
         formElement.append(
             headingElement,
@@ -71,14 +71,14 @@ export class Modal {
 
     static showNewListModal() {
         const dialogElement = document.querySelector('#add-new-list-dialog');
-        Modal.resetDialog();
+        Modal.resetDialog('add-new-list');
         dialogElement.showModal();
     }
 
-    static resetDialog() {
-        const nameInput = document.getElementById('name');
-        const colorInput = document.getElementById('color');
-        const confirmButton = document.getElementById('confirm-btn');
+    static resetDialog(id) {
+        const nameInput = document.getElementById(`${id}-name`);
+        const colorInput = document.getElementById(`${id}-color`);
+        const confirmButton = document.getElementById(`${id}-confirm-btn`);
 
         // Clear input fields
         nameInput.value = '';
@@ -88,18 +88,23 @@ export class Modal {
         confirmButton.disabled = true;
     }
 
-    static editList() {
+    static handleDoubleClickOnList(event) {
         if(!Modal.checkIfModalExists('#edit-list-dialog')) {   
-            Modal.createModal('Edit List', 'edit-list-dialog');
-            Modal.showEditListModal();
+            Modal.createModal('Edit List', 'edit-list');
+            Modal.showEditListModal(event);
           } else {
-            Modal.showEditListModal();
+            Modal.showEditListModal(event);
         }
     }
 
-    static showEditListModal() {
+    static showEditListModal(event) {
         const dialogElement = document.querySelector('#edit-list-dialog');
-        Modal.resetDialog();
+        Modal.resetDialog('edit-list');
+        Modal.fillModalWithListData(event);
         dialogElement.showModal();
+    }
+
+    static fillModalWithListData(event) {
+
     }
 }

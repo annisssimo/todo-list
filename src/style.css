@@ -181,7 +181,7 @@ div.input {
     margin-bottom: 12px;
 }
 
-#name, #color {
+#add-new-list-name, #add-new-list-color, #edit-list-name, #edit-list-color {
     margin-left: 10px;
     width: 80%;
 }
