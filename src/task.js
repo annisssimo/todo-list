@@ -55,8 +55,8 @@ export class Task {
 
   static getActiveCustomList() {
     const activeList = document.querySelector('.list-clicked');
+    if(!activeList) return;
     const list = List.findClickedListById(activeList);
-
     return list;
   }
 
@@ -86,21 +86,24 @@ export class Task {
     UI.updateTaskListInMainContent(list);
 
     //Обновляем счетчики
-    List.updateNumbers(list);
+    List.updateNumbers();
 
   }
 
   static deleteTask(selectedTask) {
     let taskId = selectedTask.getAttribute('data-id');
     let activeList = Task.getActiveCustomList();
+    if(!activeList) return;
     activeList.removeTaskFromAllLists(taskId);
-    List.updateNumbers(activeList);
+    List.updateNumbers();
+    UI.deleteTaskDiv(selectedTask);
   }
 
   static editTask(event) {
     const taskDiv = event.target.closest('.task');
     const taskId = taskDiv.getAttribute('data-id');
     const activeList = Task.getActiveCustomList();
+    if(!activeList) return;
     const task = activeList.getTaskById(taskId);
 
     // Создаем новую форму
@@ -119,11 +122,7 @@ export class Task {
       if (event.key === 'Enter') {
         event.preventDefault(); // Предотвращаем стандартное действие формы
 
-        //Заменяем поля задачи данными из формы
-        task.updateTaskUsingDataFromForm();
-
-        //Полностью обновляем список
-        UI.updateTaskListInMainContent(activeList);
+        Task.saveEditedTask(task, activeList);
 
         // Создаем новую пустую форму таски
         ElementsCreator.createNewTaskForm('add-new-task-form');
@@ -159,5 +158,7 @@ export class Task {
 
     //Полностью обновляем список
     UI.updateTaskListInMainContent(activeList);
+
+    List.updateNumbers();
   }
 }

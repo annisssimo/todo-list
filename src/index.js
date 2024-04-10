@@ -78,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const selectedTask = document.querySelector('.selected-task'); // Находим задачу с классом .selected
       if (selectedTask) { // Если такая задача есть
         Task.deleteTask(selectedTask);
-        UI.deleteTaskDiv(selectedTask);
       }
     }
   });

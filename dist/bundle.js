@@ -1554,8 +1554,8 @@ class Task {
 
   static getActiveCustomList() {
     const activeList = document.querySelector('.list-clicked');
+    if(!activeList) return;
     const list = _list__WEBPACK_IMPORTED_MODULE_0__.List.findClickedListById(activeList);
-
     return list;
   }
 
@@ -1585,21 +1585,24 @@ class Task {
     _ui__WEBPACK_IMPORTED_MODULE_1__.UI.updateTaskListInMainContent(list);
 
     //Обновляем счетчики
-    _list__WEBPACK_IMPORTED_MODULE_0__.List.updateNumbers(list);
+    _list__WEBPACK_IMPORTED_MODULE_0__.List.updateNumbers();
 
   }
 
   static deleteTask(selectedTask) {
     let taskId = selectedTask.getAttribute('data-id');
     let activeList = Task.getActiveCustomList();
+    if(!activeList) return;
     activeList.removeTaskFromAllLists(taskId);
-    _list__WEBPACK_IMPORTED_MODULE_0__.List.updateNumbers(activeList);
+    _list__WEBPACK_IMPORTED_MODULE_0__.List.updateNumbers();
+    _ui__WEBPACK_IMPORTED_MODULE_1__.UI.deleteTaskDiv(selectedTask);
   }
 
   static editTask(event) {
     const taskDiv = event.target.closest('.task');
     const taskId = taskDiv.getAttribute('data-id');
     const activeList = Task.getActiveCustomList();
+    if(!activeList) return;
     const task = activeList.getTaskById(taskId);
 
     // Создаем новую форму
@@ -1618,11 +1621,7 @@ class Task {
       if (event.key === 'Enter') {
         event.preventDefault(); // Предотвращаем стандартное действие формы
 
-        //Заменяем поля задачи данными из формы
-        task.updateTaskUsingDataFromForm();
-
-        //Полностью обновляем список
-        _ui__WEBPACK_IMPORTED_MODULE_1__.UI.updateTaskListInMainContent(activeList);
+        Task.saveEditedTask(task, activeList);
 
         // Создаем новую пустую форму таски
         _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createNewTaskForm('add-new-task-form');
@@ -1658,6 +1657,8 @@ class Task {
 
     //Полностью обновляем список
     _ui__WEBPACK_IMPORTED_MODULE_1__.UI.updateTaskListInMainContent(activeList);
+
+    _list__WEBPACK_IMPORTED_MODULE_0__.List.updateNumbers();
   }
 }
 
@@ -9591,7 +9592,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const selectedTask = document.querySelector('.selected-task'); // Находим задачу с классом .selected
       if (selectedTask) { // Если такая задача есть
         _task__WEBPACK_IMPORTED_MODULE_5__.Task.deleteTask(selectedTask);
-        _ui__WEBPACK_IMPORTED_MODULE_2__.UI.deleteTaskDiv(selectedTask);
       }
     }
   });
