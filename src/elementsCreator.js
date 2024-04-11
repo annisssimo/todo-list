@@ -206,7 +206,15 @@ export class ElementsCreator {
         });
 
         // Обработчик для редактирования задачи при двойном клике
-        formWrapper.addEventListener('dblclick', (event) => Task.editTask(event));
+        formWrapper.addEventListener('dblclick', (event) => {
+            const clickedElement = event.target;
+        
+            // Check if the clicked element is not the important or done button
+            if (!clickedElement.classList.contains('important-btn') && !clickedElement.classList.contains('done-btn')) {
+                Task.editTask(event);
+            }
+        });
+        
     }
 
     static fillNewTaskForm(task) {

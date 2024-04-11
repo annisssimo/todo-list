@@ -125,13 +125,6 @@ export class Task {
         Task.handleEnterKeyWhenEdit(event, task, activeList);
       }
     });
-
-    // const mainContent = document.querySelector('#main-content');
-    // mainContent.addEventListener('click', (event) => {
-    //   if(!event.target.closest('.task') && !event.target.closest('#add-new-task-form') && !event.target.closest('#edit-task-form')) {
-    //     Task.saveEditedTask(task, activeList);
-    //   }
-    // });
   }
 
   static handleEnterKeyWhenEdit(event) {
