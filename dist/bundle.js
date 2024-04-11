@@ -1358,6 +1358,16 @@ class List {
     return this.tasks.length;
   }
 
+  editList() {
+    const editListNameInput = document.querySelector('#edit-list-name');
+    const editListColorInput = document.querySelector('#edit-list-color');
+
+    this.heading = editListNameInput.value;
+    this.color = editListColorInput.value;
+
+    _todo__WEBPACK_IMPORTED_MODULE_1__["default"].saveToLocalStorage();
+  }
+
   static removeFromAllTasksList(taskId) {
     allList.removeTaskById(taskId);
   }
@@ -1416,14 +1426,6 @@ class List {
     const list = List.findClickedListById(activeList);
     return list;
   }
-
-  static editList(listToEdit) {
-    const editListNameInput = document.querySelector('#edit-list-name');
-    const editListColorInput = document.querySelector('#edit-list-color');
-
-    listToEdit.heading = editListNameInput.value;
-    listToEdit.color = editListColorInput.value;
-}
 }
 
 const todayList = new List('default', 1, 'Today', 'var(--blue)');
@@ -1533,7 +1535,7 @@ class Modal {
             }
             else if (confirmButton.id === 'edit-list-confirm-btn') {
                 const activeListToEdit = _list__WEBPACK_IMPORTED_MODULE_0__.List.getActiveCustomList();
-                _list__WEBPACK_IMPORTED_MODULE_0__.List.editList(activeListToEdit);
+                activeListToEdit.editList();
                 _ui__WEBPACK_IMPORTED_MODULE_1__.UI.displayMyLists();
                 _ui__WEBPACK_IMPORTED_MODULE_1__.UI.makeNewListActive(activeListToEdit);
             }
@@ -1814,7 +1816,8 @@ class ToDo {
     }
 
     addList(list) {
-        return this.lists.push(list);
+        this.lists.push(list);
+        this.saveToLocalStorage();
     }
 
     deleteList(list) {
@@ -1822,6 +1825,7 @@ class ToDo {
         if (index !== -1) {
             this.lists.splice(index, 1); // Remove the list from the array
         }
+        this.saveToLocalStorage();
     }
 
     updateAllTasksList() {
@@ -1831,6 +1835,10 @@ class ToDo {
                 task.addToAllTasksList();
             });
         });
+    }
+
+    saveToLocalStorage() {
+        localStorage.setItem('todoLists', JSON.stringify(this.lists));
     }
 }
 
@@ -9669,6 +9677,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _elementsCreator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./elementsCreator */ "./src/elementsCreator.js");
 /* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./list */ "./src/list.js");
 /* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./task */ "./src/task.js");
+/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
+
+
 
 
 
@@ -9680,6 +9691,15 @@ __webpack_require__.r(__webpack_exports__);
 _ui__WEBPACK_IMPORTED_MODULE_2__.UI.loadFonts();
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  // Загрузка данных из localStorage при запуске приложения
+  const savedLists = JSON.parse(localStorage.getItem('todoLists'));
+  savedLists.forEach(listData => {
+    const list = new _list__WEBPACK_IMPORTED_MODULE_4__.List(listData.type, listData.id, listData.heading, listData.color);
+    list.tasks = listData.tasks.map(taskData => new _task__WEBPACK_IMPORTED_MODULE_5__.Task(taskData));
+    _todo__WEBPACK_IMPORTED_MODULE_6__["default"].addList(list);
+    _ui__WEBPACK_IMPORTED_MODULE_2__.UI.displayMyLists();
+  });
 
   const tilesDiv = document.querySelector('.tiles');
   

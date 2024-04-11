@@ -6,7 +6,8 @@ class ToDo {
     }
 
     addList(list) {
-        return this.lists.push(list);
+        this.lists.push(list);
+        this.saveToLocalStorage();
     }
 
     deleteList(list) {
@@ -14,6 +15,7 @@ class ToDo {
         if (index !== -1) {
             this.lists.splice(index, 1); // Remove the list from the array
         }
+        this.saveToLocalStorage();
     }
 
     updateAllTasksList() {
@@ -23,6 +25,10 @@ class ToDo {
                 task.addToAllTasksList();
             });
         });
+    }
+
+    saveToLocalStorage() {
+        localStorage.setItem('todoLists', JSON.stringify(this.lists));
     }
 }
 

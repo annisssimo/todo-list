@@ -57,6 +57,16 @@ class List {
     return this.tasks.length;
   }
 
+  editList() {
+    const editListNameInput = document.querySelector('#edit-list-name');
+    const editListColorInput = document.querySelector('#edit-list-color');
+
+    this.heading = editListNameInput.value;
+    this.color = editListColorInput.value;
+
+    todo.saveToLocalStorage();
+  }
+
   static removeFromAllTasksList(taskId) {
     allList.removeTaskById(taskId);
   }
@@ -115,14 +125,6 @@ class List {
     const list = List.findClickedListById(activeList);
     return list;
   }
-
-  static editList(listToEdit) {
-    const editListNameInput = document.querySelector('#edit-list-name');
-    const editListColorInput = document.querySelector('#edit-list-color');
-
-    listToEdit.heading = editListNameInput.value;
-    listToEdit.color = editListColorInput.value;
-}
 }
 
 const todayList = new List('default', 1, 'Today', 'var(--blue)');

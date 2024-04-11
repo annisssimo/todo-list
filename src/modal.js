@@ -81,7 +81,7 @@ export class Modal {
             }
             else if (confirmButton.id === 'edit-list-confirm-btn') {
                 const activeListToEdit = List.getActiveCustomList();
-                List.editList(activeListToEdit);
+                activeListToEdit.editList();
                 UI.displayMyLists();
                 UI.makeNewListActive(activeListToEdit);
             }
