@@ -1240,7 +1240,15 @@ class ElementsCreator {
         });
 
         // Обработчик для редактирования задачи при двойном клике
-        formWrapper.addEventListener('dblclick', (event) => _task__WEBPACK_IMPORTED_MODULE_2__.Task.editTask(event));
+        formWrapper.addEventListener('dblclick', (event) => {
+            const clickedElement = event.target;
+        
+            // Check if the clicked element is not the important or done button
+            if (!clickedElement.classList.contains('important-btn') && !clickedElement.classList.contains('done-btn')) {
+                _task__WEBPACK_IMPORTED_MODULE_2__.Task.editTask(event);
+            }
+        });
+        
     }
 
     static fillNewTaskForm(task) {
@@ -1744,13 +1752,6 @@ class Task {
         Task.handleEnterKeyWhenEdit(event, task, activeList);
       }
     });
-
-    // const mainContent = document.querySelector('#main-content');
-    // mainContent.addEventListener('click', (event) => {
-    //   if(!event.target.closest('.task') && !event.target.closest('#add-new-task-form') && !event.target.closest('#edit-task-form')) {
-    //     Task.saveEditedTask(task, activeList);
-    //   }
-    // });
   }
 
   static handleEnterKeyWhenEdit(event) {
