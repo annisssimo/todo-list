@@ -91,17 +91,25 @@ export class Task {
     UI.deleteTaskDiv(selectedTask);
   }
 
-  static editTask(event) {
-    if(document.querySelector('#edit-task-form')) return;
-
+  static getTaskToEdit(event) {
     const taskDiv = event.target.closest('.task');
     const taskId = taskDiv.getAttribute('data-id');
     const activeList = List.getActiveCustomList();
     if(!activeList) return;
     const task = activeList.getTaskById(taskId);
 
+    return [ taskDiv, task, activeList ];
+  }
+
+  static editTask(event) {
+    if(document.querySelector('#edit-task-form')) return;
+    
+    
+    const [ taskDiv, task, activeList ] = Task.getTaskToEdit(event);
+
     // Создаем новую форму
     const newTaskForm = ElementsCreator.createNewTaskForm('edit-task-form');
+    newTaskForm.setAttribute('data-id', task.id);
 
     //Заполняем новую форму данными из задачи
     ElementsCreator.fillNewTaskForm(task);
@@ -114,26 +122,28 @@ export class Task {
     newTaskForm.addEventListener('keypress', function(event) {
       // Проверяем, была ли нажата клавиша Enter
       if (event.key === 'Enter') {
-        event.preventDefault(); // Предотвращаем стандартное действие формы
-
-        Task.saveEditedTask(task, activeList);
-
-        // Создаем новую пустую форму таски
-        ElementsCreator.createNewTaskForm('add-new-task-form');
-
-        // Вешаем на новую форму слушатель Enter
-        UI.handleEnterKeyOnForm();
+        Task.handleEnterKeyWhenEdit(event, task, activeList);
       }
     });
 
-    const mainContent = document.querySelector('#main-content');
-    mainContent.addEventListener('click', (event) => {
-      if(!event.target.closest('.task') && !event.target.closest('#add-new-task-form') && !event.target.closest('#edit-task-form')) {
-        if (document.querySelector('#edit-task-form')) {
-          Task.saveEditedTask(task, activeList);
-        }
-      }
-    });
+    // const mainContent = document.querySelector('#main-content');
+    // mainContent.addEventListener('click', (event) => {
+    //   if(!event.target.closest('.task') && !event.target.closest('#add-new-task-form') && !event.target.closest('#edit-task-form')) {
+    //     Task.saveEditedTask(task, activeList);
+    //   }
+    // });
+  }
+
+  static handleEnterKeyWhenEdit(event) {
+    event.preventDefault(); // Предотвращаем стандартное действие формы
+
+    Task.saveEditedTask();
+
+    // Создаем новую пустую форму таски
+    ElementsCreator.createNewTaskForm('add-new-task-form');
+
+    // Вешаем на новую форму слушатель Enter
+    UI.handleEnterKeyOnForm();
   }
 
   updateTaskUsingDataFromForm() {
@@ -146,7 +156,12 @@ export class Task {
     this.isDone = doneBtn.classList.contains('radio-btn-clicked');
   }
 
-  static saveEditedTask(task, activeList) {
+  static saveEditedTask() {
+    const editForm = document.querySelector('#edit-task-form');
+    const activeList = List.getActiveCustomList();
+    const taskId = editForm.getAttribute('data-id');
+    const task = activeList.getTaskById(taskId);
+
     //Заменяем поля задачи данными из формы
     task.updateTaskUsingDataFromForm();
 
