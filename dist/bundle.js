@@ -1799,7 +1799,7 @@ class Task {
 
   static editTask(event) {
     if(document.querySelector('#edit-task-form')) return;
-    
+    if(document.querySelector('#add-new-task-form')) return;
     
     const [ taskDiv, task, activeList ] = Task.getTaskToEdit(event);
 
