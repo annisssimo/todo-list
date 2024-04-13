@@ -26,10 +26,13 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-        template: './src/index.html',
-        filename: 'index.html',
-        inject: 'head',
-        favicon: './src/images/reminder-app-icon.png',
+      template: './src/index.html',
+      filename: 'index.html',
+      inject: 'head',
+      favicon: './src/images/reminder-app-icon.png',
     }),
   ],
+  scripts: {
+    start: 'webpack serve --mode development'
+  }
 };
