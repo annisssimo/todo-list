@@ -1438,6 +1438,58 @@ const importantList = new List('default', 4, 'Important', 'var(--orange)');
 
 /***/ }),
 
+/***/ "./src/localStorage.js":
+/*!*****************************!*\
+  !*** ./src/localStorage.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   LocalStorage: () => (/* binding */ LocalStorage)
+/* harmony export */ });
+/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
+/* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./task */ "./src/task.js");
+/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./list */ "./src/list.js");
+/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
+
+
+
+
+
+class LocalStorage {
+
+  static uploadListsAndTasksFromLocalStorage() {
+    const savedLists = JSON.parse(localStorage.getItem("todoLists"));
+    if (savedLists) {
+      savedLists.forEach((listData) => {
+        const list = new _list__WEBPACK_IMPORTED_MODULE_2__.List(
+          listData.type,
+          listData.id,
+          listData.heading,
+          listData.color
+        );
+        list.tasks = listData.tasks.map((taskData) => {
+          return new _task__WEBPACK_IMPORTED_MODULE_1__.Task(
+            taskData.isDone,
+            taskData.title,
+            taskData.description,
+            taskData.dueDate,
+            taskData.isImportant
+          );
+        });
+
+        _todo__WEBPACK_IMPORTED_MODULE_3__["default"].addList(list);
+        _ui__WEBPACK_IMPORTED_MODULE_0__.UI.displayMyLists();
+      });
+    }
+  }
+}
+
+
+/***/ }),
+
 /***/ "./src/modal.js":
 /*!**********************!*\
   !*** ./src/modal.js ***!
@@ -1868,6 +1920,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./task */ "./src/task.js");
 /* harmony import */ var _elementsCreator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./elementsCreator */ "./src/elementsCreator.js");
 /* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
+/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./list */ "./src/list.js");
+/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modal */ "./src/modal.js");
+
+
 
 
 
@@ -1876,220 +1932,318 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class UI {
+  static loadFonts() {
+    webfontloader__WEBPACK_IMPORTED_MODULE_0___default().load({
+      google: {
+        families: ["Rubik Doodle Shadow:400"],
+      },
+    });
+  }
 
-    static loadFonts() {
-        webfontloader__WEBPACK_IMPORTED_MODULE_0___default().load({
-            google: {
-                families: ['Rubik Doodle Shadow:400'],
-            },
-        });
-    }
+  static handleTileClicks() {
+    const tilesDiv = document.querySelector(".tiles");
 
-    // Function to convert RGB color to HEX format
-    static rgbToHex(rgb) {
-        // Check if the input is in the correct RGB format
-        const match = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-        if (!match) {
-            // Return default color or handle the error accordingly
-            return '000000'; // Default to black color
-        }
-
-        // Convert each RGB component to HEX format
-        const [, r, g, b] = match;
-        const hexColor = ((1 << 24) + (parseInt(r) << 16) + (parseInt(g) << 8) + parseInt(b)).toString(16).slice(1);
-
-        return hexColor;
-    }
-
-    static resetAll() {
-        const heading = document.querySelector('h2');
-        heading.textContent = '';
-        const mainContent = document.querySelector('#main-content');
-        mainContent.innerHTML = '';
-    }
-
-    static updateHeading(clickedList) {
-        const text = clickedList.querySelector('.text');
-        const heading = document.querySelector('h2');
-        heading.textContent = text.textContent;
-    }
-
-    static resetTilesColors() {
-        const allTiles = document.querySelectorAll('.tile');
-        allTiles.forEach(tile => {
-            tile.classList.remove('today-tile-clicked', 'week-tile-clicked', 'all-tile-clicked', 'important-tile-clicked', 'list-clicked');
-
-            const tileIcon = tile.querySelector('.material-symbols-outlined');
-            const tileDigit = tile.querySelector('.digit');
-
-            tileIcon.style.background = '';
-            tileIcon.style.color = 'white';
-            tileDigit.style.color = '';
-        });
-    }
-
-    static changeTileColor(clickedTile) {
-        UI.resetTilesColors();
-    
-        if (clickedTile.classList.contains('tile')) {
-            clickedTile.classList.add(`${clickedTile.id}-tile-clicked`);
-    
-            const tileIcon = clickedTile.querySelector('.material-symbols-outlined');
-            const tileDigit = clickedTile.querySelector('.digit');
-    
-            if (tileIcon) {
-                tileIcon.style.background = 'white';
-                tileIcon.style.color = 'white';
-    
-                switch (clickedTile.id) {
-                    case 'today':
-                        tileIcon.style.color = 'var(--blue)';
-                        break;
-                    case 'week':
-                        tileIcon.style.color = 'var(--red)';
-                        break;
-                    case 'all':
-                        tileIcon.style.color = 'var(--dark-gray)';
-                        break;
-                    case 'important':
-                        tileIcon.style.color = 'var(--orange)';
-                        break;
-                    default:
-                        break;
-                }
-            }
-    
-            if (tileDigit) {
-                tileDigit.style.color = 'white';
-            }
-        } else if (clickedTile.classList.contains('list-item')) {
-            clickedTile.classList.add('list-clicked');
-    
-            const tileIcon = clickedTile.querySelector('.material-symbols-outlined');
-            if (tileIcon) {
-                tileIcon.style.background = 'white';
-                tileIcon.style.color = 'white';
-            }
-        }
-    }    
-    
-
-    static resetMyLists(listContainer) {
-        listContainer.innerHTML = '';
-    }
-
-    static displayMyLists() {
-        const sidebar = document.querySelector('#sidebar');
-        let listContainer = document.querySelector('#list-container');
-        
-        if (!listContainer) {
-            listContainer = document.createElement('div');
-            listContainer.id = 'list-container';
-            sidebar.appendChild(listContainer);
-        } else {
-            UI.resetMyLists(listContainer);
-        }
-        
-        const listsHeading = document.createElement('p');
-        listsHeading.textContent = 'My lists';
-        listsHeading.classList.add('my-lists-heading');
-        
-        sidebar.appendChild(listContainer);
-        listContainer.appendChild(listsHeading);
-
-        _todo__WEBPACK_IMPORTED_MODULE_3__["default"].lists.forEach(list => _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createListDiv(list, listContainer));
-    }
-
-    static resetListsColors() {
-        let lists = document.querySelectorAll('.list-item');
-        lists.forEach(list => list.classList.remove('list-clicked'));
-    }
-
-    static changeListColor(clickedList) {
-        UI.resetTilesColors();
+    tilesDiv.addEventListener("click", (event) => {
+      let clickedTile = event.target.closest(".tile");
+      if (clickedTile) {
+        UI.hidePlusElement();
         UI.resetListsColors();
-        clickedList.classList.add('list-clicked');
-    }
+        UI.updateHeading(clickedTile);
+        UI.changeTileColor(clickedTile);
 
-    static updateTaskListInMainContent(list) {
-        const mainContent = document.querySelector('#main-content');
-        mainContent.innerHTML = '';
-        list.tasks.forEach(task => _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createTaskDiv(task));
-    }
-    
-    static handleEnterKeyOnForm() {
-        const formElement = document.querySelector('#add-new-task-form');
-
-        formElement.addEventListener('keypress', function(event) {
-            // Проверяем, была ли нажата клавиша Enter
-            if (event.key === 'Enter') {
-                event.preventDefault(); // Предотвращаем стандартное действие формы
-
-                _task__WEBPACK_IMPORTED_MODULE_1__.Task.createTask();
-
-                // Создаем новую пустую форму таски
-                _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createNewTaskForm('add-new-task-form');
-
-                // Вешаем на новую форму слушатель Enter
-                UI.handleEnterKeyOnForm();
-            }
-        });
-    }
-
-    static showPlusElement() {
-        const plusAddTaskElement = document.querySelector('.plus');
-        plusAddTaskElement.classList.remove('hide');
-    }
-
-    static hidePlusElement() {
-        const plusAddTaskElement = document.querySelector('.plus');
-        plusAddTaskElement.classList.add('hide');
-    }
-
-    static makeNewListActive(newList) {
-        const listItems = document.querySelectorAll('.list-item');
-
-        listItems.forEach(listItem => {
-            const dataId = listItem.getAttribute('data-id');
-
-            if(dataId === newList.id) {
-                UI.showPlusElement();    
-                UI.updateHeading(listItem);
-                UI.changeListColor(listItem);
-                UI.updateTaskListInMainContent(newList);
-            }
-        });
-    }
-
-    static changeTaskNameColor(formWrapper) {
-        if (formWrapper) {
-            const firstDivInsideTask = formWrapper.querySelector('div:first-child'); // Находим первый div внутри 'task'
-            if (firstDivInsideTask) {
-                firstDivInsideTask.classList.toggle('gray-crossed'); // Добавляем класс 'gray-crossed' к первому div внутри 'task'
-            }
+        switch (clickedTile.id) {
+          case "all":
+            UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.allList);
+            break;
+          case "today":
+            _list__WEBPACK_IMPORTED_MODULE_4__.List.filterTodayTasks();
+            UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.todayList);
+            break;
+          case "week":
+            _list__WEBPACK_IMPORTED_MODULE_4__.List.filterWeekTasks();
+            UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.weekList);
+            break;
+          case "important":
+            _list__WEBPACK_IMPORTED_MODULE_4__.List.filterImportantTasks();
+            UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.importantList);
+            break;
+          default:
+            break;
         }
-    }
+      }
+    });
+  }
 
-    static changeColorOfDoneButtonOnClick(doneBtn) {
-        doneBtn.classList.toggle('radio-btn-clicked');
-        const formWrapper = event.target.closest('.task'); // Находим ближайший родительский элемент с классом 'task'
-        UI.changeTaskNameColor(formWrapper);
-    }
+  static handleNewListBtn() {
+    const newListBtn = document.querySelector('.new-list');
+    newListBtn.addEventListener('click', () => {
+      if(!_modal__WEBPACK_IMPORTED_MODULE_5__.Modal.checkIfModalExists('#add-new-list-dialog')) {   
+        _modal__WEBPACK_IMPORTED_MODULE_5__.Modal.createModal('New List', 'add-new-list');
+        _modal__WEBPACK_IMPORTED_MODULE_5__.Modal.showNewListModal();
+      } else {
+        _modal__WEBPACK_IMPORTED_MODULE_5__.Modal.showNewListModal();
+      }
+    });
+  }
 
-    static changeColorOfImportantButtonOnClick(importantBtn) {
-        importantBtn.classList.toggle('important-btn-clicked');
-    }
+  static handleNewTaskBtn() {
+    const newTaskBtn = document.querySelector('.plus');
+    newTaskBtn.addEventListener('click', () => {
+      _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createNewTaskForm('add-new-task-form');
+      UI.handleEnterKeyOnForm();
+    });
+  }
 
-    static highlightSelectedTask(formWrapper) {
-        const tasks = document.querySelectorAll('.task');
+  static handleMainContentClick() {
+    const mainContent = document.querySelector('#main-content');
+    mainContent.addEventListener('click', (event) => {
+      if (!event.target.closest('.task') && !event.target.closest('#add-new-task-form') && !event.target.closest('#edit-task-form')) {
+        if (document.querySelector('#add-new-task-form')) {
+          _task__WEBPACK_IMPORTED_MODULE_1__.Task.createTask();
+        } else if (document.querySelector('#edit-task-form')) {
+          _task__WEBPACK_IMPORTED_MODULE_1__.Task.saveEditedTask();
+        }
+      }
+      
+      const tasks = document.querySelectorAll('.task');
+      const clickedElement = event.target;
+      if (!clickedElement.closest('.task')) {
         tasks.forEach(t => t.classList.remove('selected-task'));
-        formWrapper.classList.add('selected-task');
+      }
+    });
+  }
+
+  static handleKeyBoardTaskDeleting() {
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Delete' || event.key === 'Backspace') {
+          const selectedTask = document.querySelector('.selected-task'); // Находим задачу с классом .selected
+          if (selectedTask) { // Если такая задача есть
+            _task__WEBPACK_IMPORTED_MODULE_1__.Task.deleteTask(selectedTask);
+          }
+        }
+      });
+  }
+
+  // Function to convert RGB color to HEX format
+  static rgbToHex(rgb) {
+    // Check if the input is in the correct RGB format
+    const match = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    if (!match) {
+      // Return default color or handle the error accordingly
+      return "000000"; // Default to black color
     }
 
-    static deleteTaskDiv(selectedTask) {
-        selectedTask.remove();
+    // Convert each RGB component to HEX format
+    const [, r, g, b] = match;
+    const hexColor = (
+      (1 << 24) +
+      (parseInt(r) << 16) +
+      (parseInt(g) << 8) +
+      parseInt(b)
+    )
+      .toString(16)
+      .slice(1);
+
+    return hexColor;
+  }
+
+  static resetAll() {
+    const heading = document.querySelector("h2");
+    heading.textContent = "";
+    const mainContent = document.querySelector("#main-content");
+    mainContent.innerHTML = "";
+  }
+
+  static updateHeading(clickedList) {
+    const text = clickedList.querySelector(".text");
+    const heading = document.querySelector("h2");
+    heading.textContent = text.textContent;
+  }
+
+  static resetTilesColors() {
+    const allTiles = document.querySelectorAll(".tile");
+    allTiles.forEach((tile) => {
+      tile.classList.remove(
+        "today-tile-clicked",
+        "week-tile-clicked",
+        "all-tile-clicked",
+        "important-tile-clicked",
+        "list-clicked"
+      );
+
+      const tileIcon = tile.querySelector(".material-symbols-outlined");
+      const tileDigit = tile.querySelector(".digit");
+
+      tileIcon.style.background = "";
+      tileIcon.style.color = "white";
+      tileDigit.style.color = "";
+    });
+  }
+
+  static changeTileColor(clickedTile) {
+    UI.resetTilesColors();
+
+    if (clickedTile.classList.contains("tile")) {
+      clickedTile.classList.add(`${clickedTile.id}-tile-clicked`);
+
+      const tileIcon = clickedTile.querySelector(".material-symbols-outlined");
+      const tileDigit = clickedTile.querySelector(".digit");
+
+      if (tileIcon) {
+        tileIcon.style.background = "white";
+        tileIcon.style.color = "white";
+
+        switch (clickedTile.id) {
+          case "today":
+            tileIcon.style.color = "var(--blue)";
+            break;
+          case "week":
+            tileIcon.style.color = "var(--red)";
+            break;
+          case "all":
+            tileIcon.style.color = "var(--dark-gray)";
+            break;
+          case "important":
+            tileIcon.style.color = "var(--orange)";
+            break;
+          default:
+            break;
+        }
+      }
+
+      if (tileDigit) {
+        tileDigit.style.color = "white";
+      }
+    } else if (clickedTile.classList.contains("list-item")) {
+      clickedTile.classList.add("list-clicked");
+
+      const tileIcon = clickedTile.querySelector(".material-symbols-outlined");
+      if (tileIcon) {
+        tileIcon.style.background = "white";
+        tileIcon.style.color = "white";
+      }
     }
+  }
+
+  static resetMyLists(listContainer) {
+    listContainer.innerHTML = "";
+  }
+
+  static displayMyLists() {
+    const sidebar = document.querySelector("#sidebar");
+    let listContainer = document.querySelector("#list-container");
+
+    if (!listContainer) {
+      listContainer = document.createElement("div");
+      listContainer.id = "list-container";
+      sidebar.appendChild(listContainer);
+    } else {
+      UI.resetMyLists(listContainer);
+    }
+
+    const listsHeading = document.createElement("p");
+    listsHeading.textContent = "My lists";
+    listsHeading.classList.add("my-lists-heading");
+
+    sidebar.appendChild(listContainer);
+    listContainer.appendChild(listsHeading);
+
+    _todo__WEBPACK_IMPORTED_MODULE_3__["default"].lists.forEach((list) =>
+      _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createListDiv(list, listContainer)
+    );
+  }
+
+  static resetListsColors() {
+    let lists = document.querySelectorAll(".list-item");
+    lists.forEach((list) => list.classList.remove("list-clicked"));
+  }
+
+  static changeListColor(clickedList) {
+    UI.resetTilesColors();
+    UI.resetListsColors();
+    clickedList.classList.add("list-clicked");
+  }
+
+  static updateTaskListInMainContent(list) {
+    const mainContent = document.querySelector("#main-content");
+    mainContent.innerHTML = "";
+    list.tasks.forEach((task) => _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createTaskDiv(task));
+  }
+
+  static handleEnterKeyOnForm() {
+    const formElement = document.querySelector("#add-new-task-form");
+
+    formElement.addEventListener("keypress", function (event) {
+      // Проверяем, была ли нажата клавиша Enter
+      if (event.key === "Enter") {
+        event.preventDefault(); // Предотвращаем стандартное действие формы
+
+        _task__WEBPACK_IMPORTED_MODULE_1__.Task.createTask();
+
+        // Создаем новую пустую форму таски
+        _elementsCreator__WEBPACK_IMPORTED_MODULE_2__.ElementsCreator.createNewTaskForm("add-new-task-form");
+
+        // Вешаем на новую форму слушатель Enter
+        UI.handleEnterKeyOnForm();
+      }
+    });
+  }
+
+  static showPlusElement() {
+    const plusAddTaskElement = document.querySelector(".plus");
+    plusAddTaskElement.classList.remove("hide");
+  }
+
+  static hidePlusElement() {
+    const plusAddTaskElement = document.querySelector(".plus");
+    plusAddTaskElement.classList.add("hide");
+  }
+
+  static makeNewListActive(newList) {
+    const listItems = document.querySelectorAll(".list-item");
+
+    listItems.forEach((listItem) => {
+      const dataId = listItem.getAttribute("data-id");
+
+      if (dataId === newList.id) {
+        UI.showPlusElement();
+        UI.updateHeading(listItem);
+        UI.changeListColor(listItem);
+        UI.updateTaskListInMainContent(newList);
+      }
+    });
+  }
+
+  static changeTaskNameColor(formWrapper) {
+    if (formWrapper) {
+      const firstDivInsideTask = formWrapper.querySelector("div:first-child"); // Находим первый div внутри 'task'
+      if (firstDivInsideTask) {
+        firstDivInsideTask.classList.toggle("gray-crossed"); // Добавляем класс 'gray-crossed' к первому div внутри 'task'
+      }
+    }
+  }
+
+  static changeColorOfDoneButtonOnClick(doneBtn) {
+    doneBtn.classList.toggle("radio-btn-clicked");
+    const formWrapper = event.target.closest(".task"); // Находим ближайший родительский элемент с классом 'task'
+    UI.changeTaskNameColor(formWrapper);
+  }
+
+  static changeColorOfImportantButtonOnClick(importantBtn) {
+    importantBtn.classList.toggle("important-btn-clicked");
+  }
+
+  static highlightSelectedTask(formWrapper) {
+    const tasks = document.querySelectorAll(".task");
+    tasks.forEach((t) => t.classList.remove("selected-task"));
+    formWrapper.classList.add("selected-task");
+  }
+
+  static deleteTaskDiv(selectedTask) {
+    selectedTask.remove();
+  }
 }
+
 
 /***/ }),
 
@@ -6003,119 +6157,23 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
-/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modal */ "./src/modal.js");
-/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
-/* harmony import */ var _elementsCreator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./elementsCreator */ "./src/elementsCreator.js");
-/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./list */ "./src/list.js");
-/* harmony import */ var _task__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./task */ "./src/task.js");
-/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./todo */ "./src/todo.js");
+/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
+/* harmony import */ var _localStorage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./localStorage */ "./src/localStorage.js");
 
 
 
 
-
-
-
-
-
-
-_ui__WEBPACK_IMPORTED_MODULE_2__.UI.loadFonts();
+_ui__WEBPACK_IMPORTED_MODULE_1__.UI.loadFonts();
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  // Загрузка данных из localStorage при запуске приложения
-  const savedLists = JSON.parse(localStorage.getItem('todoLists'));
-  if(savedLists) {
-    savedLists.forEach(listData => {
-      const list = new _list__WEBPACK_IMPORTED_MODULE_4__.List(listData.type, listData.id, listData.heading, listData.color);
-      list.tasks = listData.tasks.map(taskData => {
-        return new _task__WEBPACK_IMPORTED_MODULE_5__.Task(
-          taskData.isDone, 
-          taskData.title, 
-          taskData.description, 
-          taskData.dueDate, 
-          taskData.isImportant
-        )
-      });
-
-      _todo__WEBPACK_IMPORTED_MODULE_6__["default"].addList(list);
-      _ui__WEBPACK_IMPORTED_MODULE_2__.UI.displayMyLists();
-    }); 
-  }
-
-  const tilesDiv = document.querySelector('.tiles');
   
-  tilesDiv.addEventListener('click', (event) => {
-    let clickedTile = event.target.closest('.tile');
-    if (clickedTile) {
-      _ui__WEBPACK_IMPORTED_MODULE_2__.UI.hidePlusElement();
-      _ui__WEBPACK_IMPORTED_MODULE_2__.UI.resetListsColors();
-      _ui__WEBPACK_IMPORTED_MODULE_2__.UI.updateHeading(clickedTile);
-      _ui__WEBPACK_IMPORTED_MODULE_2__.UI.changeTileColor(clickedTile);
+  _localStorage__WEBPACK_IMPORTED_MODULE_2__.LocalStorage.uploadListsAndTasksFromLocalStorage();
 
-      switch(clickedTile.id) {
-        case 'all':
-          _ui__WEBPACK_IMPORTED_MODULE_2__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.allList);
-          break;
-        case 'today':
-          _list__WEBPACK_IMPORTED_MODULE_4__.List.filterTodayTasks();
-          _ui__WEBPACK_IMPORTED_MODULE_2__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.todayList);
-          break;
-        case 'week':
-          _list__WEBPACK_IMPORTED_MODULE_4__.List.filterWeekTasks();
-          _ui__WEBPACK_IMPORTED_MODULE_2__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.weekList);
-          break;
-        case 'important':
-          _list__WEBPACK_IMPORTED_MODULE_4__.List.filterImportantTasks();
-          _ui__WEBPACK_IMPORTED_MODULE_2__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.importantList);
-          break;
-        default:
-          break;
-      }
-    }
-  });
-
-  const newListBtn = document.querySelector('.new-list');
-  newListBtn.addEventListener('click', () => {
-    if(!_modal__WEBPACK_IMPORTED_MODULE_1__.Modal.checkIfModalExists('#add-new-list-dialog')) {   
-      _modal__WEBPACK_IMPORTED_MODULE_1__.Modal.createModal('New List', 'add-new-list');
-      _modal__WEBPACK_IMPORTED_MODULE_1__.Modal.showNewListModal();
-    } else {
-      _modal__WEBPACK_IMPORTED_MODULE_1__.Modal.showNewListModal();
-    }
-  });
-
-  const newTaskBtn = document.querySelector('.plus');
-  newTaskBtn.addEventListener('click', () => {
-    _elementsCreator__WEBPACK_IMPORTED_MODULE_3__.ElementsCreator.createNewTaskForm('add-new-task-form');
-    _ui__WEBPACK_IMPORTED_MODULE_2__.UI.handleEnterKeyOnForm();
-  });
-
-  const mainContent = document.querySelector('#main-content');
-  mainContent.addEventListener('click', (event) => {
-    if (!event.target.closest('.task') && !event.target.closest('#add-new-task-form') && !event.target.closest('#edit-task-form')) {
-      if (document.querySelector('#add-new-task-form')) {
-        _task__WEBPACK_IMPORTED_MODULE_5__.Task.createTask();
-      } else if (document.querySelector('#edit-task-form')) {
-        _task__WEBPACK_IMPORTED_MODULE_5__.Task.saveEditedTask();
-      }
-    }
-    
-    const tasks = document.querySelectorAll('.task');
-    const clickedElement = event.target;
-    if (!clickedElement.closest('.task')) {
-      tasks.forEach(t => t.classList.remove('selected-task'));
-    }
-  });
-
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Delete' || event.key === 'Backspace') {
-      const selectedTask = document.querySelector('.selected-task'); // Находим задачу с классом .selected
-      if (selectedTask) { // Если такая задача есть
-        _task__WEBPACK_IMPORTED_MODULE_5__.Task.deleteTask(selectedTask);
-      }
-    }
-  });
+  _ui__WEBPACK_IMPORTED_MODULE_1__.UI.handleTileClicks();
+  _ui__WEBPACK_IMPORTED_MODULE_1__.UI.handleNewListBtn();
+  _ui__WEBPACK_IMPORTED_MODULE_1__.UI.handleNewTaskBtn();
+  _ui__WEBPACK_IMPORTED_MODULE_1__.UI.handleMainContentClick();
+  _ui__WEBPACK_IMPORTED_MODULE_1__.UI.handleKeyBoardTaskDeleting();
 
 });
 })();
