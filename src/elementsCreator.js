@@ -3,6 +3,7 @@ import { UI } from './ui';
 import { List } from './list';
 import { Task } from './task';
 import { Modal } from './modal';
+import todo from './todo';
 
 
 export class ElementsCreator {
@@ -143,11 +144,9 @@ export class ElementsCreator {
         const taskDatePickerInput = document.createElement('div');
         taskDatePickerInput.name = 'task-date-picker';
         taskDatePickerInput.classList.add('task-date-picker');
-        if (task.dueDate) {
-            taskDatePickerInput.textContent = task.dueDate ? format(task.dueDate, 'dd.MM.yyyy') : '';
-        }
+        taskDatePickerInput.textContent = task.dueDate ? format(task.dueDate, 'dd.MM.yyyy') : '';
         return taskDatePickerInput;
-    }
+    } 
 
     static createImportantBtn(task) {
         const importantBtn = document.createElement('button');
@@ -193,12 +192,14 @@ export class ElementsCreator {
             UI.changeColorOfImportantButtonOnClick(importantBtn);
             task.toggleImportant();
             List.updateNumbers();
+            todo.saveToLocalStorage();
         });
 
         doneBtn.addEventListener('click', (event) => {
             event.stopPropagation();
             UI.changeColorOfDoneButtonOnClick(doneBtn);
             task.toggleDone();
+            todo.saveToLocalStorage();
         });
 
         formWrapper.addEventListener('click', () => {
@@ -222,9 +223,7 @@ export class ElementsCreator {
 
         taskNameInput.value = task.title;
         taskNotesInput.value = task.description;
-        if (task.dueDate) {
             taskDatePicker.value = task.dueDate ? format(task.dueDate, 'yyyy-MM-dd') : '';
-        }
         if (task.isImportant) {
             importantBtn.classList.add('important-btn-clicked');
         }

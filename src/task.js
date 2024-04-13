@@ -1,8 +1,8 @@
-import { parse } from 'date-fns';
 import { List, allList } from './list';
 import { UI } from './ui';
 import { v4 as uuidv4 } from 'uuid';
 import { ElementsCreator } from './elementsCreator';
+import todo from './todo';
 
 export class Task {
   constructor(isDone, title, description, dueDate, isImportant) {
@@ -10,7 +10,7 @@ export class Task {
     this.isDone = isDone;
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate ? parse(dueDate, 'yyyy-MM-dd', new Date()) : '';
+    this.dueDate = dueDate && new Date(dueDate);
     this.isImportant = isImportant;
   }
 
@@ -42,8 +42,7 @@ export class Task {
 
     const taskName = taskNameInput.value;
     const taskNotes = taskNotesInput.value;
-    const dueDate = taskDatePicker.value;
-
+    const dueDate = taskDatePicker.value; //string
     const taskRadioBtn = doneBtn.classList.contains('radio-btn-clicked');
     const isImportant = importantBtn.classList.contains('important-btn-clicked');
 
@@ -80,6 +79,7 @@ export class Task {
     //Обновляем счетчики
     List.updateNumbers();
 
+    todo.saveToLocalStorage();
   }
 
   static deleteTask(selectedTask) {
@@ -89,6 +89,7 @@ export class Task {
     activeList.removeTaskFromAllLists(taskId);
     List.updateNumbers();
     UI.deleteTaskDiv(selectedTask);
+    todo.saveToLocalStorage();
   }
 
   static getTaskToEdit(event) {
@@ -129,7 +130,7 @@ export class Task {
 
   static handleEnterKeyWhenEdit(event) {
     event.preventDefault(); // Предотвращаем стандартное действие формы
-
+    
     Task.saveEditedTask();
 
     // Создаем новую пустую форму таски
@@ -162,5 +163,7 @@ export class Task {
     UI.updateTaskListInMainContent(activeList);
 
     List.updateNumbers();
+
+    todo.saveToLocalStorage();
   }
 }

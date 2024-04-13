@@ -14,12 +14,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Загрузка данных из localStorage при запуске приложения
   const savedLists = JSON.parse(localStorage.getItem('todoLists'));
-  savedLists.forEach(listData => {
-    const list = new List(listData.type, listData.id, listData.heading, listData.color);
-    list.tasks = listData.tasks.map(taskData => new Task(taskData));
-    todo.addList(list);
-    UI.displayMyLists();
-  });
+  if(savedLists) {
+    savedLists.forEach(listData => {
+      const list = new List(listData.type, listData.id, listData.heading, listData.color);
+      list.tasks = listData.tasks.map(taskData => {
+        return new Task(
+          taskData.isDone, 
+          taskData.title, 
+          taskData.description, 
+          taskData.dueDate, 
+          taskData.isImportant
+        )
+      });
+
+      todo.addList(list);
+      UI.displayMyLists();
+    }); 
+  }
 
   const tilesDiv = document.querySelector('.tiles');
   

@@ -30,6 +30,7 @@ class List {
 
   addTask(task) {
     this.tasks.push(task);
+    todo.saveToLocalStorage();
   }
 
   addTaskToList(task){
