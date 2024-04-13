@@ -17,10 +17,10 @@ export class UI {
   }
 
   static handleTileClicks() {
-    const tilesDiv = document.querySelector(".tiles");
+    const tilesDiv = document.querySelector('.tiles');
 
-    tilesDiv.addEventListener("click", (event) => {
-      let clickedTile = event.target.closest(".tile");
+    tilesDiv.addEventListener('click', (event) => {
+      let clickedTile = event.target.closest('.tile');
       if (clickedTile) {
         UI.hidePlusElement();
         UI.resetListsColors();
@@ -28,18 +28,18 @@ export class UI {
         UI.changeTileColor(clickedTile);
 
         switch (clickedTile.id) {
-          case "all":
+          case 'all':
             UI.updateTaskListInMainContent(allList);
             break;
-          case "today":
+          case 'today':
             List.filterTodayTasks();
             UI.updateTaskListInMainContent(todayList);
             break;
-          case "week":
+          case 'week':
             List.filterWeekTasks();
             UI.updateTaskListInMainContent(weekList);
             break;
-          case "important":
+          case 'important':
             List.filterImportantTasks();
             UI.updateTaskListInMainContent(importantList);
             break;

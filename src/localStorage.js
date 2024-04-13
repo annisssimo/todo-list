@@ -29,5 +29,18 @@ export class LocalStorage {
         UI.displayMyLists();
       });
     }
+    LocalStorage.uploadDefaultLists();
+  }
+
+  static uploadDefaultLists() {
+    todo.lists.forEach(list => {
+      list.tasks.forEach(task => {
+        task.addToAllTasksList();
+        List.filterTodayTasks();
+        List.filterWeekTasks();
+        List.filterImportantTasks();
+      })
+    });
+    List.updateNumbers();
   }
 }
