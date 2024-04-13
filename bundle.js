@@ -1484,6 +1484,19 @@ class LocalStorage {
         _ui__WEBPACK_IMPORTED_MODULE_0__.UI.displayMyLists();
       });
     }
+    LocalStorage.uploadDefaultLists();
+  }
+
+  static uploadDefaultLists() {
+    _todo__WEBPACK_IMPORTED_MODULE_3__["default"].lists.forEach(list => {
+      list.tasks.forEach(task => {
+        task.addToAllTasksList();
+        _list__WEBPACK_IMPORTED_MODULE_2__.List.filterTodayTasks();
+        _list__WEBPACK_IMPORTED_MODULE_2__.List.filterWeekTasks();
+        _list__WEBPACK_IMPORTED_MODULE_2__.List.filterImportantTasks();
+      })
+    });
+    _list__WEBPACK_IMPORTED_MODULE_2__.List.updateNumbers();
   }
 }
 
@@ -1941,10 +1954,10 @@ class UI {
   }
 
   static handleTileClicks() {
-    const tilesDiv = document.querySelector(".tiles");
+    const tilesDiv = document.querySelector('.tiles');
 
-    tilesDiv.addEventListener("click", (event) => {
-      let clickedTile = event.target.closest(".tile");
+    tilesDiv.addEventListener('click', (event) => {
+      let clickedTile = event.target.closest('.tile');
       if (clickedTile) {
         UI.hidePlusElement();
         UI.resetListsColors();
@@ -1952,18 +1965,18 @@ class UI {
         UI.changeTileColor(clickedTile);
 
         switch (clickedTile.id) {
-          case "all":
+          case 'all':
             UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.allList);
             break;
-          case "today":
+          case 'today':
             _list__WEBPACK_IMPORTED_MODULE_4__.List.filterTodayTasks();
             UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.todayList);
             break;
-          case "week":
+          case 'week':
             _list__WEBPACK_IMPORTED_MODULE_4__.List.filterWeekTasks();
             UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.weekList);
             break;
-          case "important":
+          case 'important':
             _list__WEBPACK_IMPORTED_MODULE_4__.List.filterImportantTasks();
             UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_4__.importantList);
             break;
@@ -6159,6 +6172,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
 /* harmony import */ var _localStorage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./localStorage */ "./src/localStorage.js");
+/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./list */ "./src/list.js");
+
 
 
 
@@ -6168,6 +6183,7 @@ _ui__WEBPACK_IMPORTED_MODULE_1__.UI.loadFonts();
 document.addEventListener('DOMContentLoaded', () => {
   
   _localStorage__WEBPACK_IMPORTED_MODULE_2__.LocalStorage.uploadListsAndTasksFromLocalStorage();
+  _ui__WEBPACK_IMPORTED_MODULE_1__.UI.updateTaskListInMainContent(_list__WEBPACK_IMPORTED_MODULE_3__.todayList);
 
   _ui__WEBPACK_IMPORTED_MODULE_1__.UI.handleTileClicks();
   _ui__WEBPACK_IMPORTED_MODULE_1__.UI.handleNewListBtn();
