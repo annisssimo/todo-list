@@ -1,109 +1,17 @@
 import './style.css';
-import { Modal } from './modal';
 import { UI } from './ui';
-import { ElementsCreator } from './elementsCreator';
-import { todayList, weekList, allList, importantList } from './list';
-import { Task } from './task';
-import { List } from './list';
-import todo from './todo';
-
+import { LocalStorage } from './localStorage';
 
 UI.loadFonts();
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  // Загрузка данных из localStorage при запуске приложения
-  const savedLists = JSON.parse(localStorage.getItem('todoLists'));
-  if(savedLists) {
-    savedLists.forEach(listData => {
-      const list = new List(listData.type, listData.id, listData.heading, listData.color);
-      list.tasks = listData.tasks.map(taskData => {
-        return new Task(
-          taskData.isDone, 
-          taskData.title, 
-          taskData.description, 
-          taskData.dueDate, 
-          taskData.isImportant
-        )
-      });
-
-      todo.addList(list);
-      UI.displayMyLists();
-    }); 
-  }
-
-  const tilesDiv = document.querySelector('.tiles');
   
-  tilesDiv.addEventListener('click', (event) => {
-    let clickedTile = event.target.closest('.tile');
-    if (clickedTile) {
-      UI.hidePlusElement();
-      UI.resetListsColors();
-      UI.updateHeading(clickedTile);
-      UI.changeTileColor(clickedTile);
+  LocalStorage.uploadListsAndTasksFromLocalStorage();
 
-      switch(clickedTile.id) {
-        case 'all':
-          UI.updateTaskListInMainContent(allList);
-          break;
-        case 'today':
-          List.filterTodayTasks();
-          UI.updateTaskListInMainContent(todayList);
-          break;
-        case 'week':
-          List.filterWeekTasks();
-          UI.updateTaskListInMainContent(weekList);
-          break;
-        case 'important':
-          List.filterImportantTasks();
-          UI.updateTaskListInMainContent(importantList);
-          break;
-        default:
-          break;
-      }
-    }
-  });
-
-  const newListBtn = document.querySelector('.new-list');
-  newListBtn.addEventListener('click', () => {
-    if(!Modal.checkIfModalExists('#add-new-list-dialog')) {   
-      Modal.createModal('New List', 'add-new-list');
-      Modal.showNewListModal();
-    } else {
-      Modal.showNewListModal();
-    }
-  });
-
-  const newTaskBtn = document.querySelector('.plus');
-  newTaskBtn.addEventListener('click', () => {
-    ElementsCreator.createNewTaskForm('add-new-task-form');
-    UI.handleEnterKeyOnForm();
-  });
-
-  const mainContent = document.querySelector('#main-content');
-  mainContent.addEventListener('click', (event) => {
-    if (!event.target.closest('.task') && !event.target.closest('#add-new-task-form') && !event.target.closest('#edit-task-form')) {
-      if (document.querySelector('#add-new-task-form')) {
-        Task.createTask();
-      } else if (document.querySelector('#edit-task-form')) {
-        Task.saveEditedTask();
-      }
-    }
-    
-    const tasks = document.querySelectorAll('.task');
-    const clickedElement = event.target;
-    if (!clickedElement.closest('.task')) {
-      tasks.forEach(t => t.classList.remove('selected-task'));
-    }
-  });
-
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Delete' || event.key === 'Backspace') {
-      const selectedTask = document.querySelector('.selected-task'); // Находим задачу с классом .selected
-      if (selectedTask) { // Если такая задача есть
-        Task.deleteTask(selectedTask);
-      }
-    }
-  });
+  UI.handleTileClicks();
+  UI.handleNewListBtn();
+  UI.handleNewTaskBtn();
+  UI.handleMainContentClick();
+  UI.handleKeyBoardTaskDeleting();
 
 });
